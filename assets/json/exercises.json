@@ -1,0 +1,77 @@
+[
+  {
+    "exerciseType" : "Exercise 11",
+    "exerciseTarget" : "Example1",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 12",
+    "exerciseTarget" : "Example1",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 13",
+    "exerciseTarget" : "Example1",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 21",
+    "exerciseTarget" : "Example2",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 22",
+    "exerciseTarget" : "Example2",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 23",
+    "exerciseTarget" : "Example2",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 31",
+    "exerciseTarget" : "Example3",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 32",
+    "exerciseTarget" : "Example3",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 33",
+    "exerciseTarget" : "Example3",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 34",
+    "exerciseTarget" : "Example3",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 41",
+    "exerciseTarget" : "Example4",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 42",
+    "exerciseTarget" : "Example4",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 51",
+    "exerciseTarget" : "Example5",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 52",
+    "exerciseTarget" : "Example5",
+    "imagePath" : "assets/images/checkimage.png"
+  },
+  {
+    "exerciseType" : "Exercise 53",
+    "exerciseTarget" : "Example5",
+    "imagePath" : "assets/images/checkimage.png"
+  }
+]
