@@ -6,6 +6,8 @@ import 'dart:convert';
 
 import './exercise.dart';
 
+import './Setcount.dart';
+
 class ExerciseSelectPage extends StatefulWidget {
   DateTime date;
   ExerciseSelectPage({Key? key, required this.date}) : super(key: key);
@@ -136,36 +138,13 @@ createRow(Exercise exercise, BuildContext context, DateTime date){
         onTap: (){
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TempPage(exercise, date))
+              MaterialPageRoute(builder: (context) => Setcount(exercise, date))
           );
         },
       ),
       Divider(color: Colors.black, thickness: 1.0,),
     ],
   );
-}
-
-class TempPage extends StatelessWidget{
-  Exercise exercise;
-  DateTime date;
-  TempPage(this.exercise, this.date);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      body: Center(
-        child: GestureDetector(
-          onTap: (){
-            Navigator.pop(context);
-          },
-          child: Text(
-              '${date}\n${exercise.exerciseType} 등록 페이지입니다'
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 
