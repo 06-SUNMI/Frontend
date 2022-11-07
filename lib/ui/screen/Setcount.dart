@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import './main.dart';
 import 'package:flutter/services.dart';
-import './Exercisesetcount.dart';
-import './exercise.dart';
+import 'Exercisesetcount.dart';
+import '../../data/model/workout.dart';
 
 
 
@@ -13,7 +12,7 @@ class AlwaysDisabledFocusNode extends FocusNode {
 }
 
 class Setcount extends StatelessWidget {
-  Exercise exercise;
+  Workout exercise;
   DateTime date;
 
   //
@@ -51,7 +50,7 @@ class _SetPageState extends State<SetPage> {
   TextEditingController teb = TextEditingController();
   TextEditingController tec = TextEditingController();
 
-  late Exercise exercise;
+  late Workout exercise;
   late DateTime date;
 
   late Exercise_setcount exercisesetcount;

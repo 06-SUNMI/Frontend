@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './exercise_select_page.dart';
-import 'routine_calendar.dart';
+import 'package:get/get.dart';
+import 'ui/screen/routine_calendar.dart';
 
 void main() {
   runApp(const MyApp());
