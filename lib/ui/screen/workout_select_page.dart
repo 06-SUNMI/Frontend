@@ -4,33 +4,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 
-import './exercise.dart';
+import '../../data/model/workout.dart';
+import 'Setcount.dart';
 
-import './Setcount.dart';
-
-class ExerciseSelectPage extends StatefulWidget {
+class WorkoutSelectPage extends StatefulWidget {
   DateTime date;
-  ExerciseSelectPage({Key? key, required this.date}) : super(key: key);
+  WorkoutSelectPage({Key? key, required this.date}) : super(key: key);
 
   @override
-  _ExerciseSelectPageState createState() => _ExerciseSelectPageState(date);
+  _WorkoutSelectPageState createState() => _WorkoutSelectPageState(date);
 }
 
-class _ExerciseSelectPageState extends State<ExerciseSelectPage> {
+class _WorkoutSelectPageState extends State<WorkoutSelectPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  List<Exercise> exercises = List.empty(growable: true);
+  List<Workout> workouts = List.empty(growable: true);
   DateTime date;
+  //String testtext = 'ancesorteset';
 
-  _ExerciseSelectPageState(this.date);
+  _WorkoutSelectPageState(this.date);
 
-  _loadExercises() async {
-    String jsonString = await rootBundle.loadString('assets/json/exercises.json');
-    final jsonResponse = json.decode(jsonString) as List;
-    final List<Exercise> exercisesFromJson = jsonResponse.map((i)=>Exercise.fromJson(i)).toList();
+  _loadWorkouts() async {
+    String wokroutJson = await rootBundle.loadString('assets/json/wokrouts.json');
+    final workoutResponse = json.decode(wokroutJson) as List;
+    final List<Workout> workoutsFromJson = workoutResponse.map((i)=>Workout.fromJson(i)).toList();
 
     setState(() {
-      this.exercises.clear();
-      this.exercises.addAll(exercisesFromJson);
+      this.workouts.clear();
+      this.workouts.addAll(workoutsFromJson);
     });
   }
 
@@ -55,6 +55,7 @@ class _ExerciseSelectPageState extends State<ExerciseSelectPage> {
                   ),
                 ),
                 TabBar(
+                  physics: NeverScrollableScrollPhysics(),
                   isScrollable: true,
                   labelColor: Colors.deepPurpleAccent,
                   indicatorColor: Colors.purpleAccent,
@@ -68,12 +69,13 @@ class _ExerciseSelectPageState extends State<ExerciseSelectPage> {
                 ),
                 Expanded(
                   child: TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
                     children: [
-                      createTabPage(exercises, 'Example1',context, date),
-                      createTabPage(exercises, 'Example2',context, date),
-                      createTabPage(exercises, 'Example3',context, date),
-                      createTabPage(exercises, 'Example4',context, date),
-                      createTabPage(exercises, 'Example5',context, date),
+                      createTabPage(workouts, 'Example1',context, date),
+                      createTabPage(workouts, 'Example2',context, date),
+                      createTabPage(workouts, 'Example3',context, date),
+                      createTabPage(workouts, 'Example4',context, date),
+                      createTabPage(workouts, 'Example5',context, date),
                     ],
                   ),
                 ),
@@ -89,29 +91,29 @@ class _ExerciseSelectPageState extends State<ExerciseSelectPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(exercises.isEmpty)_loadExercises();
+    if(workouts.isEmpty)_loadWorkouts();
   }
 }
 
-createTabPage(List<Exercise> exercises, String target, BuildContext context, DateTime date){
+createTabPage(List<Workout> workouts, String workoutTarget, BuildContext context, DateTime date){
   return Column(
     mainAxisSize: MainAxisSize.max,
     children: [
       Text(
-        target,
+        workoutTarget,
         style:
         const TextStyle(
           fontSize: 32,
         ),
       ),
       const Divider(color: Colors.black,thickness: 1.0,),
-      for (Exercise exercise in exercises)
-        if(exercise.isTargetFor(target)) createRow(exercise, context, date)
+      for (Workout workout in workouts)
+        if(workout.isTargetFor(workoutTarget)) createRow(workout, context, date)
     ],
   );
 }
 
-createRow(Exercise exercise, BuildContext context, DateTime date){
+createRow(Workout workout, BuildContext context, DateTime date){
   return Column(
     children: [
       InkWell(
@@ -119,7 +121,7 @@ createRow(Exercise exercise, BuildContext context, DateTime date){
           mainAxisSize: MainAxisSize.max,
           children: [
             Image.asset(
-              exercise.imagePath!,
+              workout.imagePath!,
               width: 100,
               height: 100,
               fit: BoxFit.cover,
@@ -128,7 +130,7 @@ createRow(Exercise exercise, BuildContext context, DateTime date){
               child: Container(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
-                  exercise.exerciseType!,
+                  workout.workoutName!,
                   textAlign: TextAlign.start,
                 ),
               ),
@@ -138,7 +140,7 @@ createRow(Exercise exercise, BuildContext context, DateTime date){
         onTap: (){
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Setcount(exercise, date))
+              MaterialPageRoute(builder: (context) => Setcount(workout, date))
           );
         },
       ),
@@ -146,5 +148,4 @@ createRow(Exercise exercise, BuildContext context, DateTime date){
     ],
   );
 }
-
 
