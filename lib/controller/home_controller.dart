@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class TabPageController extends GetxController{
-  static TabPageController get to => Get.find();
+class HomeController extends GetxController{
+  static HomeController get to => Get.find();
   RxInt _curPage = 0.obs;
 
   @override

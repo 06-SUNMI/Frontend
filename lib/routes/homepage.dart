@@ -4,6 +4,8 @@ import 'package:sunmi/controller/home_controller.dart';
 import 'package:sunmi/ui/screen/challenge_date.dart';
 import 'package:sunmi/ui/screen/routine_calendar.dart';
 
+import '../ui/screen/challenge_list_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,10 +15,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TabPageController _tabPageCtrl = Get.put(TabPageController());
+  final HomeController _tabPageCtrl = Get.put(HomeController());
   List pages = [
     const RoutinePage(),
-    const ChallengeDatePage(),
+    ChallengeListPage(),
     const TempPage(),
   ];
 

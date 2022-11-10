@@ -196,7 +196,7 @@ class _RoutinePageState extends State<RoutinePage> {
             ),
             TextButton(
               onPressed: (){
-                Get.to(WorkoutSelectPage(date: _focusedDay),);
+                Get.toNamed('/workouts_select_page', arguments: {'date': _focusedDay});
               }, 
               child: Icon(Icons.add), 
               style: TextButton.styleFrom(
