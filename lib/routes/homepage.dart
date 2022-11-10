@@ -6,6 +6,8 @@ import 'package:sunmi/ui/screen/challenge_infomation.dart';
 import 'package:sunmi/ui/screen/routine_calendar.dart';
 import 'package:sunmi/ui/screen/sns_navigator.dart';
 
+import '../ui/screen/challenge_list_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,10 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TabPageController _tabPageCtrl = Get.put(TabPageController());
+  final HomeController _tabPageCtrl = Get.put(HomeController());
   List pages = [
     const RoutinePage(),
-    Tempbutton(),
+    ChallengeListPage(),
     const NavigatorScreen(),
   ];
 
@@ -35,8 +37,7 @@ class _HomePageState extends State<HomePage> {
         BottomNavigationBarItem(icon: Icon(Icons.local_fire_department), label: 'challenge',),
         BottomNavigationBarItem(icon: Icon(Icons.groups), label: 'community',),
       ]),
-    )
-    );
+    ));
   }
 }
 

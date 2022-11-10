@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Exercisesetcount.dart';
-import '../../data/model/workout.dart';
+import '/data/model/workout.dart';
+import 'package:get/get.dart';
 
 
 
@@ -16,6 +17,8 @@ class Setcount extends StatelessWidget {
   DateTime date;
 
   Setcount(this.exercise, this.date);
+
+
 
   @override
   Widget build(BuildContext context) {

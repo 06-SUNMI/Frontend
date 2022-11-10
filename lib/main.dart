@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:sunmi/routes/homepage.dart';
-
-
+import 'package:sunmi/routes/app_pages.dart';
 
 void main(){
   runApp(
     GetMaterialApp(
-      initialRoute: '/',
-      getPages: [
-        GetPage(name: '/', page: () => const HomePage()),
-      ],
+      initialRoute: Routes.initial,
+      getPages: AppPages.pages,
     )
   );
 }
-
