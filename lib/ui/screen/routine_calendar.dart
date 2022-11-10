@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:collection';
 import 'workout_select_page.dart';
+import 'package:get/get.dart';
 
 class RoutinePage extends StatefulWidget {
   const RoutinePage({super.key});
@@ -195,11 +196,7 @@ class _RoutinePageState extends State<RoutinePage> {
             ),
             TextButton(
               onPressed: (){
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => WorkoutSelectPage(date: _focusedDay,))
-                );
-                print(_focusedDay);
+                Get.to(WorkoutSelectPage(date: _focusedDay),);
               }, 
               child: Icon(Icons.add), 
               style: TextButton.styleFrom(
