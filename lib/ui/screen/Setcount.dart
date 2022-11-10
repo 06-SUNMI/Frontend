@@ -15,9 +15,6 @@ class Setcount extends StatelessWidget {
   Workout exercise;
   DateTime date;
 
-  //
-
-
   Setcount(this.exercise, this.date);
 
   @override
@@ -193,23 +190,10 @@ class _SetPageState extends State<SetPage> {
                   );
                 }
 
-              /*
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TempPage (exercise, date, exercisesetcount)),
-                );*/
-                // Respond to button press
               },
 
             ),
-            /*
-            SizedBox(
-              height: 40,
-            ),
-            Text(
-                '선택 : $_c'
-            )
-            */
+
           ],
         ),
       ),
