@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/home_controller.dart';
 import 'package:sunmi/ui/screen/challenge_date.dart';
+import 'package:sunmi/ui/screen/challenge_infomation.dart';
 import 'package:sunmi/ui/screen/routine_calendar.dart';
+import 'package:sunmi/ui/screen/sns_navigator.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -16,8 +18,8 @@ class _HomePageState extends State<HomePage> {
   final TabPageController _tabPageCtrl = Get.put(TabPageController());
   List pages = [
     const RoutinePage(),
-    const ChallengeDatePage(),
-    const TempPage(),
+    Tempbutton(),
+    const NavigatorScreen(),
   ];
 
   @override
