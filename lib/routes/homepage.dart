@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/home_controller.dart';
 import 'package:sunmi/ui/screen/challenge_date.dart';
+import 'package:sunmi/ui/screen/challenge_infomation.dart';
 import 'package:sunmi/ui/screen/routine_calendar.dart';
+import 'package:sunmi/ui/screen/sns_navigator.dart';
 
 import '../ui/screen/challenge_list_page.dart';
 
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   List pages = [
     const RoutinePage(),
     ChallengeListPage(),
-    const TempPage(),
+    const NavigatorScreen(),
   ];
 
   @override
@@ -35,8 +37,7 @@ class _HomePageState extends State<HomePage> {
         BottomNavigationBarItem(icon: Icon(Icons.local_fire_department), label: 'challenge',),
         BottomNavigationBarItem(icon: Icon(Icons.groups), label: 'community',),
       ]),
-    )
-    );
+    ));
   }
 }
 
