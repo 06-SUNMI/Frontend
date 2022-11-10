@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sunmi/routes/tab_page.dart';
+import 'package:sunmi/routes/homepage.dart';
 
 
 
@@ -9,7 +9,7 @@ void main(){
     GetMaterialApp(
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => const TabPage()),
+        GetPage(name: '/', page: () => const HomePage()),
       ],
     )
   );

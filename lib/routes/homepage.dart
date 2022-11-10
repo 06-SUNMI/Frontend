@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sunmi/controller/tap_page_controller.dart';
+import 'package:sunmi/controller/home_controller.dart';
 import 'package:sunmi/ui/screen/challenge_date.dart';
 import 'package:sunmi/ui/screen/routine_calendar.dart';
 
 
-class TabPage extends StatefulWidget {
-  const TabPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<TabPage> createState() => _TabPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _TabPageState extends State<TabPage> {
+class _HomePageState extends State<HomePage> {
   final TabPageController _tabPageCtrl = Get.put(TabPageController());
   List pages = [
     const RoutinePage(),

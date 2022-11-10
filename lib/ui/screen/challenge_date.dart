@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sunmi/routes/tab_page.dart';
+import 'package:sunmi/routes/homepage.dart';
 
 class ChallengeDatePage extends StatefulWidget {
   const ChallengeDatePage({super.key});
