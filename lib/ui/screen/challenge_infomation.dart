@@ -113,11 +113,6 @@ class Challenge_check extends StatelessWidget {
         ),
       ),
     );
-    //Center(child: Text("$selectdays"),),
-    //  body: hallendge_checkpage(selectdays),
-
-    // );
-
   }
 
 }
