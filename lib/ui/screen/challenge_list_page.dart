@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ChallengeListPage extends StatelessWidget {
+import 'package:sunmi/controller/challenges_controller.dart';
+
+class ChallengeListPage extends GetView<ChallengeController> {
   ChallengeListPage({Key? key}) : super(key: key);
 
   @override
@@ -11,7 +14,6 @@ class ChallengeListPage extends StatelessWidget {
         title: const Text('챌린지 리스트 페이지'),
       ),
       body: GetX<ChallengeController>(
-        init: Get.put(ChallengeController(challengeRepository: ChallengeRepository(challengeProvider: ChallengeProvider()))),
         builder: (challengeController) {
           print(challengeController.challenges.length);
           return GestureDetector(
@@ -26,7 +28,8 @@ class ChallengeListPage extends StatelessWidget {
                     child: TabBar(
                         labelColor: Colors.black,
                         indicator: const BoxDecoration(color: Colors.white),
-                        tabs: [challengeTab(), registeredChallengeTab()]),
+                        tabs: [challengeTab(), registeredChallengeTab()]
+                    ),
                   ),
                   Expanded(
                       child: Container(
@@ -35,8 +38,7 @@ class ChallengeListPage extends StatelessWidget {
                           children: [challengeListView(), registeredChallengeListView()],
                         ),
                       )
-                  ),
-                ]
+                  ),]
               )
             ),
           );},
@@ -56,31 +58,8 @@ registeredChallengeTab(){
 challengeListView() {
   return Expanded(
       child: ListView.separated(
-        //shrinkWrap: true,
         itemCount: Get.find<ChallengeController>().challenges.length ,
-        itemBuilder: (context, index) {
-          return InkWell(
-            child: Row(
-              children: [
-                Image.asset(
-                  'assets/images/checkimage.png',
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
-                ),
-                Column(
-                  children: [
-                    Text(
-                        '${Get.find<ChallengeController>().challenges[index].challengeName}'),
-                    Text(
-                        '${Get.find<ChallengeController>().challenges[index].startDate}'
-                            '\nto ${Get.find<ChallengeController>().challenges[index].endDate}'),
-                  ],
-                )
-              ],
-            ),
-            onTap: ()=>Get.find<ChallengeController>().challengeDetails(index),
-          );},
+        itemBuilder: challengeListItems,
         separatorBuilder: (context, index) {
           return const Divider(
             color: Colors.black,
@@ -91,35 +70,33 @@ challengeListView() {
   );
 }
 
+Widget challengeListItems(context, index) {
+        return InkWell(
+          child: Row(
+            children: [
+              Image.asset(
+                'assets/images/checkimage.png',
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,),
+              Column(
+                children: [
+                  Text(
+                      '${Get.find<ChallengeController>().challenges[index].challengeName}'),
+                  Text(
+                      '${Get.find<ChallengeController>().challenges[index].startDate}'
+                          '\nto ${Get.find<ChallengeController>().challenges[index].endDate}'),],
+              )],
+          ),
+          onTap: ()=>Get.find<ChallengeController>().challengeDetails(index),
+        );
+}
+
 registeredChallengeListView(){
   return Expanded(
       child: ListView.separated(
-        //shrinkWrap: true,
         itemCount: Get.find<ChallengeController>().registeredChallenges.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: ()=>Get.find<ChallengeController>().registeredChallengeDetails(index),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Image.asset(
-                  'assets/images/checkimage.png',
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
-                ),
-                Column(
-                    children: [
-                      Text(
-                          '${Get.find<ChallengeController>().registeredChallenges[index].challengeName}'),
-                      Text(
-                          '${Get.find<ChallengeController>().registeredChallenges[index].startDate}'
-                              '\nto ${Get.find<ChallengeController>().registeredChallenges[index].endDate}'),
-                    ]
-                )
-              ],
-            ),
-          );},
+        itemBuilder: registeredChallengeItems,
         separatorBuilder: (context, index){
           return const Divider(
             color: Colors.black,
@@ -129,6 +106,30 @@ registeredChallengeListView(){
       )
   );
 }
+
+Widget registeredChallengeItems(context, index) {
+        return InkWell(
+          onTap: ()=>Get.find<ChallengeController>().registeredChallengeDetails(index),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Image.asset(
+                'assets/images/checkimage.png',
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+              Column(
+                  children: [
+                    Text(
+                        '${Get.find<ChallengeController>().registeredChallenges[index].challengeName}'),
+                    Text(
+                        '${Get.find<ChallengeController>().registeredChallenges[index].startDate}'
+                            '\nto ${Get.find<ChallengeController>().registeredChallenges[index].endDate}'),]
+              )],
+          ),
+        );
+        }
 
 class RegisteredChallengeDetailsPage extends StatelessWidget{
   RegisteredChallengeDetailsPage({Key? key}):super(key: key);
@@ -144,6 +145,5 @@ class RegisteredChallengeDetailsPage extends StatelessWidget{
           )
       ),
     );
->>>>>>> Stashed changes
   }
 }

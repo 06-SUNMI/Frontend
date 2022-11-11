@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:get/get.dart';
+import 'package:sunmi/routes/homepage.dart';
 
 class ChallengeDatePage extends StatefulWidget {
   const ChallengeDatePage({super.key});
@@ -60,7 +61,11 @@ class _ChallengeDatePageState extends State<ChallengeDatePage> {
               ],
             ),
           ),
-          ElevatedButton(onPressed: (){}, child: Text("Confirm"),),
+          ElevatedButton(
+            onPressed: (){
+              print("confirm cliked");
+            }, child: Text("Confirm"),
+          ),
         ],
       ),
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Exercisesetcount.dart';
-import '../../data/model/workout.dart';
+import '/data/model/workout.dart';
+import 'package:get/get.dart';
 
 
 
@@ -15,10 +16,9 @@ class Setcount extends StatelessWidget {
   Workout exercise;
   DateTime date;
 
-  //
-
-
   Setcount(this.exercise, this.date);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -193,23 +193,10 @@ class _SetPageState extends State<SetPage> {
                   );
                 }
 
-              /*
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TempPage (exercise, date, exercisesetcount)),
-                );*/
-                // Respond to button press
               },
 
             ),
-            /*
-            SizedBox(
-              height: 40,
-            ),
-            Text(
-                '선택 : $_c'
-            )
-            */
+
           ],
         ),
       ),

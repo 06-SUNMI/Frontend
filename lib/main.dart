@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'ui/screen/routine_calendar.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'package:sunmi/routes/homepage.dart';
+import 'package:sunmi/routes/app_pages.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Every Health',
-      theme: ThemeData(
-        primaryColor: Color.fromRGBO(255, 230, 247, 1),
-      ),
-      home: RoutinePage(),
-    );
-  }
+void main(){
+  runApp(
+    GetMaterialApp(
+      initialRoute: Routes.initial,
+      getPages: AppPages.pages,
+    )
+  );
 }

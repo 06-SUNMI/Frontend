@@ -21,7 +21,7 @@ class Tempbutton extends StatelessWidget{
             TextButton(
               onPressed: () async{
                 _selectcays = "3";
-                Get.to(() => Challenge_check(), arguments: _selectcays);
+                Get.to(() => Challendge_check(), arguments: _selectcays);
               },
               child: Text("주3회 챌린지"),
               style: TextButton.styleFrom(
@@ -31,10 +31,12 @@ class Tempbutton extends StatelessWidget{
             TextButton(
               onPressed: () async{
                 _selectcays= "5";
-                Get.to(() => Challenge_check(), arguments: _selectcays);
+                Get.to(() => Challendge_check(), arguments: _selectcays);
               },
               child: Text("  주5회 챌린지"),
+
             ),
+
           ],
         ),
       ),
@@ -46,7 +48,7 @@ class Tempbutton extends StatelessWidget{
 
 
 
-class Challenge_check extends StatelessWidget {
+class Challendge_check extends StatelessWidget {
   var _selectcays = Get.arguments;
 
   @override
@@ -113,6 +115,11 @@ class Challenge_check extends StatelessWidget {
         ),
       ),
     );
+    //Center(child: Text("$selectdays"),),
+    //  body: hallendge_checkpage(selectdays),
+
+    // );
+
   }
 
 }
