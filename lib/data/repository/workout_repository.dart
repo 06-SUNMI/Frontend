@@ -10,6 +10,10 @@ class WorkoutRepository {
     return workoutProvider.getAllByJson();
   }
 
+  getTargets(){
+    return workoutProvider.getTargetsByJson();
+  }
+
   getByHttp(){
     return workoutProvider.getByHttp();
   }

@@ -13,6 +13,10 @@ class WorkoutController extends GetxController{
   get workouts => this._workouts.value;
   set workouts(value) => this._workouts.value = value;
 
+  final RxList<String> _workoutTargets = RxList.empty(growable: true);
+  get workoutTargets => this._workoutTargets.value;
+  set workoutTargets(value) => this._workoutTargets.value = value;
+
   @override
   void onInit() {
     super.onInit();
@@ -26,9 +30,9 @@ class WorkoutController extends GetxController{
             (data){
               this.workouts = data;
             });
-    workoutRepository.getByHttp().then(
-        (data) {
-          print(workouts);
+    workoutRepository.getTargets().then(
+        (data){
+          this.workoutTargets = data;
         }
     );
   }

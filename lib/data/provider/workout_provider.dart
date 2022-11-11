@@ -25,5 +25,12 @@ class WorkoutProvider extends GetConnect{
     final List<Workout> workoutsFromJson = workoutResponse.map((workout) => Workout.fromJson(workout)).toList();
     return workoutsFromJson;
   }
+
+  getTargetsByJson() async {
+    String targetJson = await rootBundle.loadString('assets/json/targets.json');
+    final targetResponse = json.decode(targetJson) as List;
+    final List<String> targetsFromJson = List<String>.from(targetResponse);
+    return targetsFromJson;
+  }
 }
 

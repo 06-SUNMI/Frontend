@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sunmi/ui/widget/sns_postitems.dart';
-import 'package:sunmi/ui/screen/sns_navigator.dart';
+import 'package:sunmi/ui/widget/sns/sns_postitems.dart';
+import 'package:sunmi/ui/screen/sns/sns_navigator.dart';
 
-import 'package:sunmi/ui/widget/sns_storybanner.dart';
+import 'package:sunmi/ui/widget/sns/sns_storybanner.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
