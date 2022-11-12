@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:sunmi/controller/workout_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:sunmi/routes/app_pages.dart';
-import 'package:sunmi/ui/screen/routine_calendar.dart';
+import 'package:sunmi/ui/screen/routine/routine_calendar.dart';
 import 'dart:convert';
 
 class AlwaysDisabledFocusNode extends FocusNode {
@@ -181,7 +181,6 @@ class _SetPageState extends State<SetPage> {
                       );
                     },
                   );
-   //               _postRequest();
                 } else {
                   _postRequestt(tec.text);
                   showDialog(

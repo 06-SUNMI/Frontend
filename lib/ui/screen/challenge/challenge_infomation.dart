@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sunmi/main.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sunmi/ui/screen/challenge_date.dart';
-import 'package:sunmi/ui/screen/challenge_inforoutine.dart';
-
+import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
+import 'package:sunmi/ui/screen/challenge/challenge_inforoutine.dart';
+import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
 ////// Tempbutton = 챌린지 목록 확인 임의로 만들어 둔 페이지, 나중에 지울게요
 class Tempbutton extends StatelessWidget{
   // late Sdays selectdays;

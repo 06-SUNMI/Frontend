@@ -4,7 +4,9 @@ abstract class Routes{
    static const initial ='/';
    static const workoutSelect = '/workouts_select_page';
    static const routineRegister = '/routine_register';
-   static const challenges = '/challenge_list';
-   static const challengeDetail = '/challenge_details';
-   static const registeredChallengeDetail = '/registered_challenge_details';
+   static const challengeInfo = '/challenge_info';
+   static const registeredChallengeInfo = '/registered_challenge_info';
+   static const challengeAuth = '/challenge-auth';
+   static const challengeAuthPhotos = '/challenge-auth-photos';
+   static const challengeAuthPhotoInfo = '/challenge-auth-photo-info';
 }

@@ -29,11 +29,11 @@ class ChallengeController extends GetxController {
     this.registeredChallenges = registeredChallenges;
   }
 
-  challengeDetails(int index){
-    Get.toNamed(Routes.challengeDetail, arguments: 3);
+  challengeInfo(int index){
+    Get.toNamed(Routes.challengeInfo, arguments: 3);
   }
 
-  registeredChallengeDetails(int index){
-    Get.toNamed(Routes.registeredChallengeDetail, arguments: {"index": index});
+  registeredChallengeInfo(int index){
+    Get.toNamed(Routes.registeredChallengeInfo, arguments: {"index": index});
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sunmi/ui/screen/sns_home_screen.dart';
+import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
 
 
 class NavigatorScreen extends StatefulWidget {

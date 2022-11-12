@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunmi/data/storys.dart';
 
-import 'package:sunmi/ui/widget/sns_storyitem.dart';
+import 'package:sunmi/ui/widget/sns/sns_storyitem.dart';
 
 class StoryBanner extends StatelessWidget {
   const StoryBanner({
