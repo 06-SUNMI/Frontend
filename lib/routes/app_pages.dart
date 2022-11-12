@@ -17,7 +17,7 @@ class AppPages {
     GetPage(name: Routes.workoutSelect, page: ()=> WorkoutPage(), binding: WorkoutBinding()),
     GetPage(name: Routes.routineRegister, page: ()=>Setcount(Workout(workoutName: 'qwe',workoutTarget: 'qweqwe'), DateTime.now())),
     GetPage(name: Routes.challenges, page: ()=>ChallengeListPage(), binding: ChallengeBinding()),
-    GetPage(name: Routes.challengeDetail, page: ()=> Challendge_check()),
+    GetPage(name: Routes.challengeDetail, page: ()=> ChallengeCheck()),
     GetPage(name: Routes.registeredChallengeDetail, page: ()=> RegisteredChallengeDetailsPage())
   ];
 }

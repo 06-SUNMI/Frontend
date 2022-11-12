@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'Exercisesetcount.dart';
 import '/data/model/workout.dart';
 import 'package:get/get.dart';
-
-
-
+import 'package:sunmi/controller/workout_controller.dart';
+import 'package:http/http.dart' as http;
+import 'package:sunmi/routes/app_pages.dart';
+import 'package:sunmi/ui/screen/routine_calendar.dart';
+import 'dart:convert';
 
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
@@ -54,6 +56,7 @@ class _SetPageState extends State<SetPage> {
   late DateTime date;
 
   late Exercise_setcount exercisesetcount;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +85,9 @@ class _SetPageState extends State<SetPage> {
                 controller: tea,
                 maxLength: 10,
                 keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]')),],
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                ],
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(20)
@@ -95,12 +100,14 @@ class _SetPageState extends State<SetPage> {
               //     Text('set'),
               TextFormField(
                 controller: teb,
-              //  exercisecount : tec.text, /******************/
+                //  exercisecount : tec.text, /******************/
                 //Exercise_setcount.exercisecount = tec.text,
                 maxLength: 10,
                 keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                  FilteringTextInputFormatter.deny(' ')],
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                  FilteringTextInputFormatter.deny(' ')
+                ],
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(20)
@@ -121,7 +128,6 @@ class _SetPageState extends State<SetPage> {
                   setState(() {
                     _c = value!;
                   });
-
                 },
 
               ),
@@ -131,7 +137,9 @@ class _SetPageState extends State<SetPage> {
                   controller: tec,
                   maxLength: 10,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]')),],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                  ],
                   decoration: InputDecoration(
                     // icon: Icon(Icons.check),
                     border: UnderlineInputBorder(
@@ -150,49 +158,54 @@ class _SetPageState extends State<SetPage> {
               ),
               child: const Text("확인"),
               onPressed: () {
-                if(_c ==Counter.sets){
-                showDialog(
-                context: context,
-                barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
-                builder: (BuildContext context) {
-                return AlertDialog(
-                  // content: const ScreenVideoTips(),
-                  content: new Text(tea.text + " 세트" + "   " + teb.text + " 회"),
-                  insetPadding: const EdgeInsets.fromLTRB(0, 80, 0, 80),
-                  actions: [
-                    TextButton(
-                    child: const Text('확인'),
-                    onPressed: () {
-                    Navigator.of(context).pop();
-                    },
-                    ),
-                  ],
-                  );
-                  },
-                );
-                } else{
+                if (_c == Counter.sets) {
+                  _postRequests(tea.text,teb.text);
                   showDialog(
-                  context: context,
-                  barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
-                  builder: (BuildContext context) {
-                  return AlertDialog(
-                  // content: const ScreenVideoTips(),
-                    content : new Text(tec.text+" 분"),
-                    insetPadding: const EdgeInsets.fromLTRB(0, 80, 0, 80),
-                    actions: [
-                      TextButton(
-                        child: const Text('확인'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ]
-                  ,
+                    context: context,
+                    barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        // content: const ScreenVideoTips(),
+                        content: new Text(tea.text + " 세트" + "   " + teb.text +
+                            " 회"),
+                        insetPadding: const EdgeInsets.fromLTRB(0, 80, 0, 80),
+                        actions: [
+                          TextButton(
+                            child: const Text('확인'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Get.to(() => RoutinePage());
+                            },
+                          ),
+                        ],
+                      );
+                    },
                   );
-                  },
+   //               _postRequest();
+                } else {
+                  _postRequestt(tec.text);
+                  showDialog(
+                    context: context,
+                    barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        // content: const ScreenVideoTips(),
+                        content: new Text(tec.text + " 분"),
+                        insetPadding: const EdgeInsets.fromLTRB(0, 80, 0, 80),
+                        actions: [
+                          TextButton(
+                            child: const Text('확인'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Get.to(() => RoutinePage());
+                            },
+                          ),
+                        ],
+                      );
+                    },
                   );
-                }
 
+                }
               },
 
             ),
@@ -202,4 +215,43 @@ class _SetPageState extends State<SetPage> {
       ),
     );
   }
+}
+void _postRequests(String tea, String teb) async{
+  String url = 'http://15.164.168.230:8080/members/1/routines';
+  var data = {
+    "memberRoutineWorkoutContentList": [
+      {
+        "memberRoutineWorkoutName": "PUSH_UP",
+        "memberRoutineWorkoutWeight": null,
+        "memberRoutineWorkoutCount": tea,
+        "memberRoutineWorkoutSet": teb,
+        "memberRoutineWorkoutTime": null
+      }
+    ],
+    "routineRegisterdate": "2022-11-10"
+  };
+  var body = jsonEncode(data);
+  http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
+
+  print('post : ${_res.body}');
+}
+
+void _postRequestt(String tec) async{
+  String url = 'http://15.164.168.230:8080/members/1/routines';
+  var data = {
+    "memberRoutineWorkoutContentList": [
+      {
+        "memberRoutineWorkoutName": "PUSH_UP",
+        "memberRoutineWorkoutWeight": null,
+        "memberRoutineWorkoutCount": null,
+        "memberRoutineWorkoutSet": null,
+        "memberRoutineWorkoutTime": tec
+      }
+    ],
+    "routineRegisterdate": "2022-11-10"
+  };
+  var body = jsonEncode(data);
+  http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
+
+  print('post : ${_res.body}');
 }
