@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
 import 'package:sunmi/main.dart';
-import 'package:sunmi/ui/screen/workout_select_page.dart';
+import 'package:sunmi/ui/screen/routine/workout_select_page.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

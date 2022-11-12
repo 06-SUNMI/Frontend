@@ -1,87 +1,87 @@
 [
   {
     "workoutName": "Exercise 11",
-    "workoutTarget": "Example1",
+    "workoutTarget": "chest",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 12",
-    "workoutTarget": "Example1",
+    "workoutTarget": "chest",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 13",
-    "workoutTarget": "Example1",
+    "workoutTarget": "back",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 21",
-    "workoutTarget": "Example2",
+    "workoutTarget": "lowerBody",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 22",
-    "workoutTarget": "Example2",
+    "workoutTarget": "lowerBody",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 23",
-    "workoutTarget": "Example2",
+    "workoutTarget": "lowerBody",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 31",
-    "workoutTarget": "Example3",
+    "workoutTarget": "shoulder",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 32",
-    "workoutTarget": "Example3",
+    "workoutTarget": "shoulder",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 33",
-    "workoutTarget": "Example3",
+    "workoutTarget": "triceps",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 34",
-    "workoutTarget": "Example3",
+    "workoutTarget": "triceps",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 35",
-    "workoutTarget": "Example3",
+    "workoutTarget": "biceps",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 36",
-    "workoutTarget": "Example3",
+    "workoutTarget": "biceps",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 41",
-    "workoutTarget": "Example4",
+    "workoutTarget": "core",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 42",
-    "workoutTarget": "Example4",
+    "workoutTarget": "forearm",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 51",
-    "workoutTarget": "Example5",
+    "workoutTarget": "aerobic",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 52",
-    "workoutTarget": "Example5",
+    "workoutTarget": "aerobic",
     "imagePath" : "assets/images/checkimage.png"
   },
   {
     "workoutName": "Exercise 53",
-    "workoutTarget": "Example5",
+    "workoutTarget": "aerobic",
     "imagePath" : "assets/images/checkimage.png"
   }
 ]
