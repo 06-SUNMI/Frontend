@@ -6,10 +6,8 @@ import 'package:sunmi/data/repository/challenge_repository.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ChallengeController>((){
-      return ChallengeController(
-          challengeRepository: ChallengeRepository(
-              challengeProvider: ChallengeProvider()));
-    });
+    Get.put<ChallengeController>(ChallengeController(
+        challengeRepository: ChallengeRepository(
+            challengeProvider: ChallengeProvider())));
   }
 }
