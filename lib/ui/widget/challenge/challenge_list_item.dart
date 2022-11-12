@@ -22,7 +22,7 @@ Widget challengeListItems(context, index) {
                     '\nto ${challengeController.challenges[index].endDate}'),],
         )],
     ),
-    onTap: ()=>challengeController.challengeDetails(index),
+    onTap: ()=>challengeController.challengeInfo(index),
   );
 }
 
@@ -30,7 +30,7 @@ Widget registeredChallengeItems(context, index) {
   final challengeController = Get.find<ChallengeController>();
 
   return InkWell(
-    onTap: ()=>challengeController.registeredChallengeDetails(index),
+    onTap: ()=>challengeController.registeredChallengeInfo(index),
     child: Row(
       mainAxisSize: MainAxisSize.max,
       children: [
