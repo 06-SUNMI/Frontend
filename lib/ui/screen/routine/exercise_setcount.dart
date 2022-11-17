@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Exercise_setcount {
+class ExerciseSetcount {
   String? exercisesets;
   String? exercisecount;
   String? exercisetime;
 
-  Exercise_setcount({
+  ExerciseSetcount({
     required this.exercisesets,
     required this.exercisecount,
     required this.exercisetime

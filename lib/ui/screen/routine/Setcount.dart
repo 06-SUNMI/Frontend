@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Exercisesetcount.dart';
+import 'exercise_setcount.dart';
 import '/data/model/workout.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/workout_controller.dart';
@@ -9,18 +9,9 @@ import 'package:sunmi/routes/app_pages.dart';
 import 'package:sunmi/ui/screen/routine/routine_calendar.dart';
 import 'dart:convert';
 
-class AlwaysDisabledFocusNode extends FocusNode {
-  @override
-  bool get hasFocus => false;
-}
-
 class Setcount extends StatelessWidget {
-  Workout exercise;
-  DateTime date;
 
-  Setcount(this.exercise, this.date);
-
-
+  Setcount(workoutName, date);
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +31,6 @@ class SetPage extends StatefulWidget {
   @override
   _SetPageState createState() => _SetPageState();
 
-
-
 }
 
 enum Counter {sets, timer}
@@ -52,10 +41,8 @@ class _SetPageState extends State<SetPage> {
   TextEditingController teb = TextEditingController();
   TextEditingController tec = TextEditingController();
 
-  late Workout exercise;
-  late DateTime date;
-
-  late Exercise_setcount exercisesetcount;
+  var workoutName = Get.arguments;
+  var date = Get.arguments['date'];
 
   @override
   Widget build(BuildContext context) {
@@ -92,16 +79,12 @@ class _SetPageState extends State<SetPage> {
                   border: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(20)
                   ),
-                  // labelText: '     운동세트를 입력해 주세요',
                   labelText: '    세트를 입력해 주세요  ',
                   hintText: '  -  세트  ',
                 ),
               ),
-              //     Text('set'),
               TextFormField(
                 controller: teb,
-                //  exercisecount : tec.text, /******************/
-                //Exercise_setcount.exercisecount = tec.text,
                 maxLength: 10,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
@@ -159,15 +142,14 @@ class _SetPageState extends State<SetPage> {
               child: const Text("확인"),
               onPressed: () {
                 if (_c == Counter.sets) {
-                  _postRequests(tea.text,teb.text);
+                  _postRequests(tea.text,teb.text,date);
                   showDialog(
                     context: context,
                     barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
                     builder: (BuildContext context) {
                       return AlertDialog(
                         // content: const ScreenVideoTips(),
-                        content: new Text(tea.text + " 세트" + "   " + teb.text +
-                            " 회"),
+                        content: new Text(tea.text + " 세트" + "   " + teb.text + " 회"),
                         insetPadding: const EdgeInsets.fromLTRB(0, 80, 0, 80),
                         actions: [
                           TextButton(
@@ -182,7 +164,7 @@ class _SetPageState extends State<SetPage> {
                     },
                   );
                 } else {
-                  _postRequestt(tec.text);
+                  _postRequestt(tec.text,date);
                   showDialog(
                     context: context,
                     barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
@@ -196,7 +178,7 @@ class _SetPageState extends State<SetPage> {
                             child: const Text('확인'),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              Get.to(() => RoutinePage());
+                              Get.to(() => RoutinePage());//Routes.initial)
                             },
                           ),
                         ],
@@ -215,42 +197,51 @@ class _SetPageState extends State<SetPage> {
     );
   }
 }
-void _postRequests(String tea, String teb) async{
+void _postRequests(String tea, String teb, var date) async{
   String url = 'http://15.164.168.230:8080/members/1/routines';
+  Workout selectedWorkout = Get.arguments['workout'];
+  var workoutNames= selectedWorkout.workoutName;
+  DateTime dates = Get.arguments['date'];
+  String date_data = "${dates.year}-${dates.month}-${dates.day}";
   var data = {
     "memberRoutineWorkoutContentList": [
       {
-        "memberRoutineWorkoutName": "PUSH_UP",
+        "memberRoutineWorkoutName": workoutNames,
         "memberRoutineWorkoutWeight": null,
         "memberRoutineWorkoutCount": tea,
         "memberRoutineWorkoutSet": teb,
         "memberRoutineWorkoutTime": null
       }
     ],
-    "routineRegisterdate": "2022-11-10"
+    "routineRegisterdate": date_data,
   };
   var body = jsonEncode(data);
   http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
 
-  print('post : ${_res.body}');
+ // print('post : ${_res.body}');
 }
 
-void _postRequestt(String tec) async{
+void _postRequestt(String tec, var date) async{
   String url = 'http://15.164.168.230:8080/members/1/routines';
+  Workout selectedWorkout = Get.arguments['workout'];
+  var workoutNames= selectedWorkout.workoutName;
+  DateTime dates = Get.arguments['date'];
+  String date_data = "${dates.year}-${dates.month}-${dates.day}";
   var data = {
     "memberRoutineWorkoutContentList": [
       {
-        "memberRoutineWorkoutName": "PUSH_UP",
+        "memberRoutineWorkoutName": workoutNames,
         "memberRoutineWorkoutWeight": null,
         "memberRoutineWorkoutCount": null,
         "memberRoutineWorkoutSet": null,
         "memberRoutineWorkoutTime": tec
       }
     ],
-    "routineRegisterdate": "2022-11-10"
+    "routineRegisterdate": date_data,
+    //Get.arguments['date'],
   };
   var body = jsonEncode(data);
   http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
 
-  print('post : ${_res.body}');
+  //print('post : ${_res.body}');
 }

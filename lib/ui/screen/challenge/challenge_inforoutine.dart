@@ -1,21 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:sunmi/main.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'challenge_infomation.dart';
 
-class ChallengeRoutine extends StatelessWidget{
-  // late Sdays selectdays;
+class ChallengeRoutine extends StatefulWidget {
+  const ChallengeRoutine({super.key});
 
-  String _selectcays = "3";
+  @override
+  State<ChallengeRoutine> createState() => _ChallengeRoutine();
+}
 
+class _ChallengeRoutine extends State<ChallengeRoutine> {
+ // static const int numPerWeek = ;
+  static const int numItems = 20;
+  int daycount=12;
+  //List<bool> selected = List<bool>.generate(numItems, (int index) => false);
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('challenge routine'),
-      ),
-      body: Container(
-              child: Text("루틴 정보 페이지"),
-      ),
+    return DataTable(
+      columns: const <DataColumn>[
+        DataColumn(
+          label: Expanded(
+            child: Text('일 차',style: TextStyle(fontStyle: FontStyle.italic),),
+          ),
+        ),
+        DataColumn(
+          label: Expanded(
+            child: Text('루틴', style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
+        ),
+        ],
+
+
+      rows:
+       // while(daycount<=12)...[
+         <DataRow>[
+           for(int i=1;i<=daycount;i++)
+            DataRow(
+              cells: <DataCell>[
+                DataCell(Text('$i')),
+                DataCell(Text('루틴정보')),
+          //      daycount++,
+              ],
+            ),
+        ],
+      //],
     );
   }
 }
+
