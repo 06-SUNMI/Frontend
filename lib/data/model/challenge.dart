@@ -3,20 +3,29 @@ class Challenge{
   String challengeName;
   DateTime startDate;
   DateTime endDate;
+  int participationFee;
+  int participatedNum;
+  int numPerWeek;
 
   Challenge({
     required this.challengeId,
     required this.challengeName,
     required this.startDate,
-    required this.endDate
+    required this.endDate,
+    required this.participationFee,
+    required this.participatedNum,
+    required this.numPerWeek
   });
 
   factory Challenge.fromJson(Map<String, dynamic> json){
     return Challenge(
-        challengeId: json['challengeId'],
-        challengeName: json['challengeName'],
-        startDate: json['startDate'],
-        endDate: json['endDate']
+      challengeId: json['challengeId'],
+      challengeName: json['name'],
+      startDate: DateTime.parse(json['startDate']),
+      endDate: DateTime.parse(json['endDate']),
+      participationFee: json['participationFee'],
+      participatedNum: json['participationNum'],
+      numPerWeek: json['numPerWeek']
     );
   }
 
@@ -24,9 +33,12 @@ class Challenge{
     final Map<String,dynamic> challengeJson = Map<String, dynamic>();
 
     challengeJson['challengeId'] = challengeId;
-    challengeJson['challengeName'] = challengeName;
+    challengeJson['name'] = challengeName;
     challengeJson['startDate'] = startDate;
     challengeJson['endDate'] = endDate;
+    challengeJson['participationFee'] = participationFee;
+    challengeJson['participationNum'] = participatedNum;
+    challengeJson['numPerWeek'] = numPerWeek;
 
     return challengeJson;
   }

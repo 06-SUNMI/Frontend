@@ -1,38 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/registered_challenge_info_controller.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:sunmi/ui/widget/challenge/challenge_auth_bottom_sheet.dart';
+import 'package:sunmi/ui/widget/challenge/challenge_auth_photos.dart';
+import 'package:sunmi/ui/widget/challenge/registered_challenge_progress.dart';
 
 class RegisteredChallengeInfoPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    final registeredChallengeInfoController = Get.find<RegisteredChallengeInfoController>();
+    RegisteredChallengeInfoController registeredChallengeInfoController = Get.find<RegisteredChallengeInfoController>();
+    registeredChallengeInfoController.getById(Get.arguments['selectedChallengeId']);
     return Scaffold(
       appBar: AppBar(
         title: Text('등록한 챌린지 상세 조회 페이지'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            ElevatedButton(
-              child: Text('뒤로가기'),
-              onPressed: () => Get.back(),
-            ),
-            ElevatedButton(
-              child: Text('인증 사진 리스트 페이지 가기'),
-              onPressed: () => registeredChallengeInfoController.toChallengeAuthPhotos(),
-            ),
-            ElevatedButton(
-              child: Text('인증 사진 정보 페이지 가기'),
-              onPressed: () => registeredChallengeInfoController.toChallengeAuthPhotoInfo(),
-            ),
-            ElevatedButton(
-              child: Text('챌린지 인증 페이지 가기'),
-              onPressed: () => registeredChallengeInfoController.toChallengeAuth(),
-            )
-          ],
+      body: GestureDetector(
+        onTap: ()=>FocusScope.of(context).unfocus(),
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Text(registeredChallengeInfoController.registeredChallenge.challengeName,style: TextStyle(
+                  fontSize: 30
+              ),),
+              Text('기간 \n${registeredChallengeInfoController.registeredChallenge.startDate} '
+                  'to ${registeredChallengeInfoController.registeredChallenge.endDate}'),
+              Divider(thickness: 1.0, color: Colors.black,),
+              challengeProgress(),
+              challengeAuthPhotos(),
+            ],
+          ),
         ),
       ),
+      bottomSheet: challengeAuthBottomSheet(),
     );
   }
 }
+
+
+
+
+

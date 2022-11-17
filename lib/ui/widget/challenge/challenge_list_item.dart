@@ -46,7 +46,10 @@ Widget registeredChallengeItems(context, index) {
                   '${challengeController.registeredChallenges[index].challengeName}'),
               Text(
                   '${challengeController.registeredChallenges[index].startDate}'
-                      '\nto ${challengeController.registeredChallenges[index].endDate}'),]
+                      '\nto ${challengeController.registeredChallenges[index].endDate}'),
+              Text(
+                  '${challengeController.registeredChallenges[index].progressRate}'
+              ),]
         )],
     ),
   );

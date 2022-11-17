@@ -9,19 +9,7 @@ class ChallengeRepository {
   ChallengeRepository({required this.challengeProvider});
 
   getAll() {
-    List<Challenge> mockChallenges = List<Challenge>.empty(growable: true);
-
-    mockChallenges.add(Challenge(
-        challengeId: 1,
-        challengeName: '1',
-        startDate: DateTime.now(),
-        endDate: DateTime.now()));
-    mockChallenges.add(Challenge(
-        challengeId: 2,
-        challengeName: '2',
-        startDate: DateTime.now(),
-        endDate: DateTime.now()));
-    return mockChallenges;
+    return challengeProvider.getAll();
   }
 
   getByUserId(int userId) {
@@ -31,12 +19,18 @@ class ChallengeRepository {
         challengeId: 3,
         challengeName: '3',
         startDate: DateTime.now(),
-        endDate: DateTime.now()));
+        endDate: DateTime.now(),
+        participationFee: 30000,
+        participatedNum: 10,
+        numPerWeek: 3));
     mockRegisteredChallenges.add(Challenge(
         challengeId: 4,
         challengeName: '4',
         startDate: DateTime.now(),
-        endDate: DateTime.now()));
+        endDate: DateTime.now(),
+        participationFee: 30000,
+        participatedNum: 10,
+        numPerWeek: 3));
     return mockRegisteredChallenges;
   }
 }

@@ -15,8 +15,8 @@ class ChallengeListPage extends GetView<ChallengeController> {
         title: const Text('챌린지 리스트 페이지'),
       ),
       body: GetX<ChallengeController>(
+        init: Get.find<ChallengeController>().getAll(),
         builder: (challengeController) {
-          print(challengeController.challenges.length);
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: DefaultTabController(
