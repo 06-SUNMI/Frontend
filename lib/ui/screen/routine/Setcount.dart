@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:sunmi/controller/workout_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:sunmi/routes/app_pages.dart';
-import 'package:sunmi/ui/screen/routine/routine_calendar.dart';
 import 'dart:convert';
 
 class Setcount extends StatelessWidget {
@@ -156,7 +155,7 @@ class _SetPageState extends State<SetPage> {
                             child: const Text('확인'),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              Get.to(() => RoutinePage());
+                              Get.toNamed(Routes.initial);
                             },
                           ),
                         ],
@@ -178,7 +177,7 @@ class _SetPageState extends State<SetPage> {
                             child: const Text('확인'),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              Get.to(() => RoutinePage());//Routes.initial)
+                              Get.toNamed(Routes.initial);//Routes.initial)
                             },
                           ),
                         ],

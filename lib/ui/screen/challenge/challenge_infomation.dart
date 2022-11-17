@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_inforoutine.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
+import 'package:sunmi/routes/app_pages.dart';
 
 class ChallengeCheck extends StatelessWidget {
   var _selectcays = Get.arguments;
@@ -86,7 +87,8 @@ class ChallengeCheck extends StatelessWidget {
                        child: ElevatedButton(
                           child:Text("신청하기", style: TextStyle(fontSize: 25,fontFamily: 'Signatra',fontWeight: FontWeight.bold),textAlign: TextAlign.center),
                           onPressed: (){
-                            Get.to(() => ChallengeDatePage(), arguments: {'challengeId': '1','numPerWeek': '${_selectcays}'});
+                            Get.toNamed(Routes.challengeDate, arguments: {"start_date" : DateTime(2022, 11, 11), "end_date" : DateTime(2022, 11, 25)});
+
                           },
                         ),
             ),

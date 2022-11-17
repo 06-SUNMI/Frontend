@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/home_controller.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
-import 'package:sunmi/ui/screen/challenge/challenge_infomation.dart';
-import 'package:sunmi/ui/screen/routine/routine_calendar.dart';
+import 'package:sunmi/ui/screen/routine/routine_calendar_page.dart';
 import 'package:sunmi/ui/screen/sns/sns_navigator.dart';
+import 'package:sunmi/routes/app_pages.dart';
 
 import '../ui/screen/challenge/challenge_list_page.dart';
 
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   final HomeController _tabPageCtrl = Get.put(HomeController());
+
   List pages = [
-    const RoutinePage(),
+    RoutineCalendar(),
     ChallengeListPage(),
     const NavigatorScreen(),
+  ];
+
+  List homeRoutes = [
+    Routes.workoutSelect,
+    Routes.challengeInfo,
+    Routes.workoutSelect,
   ];
 
   @override
@@ -38,19 +39,5 @@ class _HomePageState extends State<HomePage> {
         BottomNavigationBarItem(icon: Icon(Icons.groups), label: 'community',),
       ]),
     ));
-  }
-}
-
-class TempPage extends StatelessWidget {
-  const TempPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('SNS Temp Page'),),
-      body: Center(
-        child: Text('sns temp page'),
-      ),
-    );
   }
 }

@@ -4,6 +4,7 @@ import 'package:sunmi/data/provider/challenge_provider.dart';
 import 'package:sunmi/data/provider/registered_challenge_provider.dart';
 import 'package:sunmi/data/repository/challenge_repository.dart';
 import 'package:sunmi/data/repository/registered_challenge_repository.dart';
+import 'package:sunmi/controller/calendar_controller.dart';
 
 class HomeBinding extends Bindings {
   @override
@@ -14,5 +15,6 @@ class HomeBinding extends Bindings {
         registeredChallengeRepository: RegisteredChallengeRepository(
             registeredChallengeProvider: RegisteredChallengeProvider()),
     ));
+    Get.lazyPut(() => CalendarController());
   }
 }

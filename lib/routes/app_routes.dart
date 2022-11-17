@@ -9,4 +9,6 @@ abstract class Routes{
    static const challengeAuth = '/challenge-auth';
    static const challengeAuthPhotos = '/challenge-auth-photos';
    static const challengeAuthPhotoInfo = '/challenge-auth-photo-info';
+   static const challengeDate = '/challenge_date';
+   //static const calendar = '/calendar';
 }
