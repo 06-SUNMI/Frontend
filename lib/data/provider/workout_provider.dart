@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:sunmi/data/model/workout.dart';
 import 'package:get/get.dart';
 
-String _baseURL = 'http://15.164.168.230:8080';
+import 'url.dart' as url;
 
 class WorkoutProvider extends GetConnect{
 
-  Future<Response> getWorkouts() => get(_baseURL + '/workout-data');
+  Future<Response> getWorkouts() => get(url.baseURL + '/workout-data');
 
   getByHttp() async{
     var jsonData = await getWorkouts();

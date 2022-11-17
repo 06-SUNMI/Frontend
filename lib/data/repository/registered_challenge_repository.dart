@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sunmi/controller/challenges_controller.dart';
 import 'package:sunmi/data/model/registered_challenge.dart';
 
 import 'package:sunmi/data/provider/registered_challenge_provider.dart';
@@ -13,16 +14,11 @@ class RegisteredChallengeRepository {
   }
 
   getById(int challengeId){
-    DateTime endDate = DateTime(DateTime.now().year, DateTime.now().month +1, 0);
-    // return registeredChallengeProvider.getById(challengeId, 1);
-    return RegisteredChallenge(
-        challengeId: challengeId,
-        challengeName: '신청한 챌린지',
-        startDate: DateTime.now(),
-        endDate: endDate,
-        progressRate: 25,
-        participatedNum: 1,
-        participationFee: 30000,
-        numPerWeek: 3);
+    ChallengeController challengeController = Get.find<ChallengeController>();
+
+    for (RegisteredChallenge challenge in challengeController.registeredChallenges) {
+      if(challenge.challengeId == challengeId) return challenge;
+    }
+    print('Specific Challenge not Found, challengeId : $challengeId');
   }
 }

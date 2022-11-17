@@ -37,6 +37,9 @@ dependencies:
   #http: ^0.12.0+2
   kakao_flutter_sdk_user: ^1.3.0-beta.4 # 카카오 로그인
   percent_indicator: ^4.0.1
+  exif: ^3.1.2
+  image_picker: ^0.8.6
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

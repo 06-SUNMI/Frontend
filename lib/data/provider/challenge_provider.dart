@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:sunmi/data/model/challenge.dart';
 import 'package:get/get.dart';
 
-String _baseURL = 'http://15.164.168.230:8080';
+import 'url.dart' as url;
 
 class ChallengeProvider extends GetConnect{
-  Future<Response> getChallenges()=>get(_baseURL+'/challenges');
+  Future<Response> getChallenges()=>get(url.baseURL+'/challenges');
   
   getAll() async{
     var challengeResponse = await getChallenges();
