@@ -12,6 +12,8 @@ import '../data/model/workout.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_infomation.dart';
 import 'package:sunmi/binding/registered_challenge_binding.dart';
 import 'homepage.dart';
+import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
+import 'package:sunmi/binding/challenge_date_binding.dart';
 
 part 'app_routes.dart';
 
@@ -25,6 +27,7 @@ class AppPages {
     GetPage(name: Routes.challengeAuth, page: ()=>ChallengeAuthPage()),
     GetPage(name: Routes.challengeAuthPhotos, page: ()=>ChallengeAuthPhotosPage()),
     GetPage(name: Routes.challengeAuthPhotoInfo, page: ()=>ChallengeAuthPhotoInfoPage()),
+     GetPage(name: Routes.challengeDate, page: ()=>ChallengeDatePage(), binding: ChallengeDateBinding()),
 
   ];
 }
