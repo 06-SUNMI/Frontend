@@ -7,7 +7,7 @@ class RegisteredChallengeBinding extends Bindings{
   @override
   void dependencies() {
     Get.lazyPut<RegisteredChallengeInfoController>((){
-      return RegisteredChallengeInfoController();
+      return RegisteredChallengeInfoController(registeredChallengeRepository: RegisteredChallengeRepository(registeredChallengeProvider: RegisteredChallengeProvider()));
     });
 
   }

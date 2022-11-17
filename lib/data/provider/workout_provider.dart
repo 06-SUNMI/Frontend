@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:sunmi/data/model/workout.dart';
 import 'package:get/get.dart';
 
-String _baseURL = 'http://15.164.168.230:8080';
+import 'url.dart' as url;
 
 class WorkoutProvider extends GetConnect{
 
-  Future<Response> getWorkouts() => get(_baseURL + '/workout-data');
+  Future<Response> getWorkouts() => get(url.baseURL + '/workout-data');
 
   getByHttp() async{
     var jsonData = await getWorkouts();
@@ -22,6 +22,7 @@ class WorkoutProvider extends GetConnect{
   getAllByJson() async {
     String workoutJson = await rootBundle.loadString('assets/json/workouts.json');
     final workoutResponse = json.decode(workoutJson) as List;
+    print(workoutResponse);
     final List<Workout> workoutsFromJson = workoutResponse.map((workout) => Workout.fromJson(workout)).toList();
     return workoutsFromJson;
   }

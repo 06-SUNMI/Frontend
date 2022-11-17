@@ -21,7 +21,6 @@ class WorkoutController extends GetxController{
   void onInit() {
     super.onInit();
     getAll();
-    print('loaded workout lists');
 
   }
 
