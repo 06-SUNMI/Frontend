@@ -34,7 +34,7 @@ class ChallengeController extends GetxController {
   }
 
   challengeInfo(int index){
-    Get.toNamed(Routes.challengeInfo, arguments: 3);
+    Get.toNamed(Routes.challengeInfo, arguments: {'challenge': challenges[index]});
   }
 
   registeredChallengeInfo(int index){

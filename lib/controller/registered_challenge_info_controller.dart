@@ -17,7 +17,7 @@ class RegisteredChallengeInfoController extends GetxController{
   });
 
   getById(int challengeId){
-    this.currentChallengeId = challengeId;
+    currentChallengeId = challengeId;
     registeredChallenge = registeredChallengeRepository.getById(challengeId);
   }
 

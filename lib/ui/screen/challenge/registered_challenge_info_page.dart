@@ -12,6 +12,7 @@ class RegisteredChallengeInfoPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     RegisteredChallengeInfoController registeredChallengeInfoController = Get.find<RegisteredChallengeInfoController>();
+    registeredChallengeInfoController.currentChallengeId = Get.arguments['selectedChallengeId'];
     registeredChallengeInfoController.getById(Get.arguments['selectedChallengeId']);
     return Scaffold(
       appBar: AppBar(

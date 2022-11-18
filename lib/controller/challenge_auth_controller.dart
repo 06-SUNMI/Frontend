@@ -3,17 +3,20 @@ import 'dart:io';
 import 'package:exif/exif.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio;
+import 'package:intl/intl.dart';
+import 'package:sunmi/controller/calendar_controller.dart';
+import 'package:sunmi/controller/registered_challenge_info_controller.dart';
+import 'package:sunmi/data/model/routine_detail.dart';
 
 import 'package:sunmi/data/repository/challenge_auth_repository.dart';
+import 'package:sunmi/data/repository/routine_detail_repository.dart';
 
 
 class ChallengeAuthController extends GetxController {
   final ChallengeAuthRepository challengeAuthRepository;
+  final RoutineDetailRepository routineDetailRepository = RoutineDetailRepository();
 
-  ChallengeAuthController({
-    required this.challengeAuthRepository
-  });
+  RoutineDetail? todayRoutineDetail;
 
   final RxBool _isImageLoaded = false.obs;
   get isImageLoaded => _isImageLoaded.value;
@@ -23,16 +26,34 @@ class ChallengeAuthController extends GetxController {
   get selectedImage => _selectedImage!.value;
   set selectedImage(value) => _selectedImage!.value = value;
 
-  tempPost() async{
-    if(this.isImageLoaded){
-      final dio.MultipartFile _challengeAuth = await dio.MultipartFile.fromFile(selectedImage.path);
-      final formData = dio.FormData.fromMap({
-        'file': _challengeAuth,
-      });
-      final response = await dio.Dio().post("http://15.164.168.230:8080/challenges/auth/challenge-routines/1/members/1",
-          data: formData,
-          options: dio.Options(contentType: dio.Headers.formUrlEncodedContentType));
+  ChallengeAuthController({
+    required this.challengeAuthRepository
+  });
+
+  authChallenge() async {
+    if(isImageLoaded){
+      getImageDate();
+      await getTodayRoutineDetail();
+      print(todayRoutineDetail!.routineChallengeId);
+      return await challengeAuthRepository.authChallenge(
+          todayRoutineDetail!.routineChallengeId,
+          todayRoutineDetail!.memberRoutineId,
+          selectedImage);
     }
+  }
+
+  getTodayRoutineDetail() async {
+    CalendarController calendarController = Get.find<CalendarController>();
+    List days = calendarController.days;
+    int todayRoutineId = -1;
+    for(var day in days){
+      if(calendarController.isToday(day['year'], day['month'], day['day'])){
+        todayRoutineId = day['routineId'];
+      }
+    }
+    print(todayRoutineId);
+    this.todayRoutineDetail = await routineDetailRepository.getById(todayRoutineId);
+    return;
   }
 
   pickImage() async {
@@ -46,6 +67,18 @@ class ChallengeAuthController extends GetxController {
     }
   }
 
+  getImageDate(){
+    readExif().then((exif){
+      DateTime;
+      print(exif['EXIF DateTimeOriginal']);
+      String dateString = exif['EXIF DateTimeOriginal'].toString().substring(0,10);
+      print(dateString);
+      DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString);
+
+      print(imageDateOriginal);
+    });
+  }
+
   readExif() async {
     final fileBytes = File(selectedImage!.path).readAsBytesSync();
     final data = await readExifFromBytes(fileBytes);
@@ -54,9 +87,6 @@ class ChallengeAuthController extends GetxController {
       print('There is no EXIF data');
       return;
     }
-    print('keys of data:');
-    for (final entry in data.entries){
-      print('${entry.key} : ${entry.value}');
-    }
+    return data;
   }
 }
