@@ -16,24 +16,28 @@ class RegisteredChallengeInfoController extends GetxController{
   set currentChallengeId(value) => this._currentChallengeId.value = value;
 
   @override
-  void onInit(){
-    once(_currentChallengeId, (currentChallengeId) async {
-      _registeredChallenge = Rx<RegisteredChallenge>(await registeredChallengeRepository.getById(currentChallengeId));
-      _registeredChallenge.refresh();
-    });
-    // ever(_currentChallengeId, (currentChallengeId){
-    //   registeredChallenge = getById(currentChallengeId);
+  void onInit() {
+    currentChallengeId = Get.arguments['selectedChallengeId'];
+    _registeredChallenge = Rx<RegisteredChallenge>(registeredChallengeRepository.getById(currentChallengeId));
+
+    // once(_currentChallengeId, (currentChallengeId) {
+    //   _registeredChallenge = Rx<RegisteredChallenge>(registeredChallengeRepository.getById(currentChallengeId));
+    //   _registeredChallenge.refresh();
     // });
+    ever(_currentChallengeId, (currentChallengeId){
+      registeredChallenge = getById(currentChallengeId);
+    });
     super.onInit();
   }
+
 
   RegisteredChallengeInfoController({
     required this.registeredChallengeRepository
   });
 
-  updateCurrentChallenge(){
+  updateCurrentChallenge()  {
     Get.find<ChallengeController>().getAll();
-    registeredChallenge = registeredChallengeRepository.getById(currentChallengeId);
+    registeredChallenge =  registeredChallengeRepository.getById(currentChallengeId);
     _registeredChallenge.refresh();
   }
 

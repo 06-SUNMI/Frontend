@@ -16,9 +16,6 @@ class RegisteredChallengeInfoPage extends StatelessWidget{
         title: Text('등록한 챌린지 상세 조회 페이지'),
       ),
       body: GetX<RegisteredChallengeInfoController>(
-        initState: (state) {
-          Get.find<RegisteredChallengeInfoController>().currentChallengeId = Get.arguments['selectedChallengeId'];
-        },
         builder: (registeredChallengeInfoController){
           return GestureDetector(
             onTap: ()=>FocusScope.of(context).unfocus(),
