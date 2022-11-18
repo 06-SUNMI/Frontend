@@ -39,6 +39,7 @@ dependencies:
   percent_indicator: ^4.0.1
   exif: ^3.1.2
   image_picker: ^0.8.6
+  intl:
 
 
   # The following adds the Cupertino Icons font to your application.

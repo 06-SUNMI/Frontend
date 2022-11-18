@@ -7,4 +7,8 @@ class ChallengeAuthRepository{
   ChallengeAuthRepository({
     required this.challengeAuthProvider
   });
+
+  authChallenge(challengeRoutineId, memberRoutineId, image){
+    return challengeAuthProvider.authChallenge(challengeRoutineId, memberRoutineId, image);
+  }
 }

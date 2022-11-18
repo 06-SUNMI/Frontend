@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/challenge_auth_controller.dart';
+import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 import 'package:sunmi/data/provider/challenge_auth_provider.dart';
 import 'package:sunmi/data/repository/challenge_auth_repository.dart';
+import 'package:sunmi/routes/app_pages.dart';
 
 class ChallengeAuthPage extends StatelessWidget{
   @override
@@ -32,7 +34,30 @@ class ChallengeAuthPage extends StatelessWidget{
                 ),
                 ElevatedButton(
                   child: Text('보내기'),
-                  onPressed: authPageController.tempPost,
+                  onPressed: () async {
+                    var value = await authPageController.authChallenge();
+                    if(value == -1){
+                      showDialog(
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                              content: Text('실패'),
+                              actions: [
+                              ],
+                            );
+                          });
+                    } else {
+                      Get.find<RegisteredChallengeInfoController>().updateCurrentChallenge();
+                      Get.back();
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            content: Text('성공'),
+                            actions: [
+                            ],
+                          ));
+                    }
+                  },
                 ),
                 authPageController.isImageLoaded?
                 Image.file(authPageController.selectedImage) : Text("이미지를 불러와주세요")
