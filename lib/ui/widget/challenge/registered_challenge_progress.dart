@@ -4,7 +4,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 
 challengeProgress(){
-  return Column(
+  return Obx(()=>Column(
     children: [
       Text('진행상황'),
       Center(
@@ -21,5 +21,5 @@ challengeProgress(){
       ),
       Divider(thickness: 1.0, color: Colors.black,),
     ],
-  );
+  ));
 }

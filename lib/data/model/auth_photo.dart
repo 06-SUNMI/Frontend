@@ -11,7 +11,7 @@ class AuthPhoto {
 
   factory AuthPhoto.fromJson(Map<String,dynamic> json){
     return AuthPhoto(
-      photoPath: json['photoPath'],
+      photoPath: json['photoUrl'],
       authPostId: json['challengeAuthPostId'],
       memberId: json['memberId'],
     );
@@ -20,7 +20,7 @@ class AuthPhoto {
   toJson(){
     Map<String, dynamic> authPhotoJson = {};
     authPhotoJson['challengeAuthPostId'] = authPostId;
-    authPhotoJson['photoPath'] = photoPath;
+    authPhotoJson['photoUrl'] = photoPath;
     authPhotoJson['memberId'] = memberId;
     return authPhotoJson;
   }

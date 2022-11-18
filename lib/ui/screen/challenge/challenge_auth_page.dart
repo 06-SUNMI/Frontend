@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/challenge_auth_controller.dart';
+import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 import 'package:sunmi/data/provider/challenge_auth_provider.dart';
 import 'package:sunmi/data/repository/challenge_auth_repository.dart';
 import 'package:sunmi/routes/app_pages.dart';
@@ -46,6 +47,7 @@ class ChallengeAuthPage extends StatelessWidget{
                             );
                           });
                     } else {
+                      Get.find<RegisteredChallengeInfoController>().updateCurrentChallenge();
                       Get.back();
                       showDialog(
                           context: context,
@@ -54,7 +56,6 @@ class ChallengeAuthPage extends StatelessWidget{
                             actions: [
                             ],
                           ));
-                      Get.back();
                     }
                   },
                 ),

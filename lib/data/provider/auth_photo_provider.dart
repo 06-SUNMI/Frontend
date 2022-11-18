@@ -6,7 +6,10 @@ import 'url.dart' as url;
 class AuthPhotoProvider extends GetConnect{
   Future<Response> getAuthPhoto(int challengeId) => get('${url.baseURL}/challenges/$challengeId/auth');
 
-  getAllByChallengeId(int challengeId){
-
+  getAllByChallengeId(int challengeId) async {
+    var authPhotoResponse = await getAuthPhoto(challengeId);
+    final authPhotosJson = authPhotoResponse.body['challengeFindAllAuthPostDataList'] as List;
+    List<AuthPhoto> authPhotos = authPhotosJson.map((authPhoto) => AuthPhoto.fromJson(authPhoto)).toList();
+    return authPhotos;
   }
 }
