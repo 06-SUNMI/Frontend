@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 
-
 class CalendarController extends GetxController {
   static CalendarController get to => Get.find();
   var week = ["일", "월", "화", "수", "목", "금", "토"];
@@ -17,8 +16,11 @@ class CalendarController extends GetxController {
   int routineCount = 0;
   Map routineInfo = {};
   var routineInfoList;
+  RxList routineDay= [].obs;
 
   late DateTime pick;
+  late int pickDateRoutineId;
+  late int dayTemp;
 
   @override
   void onInit () {
@@ -63,7 +65,6 @@ class CalendarController extends GetxController {
       }
       days = [...temp, ...days].obs;
     }
-
     
     var temp = [];
     for (var i = 1; i <= 42 - days.length; i++) {
@@ -89,29 +90,41 @@ class CalendarController extends GetxController {
   pickDate(int index){
     for(var day in days){
       day["picked"].value = false;
-    }
+    };
     days[index]["picked"].value = true;
     pick = DateTime(days[index]["year"],days[index]["month"],days[index]["day"]);
+    pickDateRoutineId = days[index]["routineId"];
+    routineDay.clear();
+    
+    if(pickDateRoutineId!=0){
+      for(int i=0;i<routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"].length;i++){
+        routineDay.add({
+          "workoutId" : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineContentId"],
+          "workoutName": routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutName"],
+          "workoutCount " : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutCount"],
+          "workoutSet" : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutSet"],
+          "workoutTime" : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutTime"],
+          "isChecked" : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineIsChecked"] ==true ? true.obs : false.obs,
+        }
+        );
+      }
+    }
+    dayTemp = index;
   }
 
   getRoutines() async{
-    print("getRoutine start");
     String url = 'http://15.164.168.230:8080/members/1/routines';
     var response = await http.get(Uri.parse(url));
     var responseBody = response.body;
     routinelist = jsonDecode(responseBody);
     routineCount = routinelist["memberRoutineDataList"].length; 
     for(var i=0;i<routineCount;i++){
-      print(routinelist["memberRoutineDataList"][i]);
       getRoutineInfo(routinelist["memberRoutineDataList"][i]["routineId"], routinelist["memberRoutineDataList"][i]["routineRegisterData"]);
     }
 
     for(int i=0;i<days.length;i++){
       days[i]["routineId"] = hasRoutine(days[i]["year"], days[i]["month"], days[i]["day"]);
-      //print(hasRoutine(days[i]["year"], days[i]["month"], days[i]["day"]));
     }
-    print(routineCount);
-
   }
 
   hasRoutine(int checkyear, int checkmonth, int checkday){
@@ -136,25 +149,22 @@ class CalendarController extends GetxController {
     var response = await http.get(Uri.parse(url));
     var responseBody = response.body;
     routineInfoList = jsonDecode(responseBody);
-  }
-  
-}
-
-
-class RoutineContent{
-  var workoutName;
-  var workoutCount;
-  var workoutSet;
-  var workoutTime;
-  bool check = false;
-
-  setSetCount(String name, int count, int set){
-    workoutName = name;
-    workoutSet = set;
-    workoutCount = count;
+    routineInfo[id] = routineInfoList;
   }
 
-  setTime(int min){
-    workoutTime = min;
+  deleteWorkout(int index, int dayIndex){
+    int deleteWorkoutId = routineDay[index]["memberRoutineContentId"];
+    int deleteRoutineId = days[dayIndex]["routineId"];
+  }
+
+  pickWorkout(int index) async{
+    if(routineDay[index]["isChecked"] == true){
+      routineDay[index]["isChecked"].value = false;
+    }
+    else{
+      routineDay[index]["isChecked"].value = true;
+    }
+    String url = 'http://15.164.168.230:8080/routines/routine-contents/${routineDay[index]["workoutId"]}/check';
+    await http.put(Uri.parse(url));
   }
 }
