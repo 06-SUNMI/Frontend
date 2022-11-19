@@ -34,10 +34,16 @@ class ChallengeAuthController extends GetxController {
 
   authChallenge() async {
     if(isImageLoaded){
-      // var dateString = getImageDate();
-      // print(dateString);
-      // DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString.toString());
-      // print(imageDateOriginal);
+      var dateString = await getImageDate();
+      print(dateString);
+      DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString.toString());
+      print(imageDateOriginal);
+      int  difference = DateTime.now().difference(imageDateOriginal).inDays;
+      print(difference);
+      if(difference != 0) {
+        print('photo is not for today');
+        return -4;
+      }
       await getTodayRoutineDetail();
       print(todayRoutineDetail!.routineChallengeId);
       var response = await challengeAuthRepository.authChallenge(
@@ -46,7 +52,6 @@ class ChallengeAuthController extends GetxController {
           selectedImage);
       if(response > 0){
         Get.find<ChallengeController>().getAll();
-
       }
       return response;
     }
