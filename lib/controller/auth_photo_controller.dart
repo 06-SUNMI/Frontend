@@ -4,11 +4,11 @@ import 'package:sunmi/data/repository/auth_photo_repository.dart';
 
 class AuthPhotoController extends GetxController{
   final AuthPhotoRepository authPhotoRepository;
-  RxList<AuthPhoto> _authPhotos = <AuthPhoto>[].obs;
-  get authPhotos => _authPhotos.value;
-  set authPhotos(value) => _authPhotos.value = value;
+  final RxList<AuthPhoto> _authPhotos = <AuthPhoto>[].obs;
+  get authPhotos => _authPhotos;
+  set authPhotos(value) => _authPhotos.assignAll(value);
 
-  RxInt _currentChallengeId = 0.obs;
+  final _currentChallengeId = 0.obs;
   get currentChallengeId => _currentChallengeId.value;
   set currentChallengeId(value) => _currentChallengeId.value = value;
 
@@ -27,11 +27,10 @@ class AuthPhotoController extends GetxController{
     required this.authPhotoRepository,
   });
 
-  getAllByCurrentId(){
+  updateCurrentPhotos(){
     authPhotoRepository.getAllByChallengeId(currentChallengeId).then((data){
       authPhotos = data;
       print(authPhotos);
-      _authPhotos.refresh();
     });
   }
 

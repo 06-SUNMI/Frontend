@@ -49,26 +49,9 @@ class ChallengeListPage extends GetView<ChallengeController> {
 }
 
 challengeTab(){
-  return Tab(text: '신청가능한 챌린지');
+  return Tab(text: '전체 챌린지');
 }
 
 registeredChallengeTab(){
   return Tab(text: '신청한 챌린지',);
-}
-
-class RegisteredChallengeDetailsPage extends StatelessWidget{
-  RegisteredChallengeDetailsPage({Key? key}):super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      body: Center(
-          child: InkWell(
-            onTap: () => Get.back(),
-            child: Text('신청한 챌린지 ${Get.arguments['index']}의 상세정보 '),
-          )
-      ),
-    );
-  }
 }

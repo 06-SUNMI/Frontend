@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sunmi/controller/auth_photo_controller.dart';
 import 'package:sunmi/controller/challenge_auth_controller.dart';
+import 'package:sunmi/controller/challenges_controller.dart';
 import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 import 'package:sunmi/data/provider/challenge_auth_provider.dart';
 import 'package:sunmi/data/repository/challenge_auth_repository.dart';
@@ -36,24 +38,39 @@ class ChallengeAuthPage extends StatelessWidget{
                   child: Text('보내기'),
                   onPressed: () async {
                     var value = await authPageController.authChallenge();
-                    if(value == -1){
+                    if(value < 0){
                       showDialog(
+                          barrierDismissible: false,
                           context: context,
                           builder: (context){
                             return AlertDialog(
                               content: Text('실패'),
                               actions: [
+                                FloatingActionButton(
+                                  onPressed: (){
+                                    Get.back();
+                                  },
+                                  child: Text('확인'),)
                               ],
                             );
                           });
                     } else {
-                      Get.find<RegisteredChallengeInfoController>().updateCurrentChallenge();
-                      Get.back();
+                      print('in challenge auth page after get back--------');
                       showDialog(
+                          barrierDismissible: false,
                           context: context,
                           builder: (context) => AlertDialog(
                             content: Text('성공'),
                             actions: [
+                              FloatingActionButton(
+                                  onPressed: (){
+                                    Get.find<AuthPhotoController>().updateCurrentPhotos();
+                                    Get.find<RegisteredChallengeInfoController>().updateCurrentChallenge();
+                                    Get.back();
+                                    Get.back();
+                                  },
+                                child: Text('확인'),
+                              )
                             ],
                           ));
                     }

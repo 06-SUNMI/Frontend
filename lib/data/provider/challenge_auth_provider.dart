@@ -4,14 +4,13 @@ import 'url.dart';
 
 class ChallengeAuthProvider extends GetConnect {
   Future<Response> postChallengeAuth(challengeRoutineId, memberRoutineId, data) =>
-      post('$baseURL/challenges/auth/challenge-routines/$challengeRoutineId/member-routines/$memberRoutineId', data);
+      post('$baseURL/challenges/auth/challenge-routines/$challengeRoutineId/member-routines/$memberRoutineId', data, contentType: 'multipart/form-data');
   
   authChallenge(int challengeRoutineId,int memberRoutineId, File image) async{
     final challengeAuthPhoto = MultipartFile(image.path, filename: 'image.jpg');
     print(challengeAuthPhoto.length);
     final formData = FormData({
       'challengeAuthPostPhoto': challengeAuthPhoto,
-
     });
 
     var authChallengeResponse = await postChallengeAuth(challengeRoutineId, memberRoutineId, formData);

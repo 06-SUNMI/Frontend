@@ -4,6 +4,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 
 challengeProgress(){
+  var registeredChallengeController = Get.find<RegisteredChallengeInfoController>();
   return Obx(()=>Column(
     children: [
       Text('진행상황'),
@@ -15,7 +16,7 @@ challengeProgress(){
           progressColor: Colors.blueAccent,
           // percent: Get.find<RegisteredChallengeInfoController>().registeredChallenge.progressRate/100.0,
           percent: 0.5,
-          center: Text(Get.find<RegisteredChallengeInfoController>().registeredChallenge.progressRate.toString()+'%'),
+          center: Text(registeredChallengeController.registeredChallenge.progressRate.toString()+'%'),
           barRadius: Radius.circular(10.0),
         ),
       ),

@@ -6,39 +6,35 @@ import 'package:sunmi/data/repository/registered_challenge_repository.dart';
 import 'package:sunmi/routes/app_pages.dart';
 
 class RegisteredChallengeInfoController extends GetxController{
-  RegisteredChallengeRepository registeredChallengeRepository;
-  late Rx<RegisteredChallenge> _registeredChallenge;
-  get registeredChallenge => _registeredChallenge.value;
-  set registeredChallenge(value) => _registeredChallenge.value = value;
+  RegisteredChallengeInfoController({
+    required this.registeredChallengeRepository
+  });
 
-  RxInt _currentChallengeId = 0.obs;
-  get currentChallengeId => this._currentChallengeId.value;
-  set currentChallengeId(value) => this._currentChallengeId.value = value;
+  RegisteredChallengeRepository registeredChallengeRepository;
+  late final Rx<RegisteredChallenge> _registeredChallenge;
+  get registeredChallenge => _registeredChallenge.value;
+  set registeredChallenge(value) => _registeredChallenge(value);
+
+  final RxInt _currentChallengeId = 0.obs;
+  get currentChallengeId => _currentChallengeId.value;
+  set currentChallengeId(value) => _currentChallengeId.value = value;
 
   @override
   void onInit() {
     currentChallengeId = Get.arguments['selectedChallengeId'];
     _registeredChallenge = Rx<RegisteredChallenge>(registeredChallengeRepository.getById(currentChallengeId));
 
-    // once(_currentChallengeId, (currentChallengeId) {
-    //   _registeredChallenge = Rx<RegisteredChallenge>(registeredChallengeRepository.getById(currentChallengeId));
-    //   _registeredChallenge.refresh();
-    // });
     ever(_currentChallengeId, (currentChallengeId){
-      registeredChallenge = getById(currentChallengeId);
+      registeredChallenge = registeredChallengeRepository.getById(currentChallengeId);
     });
     super.onInit();
   }
 
-
-  RegisteredChallengeInfoController({
-    required this.registeredChallengeRepository
-  });
-
-  updateCurrentChallenge()  {
-    Get.find<ChallengeController>().getAll();
-    registeredChallenge =  registeredChallengeRepository.getById(currentChallengeId);
-    _registeredChallenge.refresh();
+  updateCurrentChallenge() {
+    print('in registered controller getall started=====================');
+    print('in registered controller get by id started=====================');
+    registeredChallenge = registeredChallengeRepository.getById(currentChallengeId);
+    print(registeredChallenge.progressRate);
   }
 
   getById(int challengeId){
