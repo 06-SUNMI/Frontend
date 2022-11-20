@@ -50,7 +50,7 @@ class ChallengeListPage extends GetView<ChallengeController> {
 
 challengeTab(){
   return Tab(text: '전체 챌린지');
-}
+} 
 
 registeredChallengeTab(){
   return Tab(text: '신청한 챌린지',);

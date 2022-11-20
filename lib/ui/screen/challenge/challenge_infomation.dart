@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
-import 'challenge_inforoutine.dart';
+import 'package:flutter/rendering.dart';
+import '../../../data/model/challenge.dart';
+import 'challenge_inforout.dart';
+
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
-import 'package:sunmi/ui/screen/challenge/challenge_inforoutine.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
 import 'package:sunmi/routes/app_pages.dart';
+import 'package:sunmi/data/model/challenge.dart';
+import 'package:sunmi/data/model/registered_challenge.dart';
+import 'package:sunmi/data/repository/registered_challenge_repository.dart';
+import 'package:sunmi/ui/widget/challenge/registered_challenge_progress.dart';
+import 'package:sunmi/controller/registered_challenge_info_controller.dart';
+
 
 class ChallengeCheck extends StatelessWidget {
-  var _selectcays = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
+    var challenges_data = Get.arguments["challenge"];
+    var _startdays =  challenges_data.startDate;
+    String startdays = "${_startdays.year}-${_startdays.month}-${_startdays.day}";
+    int _selectcays = challenges_data.numPerWeek;
+    int _peoples = challenges_data.participatedNum;
+    int _id = challenges_data.challengeId;
+
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text("everyhealth")),
@@ -48,17 +62,17 @@ class ChallengeCheck extends StatelessWidget {
             ),
             Container(
               color: Colors.white,
-              height: 50, // 높이 설정
-              child: Text("기간 : 11월 28일 ~ 12월 26일 "+"주 $_selectcays 일, 한 달 동안 진행 ", style: TextStyle(fontSize: 12,fontFamily: 'Signatra',
+              height: 30, // 높이 설정
+              padding: EdgeInsets.fromLTRB(0,0,25,0),
+              child: Text("기간 : $startdays  부터 시작, "+"4 주 동안 진행 ", style: TextStyle(fontSize: 12,fontFamily: 'Signatra',
                   fontWeight: FontWeight.bold),textAlign: TextAlign.end,),
-              padding: EdgeInsets.all(10),
             ),
             Container(
               color: Colors.white,
-              height: 50, // 높이 설정
-              child: Text("참여자 수 "+"n명", style: TextStyle(fontSize: 15,fontFamily: 'Signatra',
-                  fontWeight: FontWeight.bold,color: Colors.blue),),
-              padding: EdgeInsets.fromLTRB(30, 0,0,0),
+              height: 30,
+              padding: EdgeInsets.fromLTRB(0,0,25,0), // 높이 설정
+              child: Text("누적 참여자 수 :"+" $_peoples 명", style: TextStyle(fontSize: 20,fontFamily: 'Signatra',
+                  fontWeight: FontWeight.bold,color: Colors.deepPurple),textAlign: TextAlign.end),
             ),
             Container(
               child: Center(
@@ -76,7 +90,8 @@ class ChallengeCheck extends StatelessWidget {
               child: TextButton(
                 child:Text("루틴 미리 살펴보기 >",style: TextStyle(fontSize: 15,fontFamily: 'Signatra',fontWeight: FontWeight.bold,color: Colors.black),textAlign: TextAlign.left,),
                 onPressed: () async{
-                   Get.to(() => ChallengeRoutine(), arguments: {'numPerWeek': '${_selectcays}'});
+                  Get.toNamed(Routes.challengeRoutInfo, arguments: {'challenge': challenges_data});
+                //   Get.to(() => ChallengeRoutine());//arguments: {'challenge': 'challenges_data'}
                 },
               ),
             ),
@@ -88,7 +103,6 @@ class ChallengeCheck extends StatelessWidget {
                           child:Text("신청하기", style: TextStyle(fontSize: 25,fontFamily: 'Signatra',fontWeight: FontWeight.bold),textAlign: TextAlign.center),
                           onPressed: (){
                             Get.toNamed(Routes.challengeDate, arguments: {"start_date" : DateTime(2022, 11, 11), "end_date" : DateTime(2022, 11, 25)});
-
                           },
                         ),
             ),
