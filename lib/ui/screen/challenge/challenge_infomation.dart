@@ -21,6 +21,7 @@ class ChallengeCheck extends StatelessWidget {
   Widget build(BuildContext context) {
     var challenges_data = Get.arguments["challenge"];
     var _startdays =  challenges_data.startDate;
+    var _enddays = challenges_data.endDate;
     String startdays = "${_startdays.year}-${_startdays.month}-${_startdays.day}";
     int _selectcays = challenges_data.numPerWeek;
     int _peoples = challenges_data.participatedNum;
@@ -102,7 +103,9 @@ class ChallengeCheck extends StatelessWidget {
                        child: ElevatedButton(
                           child:Text("신청하기", style: TextStyle(fontSize: 25,fontFamily: 'Signatra',fontWeight: FontWeight.bold),textAlign: TextAlign.center),
                           onPressed: (){
-                            Get.toNamed(Routes.challengeDate, arguments: {"start_date" : DateTime(2022, 11, 11), "end_date" : DateTime(2022, 11, 25)});
+                            // String enddays = "${_enddays.year}-${_enddays.month}-${_enddays.day}";
+                            //
+                            Get.toNamed(Routes.challengeDate, arguments: {"challengeId":_id,"start_date" : DateTime(_startdays.year, _startdays.month, _startdays.day), "end_date" : DateTime(_enddays.year, _enddays.month, _enddays.day)});
                           },
                         ),
             ),
