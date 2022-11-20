@@ -23,7 +23,7 @@ class AppPages {
   static final pages =[
     GetPage(name: Routes.initial, page: ()=> HomePage(), binding: HomeBinding()),
     GetPage(name: Routes.workoutSelect, page: ()=> WorkoutPage(), binding: WorkoutBinding()),
-    GetPage(name: Routes.routineRegister, page: ()=>Setcount(Workout(workoutName: 'qweqwe',workoutTarget: 'qweqwe'), DateTime.now())),
+    GetPage(name: Routes.routineRegister, page: ()=>Setcount()),
     GetPage(name: Routes.challengeInfo, page: ()=> ChallengeCheck()),
     GetPage(name: Routes.registeredChallengeInfo, page: ()=> RegisteredChallengeInfoPage(),binding: RegisteredChallengeBinding()),
     GetPage(name: Routes.challengeAuth, page: ()=>ChallengeAuthPage()),
