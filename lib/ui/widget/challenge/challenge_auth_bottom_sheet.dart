@@ -4,7 +4,10 @@ import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 
 challengeAuthBottomSheet() {
   var registeredChallengeController = Get.find<RegisteredChallengeInfoController>();
-  if(DateTime.now().difference(registeredChallengeController.registeredChallenge.endDate).inDays > 0){
+  if(registeredChallengeController.registeredChallenge.progressRate == 100){
+    return Text('챌린지 성공');
+  }
+  else if(DateTime.now().difference(registeredChallengeController.registeredChallenge.endDate).inDays > 0){
     return Text('챌린지 기간이 끝났습니다');
   }
   else return ElevatedButton(
