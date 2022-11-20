@@ -17,7 +17,10 @@ class RegisteredChallengeRepository {
     ChallengeController challengeController = Get.find<ChallengeController>();
 
     for (RegisteredChallenge challenge in challengeController.registeredChallenges) {
-      return challenge;
+      if(challenge.challengeId == challengeId) {
+
+        return challenge;
+      }
     }
     print('Specific Challenge not Found, challengeId : $challengeId');
   }
