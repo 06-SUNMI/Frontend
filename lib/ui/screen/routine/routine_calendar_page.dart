@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/calendar_controller.dart';
-
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RoutineCalendar extends GetView<CalendarController> {
-  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -50,6 +50,16 @@ class RoutineCalendar extends GetView<CalendarController> {
                 color: Colors.black,
               ),
             ),
+            IconButton(
+              onPressed: () {
+               controller.onInit();
+              },
+              icon: Icon(
+                Icons.refresh,
+                size: 20,
+                color: Colors.blue,
+              ),
+            ),
           ],
         ),
         backgroundColor: Colors.white,
@@ -61,12 +71,16 @@ class RoutineCalendar extends GetView<CalendarController> {
         ),
         toolbarHeight: 50,
       ),
-      body: Column(
-        children: [
-          Container(
-                width: 350,
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: Row(
+
+
+
+      body:  SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: 350,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     for (var i = 0; i < controller.week.length; i++)
@@ -120,29 +134,54 @@ class RoutineCalendar extends GetView<CalendarController> {
                   ],
                 ),
               ),
-              Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
               
-            TextButton(
-              onPressed: (){
-                Get.toNamed('/workouts_select_page', arguments: {'date': controller.pick});
-              }, 
-              child: Icon(Icons.add), 
-              style: TextButton.styleFrom(
-                //shape: CircleBorder(), 
-                side: BorderSide(
-                  color: Color.fromRGBO(147,125,194,1),
-                  width: 2.0,
+                SizedBox(
+                  child: Obx(()=>Column(
+                    children: [
+                      for(int i=0;i<controller.routineDay.length;i++)
+                        Obx(()=>ListTile(
+                          leading: controller.routineDay[i]["isChecked"]==true ? Icon(Icons.check_box) :  Icon(Icons.check_box_outline_blank),
+                          title: Text(controller.routineDay[i]["workoutName"].toString()),
+                          onTap: () {
+                            
+                            controller.pickWorkout(i);
+                          },
+                          onLongPress: () {
+                            showDialog(context: context, builder: (BuildContext context){
+                              return AlertDialog(
+                                
+                                actions: [
+                                  TextButton(onPressed: (){
+                                    print("수정 clicked");
+                                  }, child: Text("수정")),
+                                  TextButton(onPressed: (){
+                                    controller.deleteWorkout(i, controller.dayTemp);////
+                                  }, child: Text("삭제")),
+                                ],
+                              );
+                            });
+                          },
+                        ),),
+
+                      TextButton(
+                        onPressed: (){
+                          Get.toNamed('/workouts_select_page', arguments: {'date': controller.pick});
+                        }, 
+                        child: Icon(Icons.add), 
+                        style: TextButton.styleFrom(
+                          //shape: CircleBorder(), 
+                          side: BorderSide(
+                            color: Color.fromRGBO(147,125,194,1),
+                            width: 2.0,
+                          ),
+                          minimumSize: Size(80, 50),
+                        ),
+                       ),
+                    ],
+                  ),),
                 ),
-                minimumSize: Size(80, 50),
-              ),
-            ),
-            ],
-          )
-              
         ],
-      ),
+      ),),
     );
   }
 }
