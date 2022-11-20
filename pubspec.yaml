@@ -33,7 +33,6 @@ dependencies:
   flutter:
     sdk: flutter
   table_calendar: ^3.0.7
-  pull_to_refresh: ^2.0.0
   http: ^0.13.5
   kakao_flutter_sdk_user: ^1.3.0-beta.4 # 카카오 로그인
   percent_indicator: ^4.0.1

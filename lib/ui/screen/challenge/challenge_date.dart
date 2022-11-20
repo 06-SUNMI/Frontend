@@ -73,7 +73,7 @@ class ChallengeDatePage extends GetView<ChallengeDateController>{
               ),
         ElevatedButton(
             onPressed: (){
-              print(controller.selectDays);
+             // print(controller.selectDays);
             }, child: Text("Confirm"),
           ),
       ]),
