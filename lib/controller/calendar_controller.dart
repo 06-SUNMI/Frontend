@@ -114,7 +114,7 @@ class CalendarController extends GetxController {
 
   getRoutines() async{
 
-    String url = 'http://15.164.168.230:8080/members/1/routines';
+    String url = 'http://15.164.168.230:8080/members/5/routines';
     var response = await http.get(Uri.parse(url));
     var responseBody = response.body;
     routinelist = jsonDecode(responseBody);

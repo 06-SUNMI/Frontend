@@ -47,7 +47,9 @@ class ChallengeAuthController extends GetxController {
       }
 
       await getTodayRoutineDetail();
-      print(todayRoutineDetail!.routineChallengeId);
+      for (var routine in todayRoutineDetail!.routines){
+        if(routine.workoutChecked == false) return -5;
+      }
       var response = await challengeAuthRepository.authChallenge(
           todayRoutineDetail!.routineChallengeId,
           todayRoutineDetail!.memberRoutineId,
