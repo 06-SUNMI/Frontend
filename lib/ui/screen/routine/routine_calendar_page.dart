@@ -183,12 +183,12 @@ class RoutineCalendar extends GetView<CalendarController> {
                       TextButton(
                         onPressed: (){
                           if(controller.routineDay.length==0){
-                            Get.toNamed(Routes.workoutSelect, arguments: {'date' : controller.pick, 'add' : false});
+                            Get.toNamed(Routes.workoutSelect, arguments: {'date' : controller.pick, 'add' : 0});
                             print("post");
                           }
                           else{
-                            Get.toNamed(Routes.workoutSelect, arguments: {'date' : controller.pick, 'add' : true});
-                            print("put");
+                            Get.toNamed(Routes.workoutSelect, arguments: {'date' : controller.pick, 'add' : controller.pickDateRoutineId});
+                            print(controller.pickDateRoutineId);
                           }
                           //Get.toNamed('/workouts_select_page', arguments: {'date': controller.pick});
                         }, 
