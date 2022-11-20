@@ -47,14 +47,18 @@ class ChallengeAuthController extends GetxController {
       }
 
       await getTodayRoutineDetail();
-      for (var routine in todayRoutineDetail!.routines){
-        if(routine.workoutChecked == false) return -5;
-      }
+      // for (var routine in todayRoutineDetail!.routines){
+      //   if(routine.workoutChecked == false) return -5;
+      // }
       var response = await challengeAuthRepository.authChallenge(
           todayRoutineDetail!.routineChallengeId,
           todayRoutineDetail!.memberRoutineId,
           selectedImage);
+      try {
+        if(response['status'] > 399 ) return -10;
+      } catch(err){
 
+    }
       if(response > 0){
         Get.find<ChallengeController>().getAll();
       }
