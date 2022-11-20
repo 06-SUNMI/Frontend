@@ -202,7 +202,7 @@ void _postRequests(String tea, String teb, var date) async {
   var workoutNames = selectedWorkout.workoutName;
   DateTime dates = Get.arguments['date'];
   String date_data = "${dates.year}-${dates.month}-${dates.day}";
-
+  //print(routineId);
   if (routineId == 0) {
     String url = 'http://15.164.168.230:8080/members/1/routines';
     var data = {
@@ -221,6 +221,7 @@ void _postRequests(String tea, String teb, var date) async {
     http.Response _res = await http.post(
         Uri.parse(url), headers: {"content-type": "application/json"},
         body: body);
+  //  print('post : ${_res.body}');
   }
   else {
     String url = 'http://15.164.168.230:8080/routines/${routineId}/routine-content';
@@ -238,7 +239,7 @@ void _postRequests(String tea, String teb, var date) async {
         Uri.parse(url), headers: {"content-type": "application/json"},
         body: body);
   }
-  //print('post : ${_res.body}');
+
 }
 
 void _postRequestt(String tec, var date) async{
