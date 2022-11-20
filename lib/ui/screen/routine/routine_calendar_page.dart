@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/calendar_controller.dart';
-//import 'package:pull_to_refresh/pull_to_refresh.dart';
-
+import 'package:sunmi/routes/app_pages.dart';
 
 class RoutineCalendar extends GetView<CalendarController> {
 
@@ -115,17 +114,20 @@ class RoutineCalendar extends GetView<CalendarController> {
                         width: 40,
                         margin: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                         decoration: BoxDecoration(
-                          color: controller.isToday(controller.days[i]["year"], controller.days[i]["month"], controller.days[i]["day"]) ? Colors.blueGrey : null,
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: controller.days[i]["routineId"] ==0? null: controller.days[i]["allChecked"]==100 ? Color.fromARGB(255, 109, 195, 111) : Color.fromARGB(255, 215, 215, 215),
                           border: controller.days[i]["picked"].value ? Border.all(width: 2, color: Colors.blueGrey) : null,
                         ),
                         child: Center(
                           child: Text(
                             controller.days[i]["day"].toString(),
+                            
                             style: TextStyle(
+                              fontWeight: controller.isToday(controller.days[i]["year"], controller.days[i]["month"], controller.days[i]["day"]) ? FontWeight.bold : null,
                               color: controller.isToday(controller.days[i]["year"], controller.days[i]["month"], controller.days[i]["day"])
-                                  ? Colors.white
+                                  ? Colors.black
                                   : controller.days[i]["inMonth"]
-                                      ? Colors.black
+                                      ? Color.fromARGB(210, 0, 0, 0)
                                       : Colors.grey,
                             ),
                           ),
@@ -153,10 +155,24 @@ class RoutineCalendar extends GetView<CalendarController> {
                                 
                                 actions: [
                                   TextButton(onPressed: (){
+                                    Get.back(); 
+                                    showDialog(context: context, builder: (BuildContext context){
+                                      return AlertDialog(
+                                        title: Text("EDIT WORKOUT"),
+                                        
+                                        actions: [
+                                          TextButton(onPressed: (){
+                                            print("수정");
+                                          }, child: Text("확인")),
+                                        ],
+                                      );
+                                    });
                                     print("수정 clicked");
                                   }, child: Text("수정")),
                                   TextButton(onPressed: (){
-                                    controller.deleteWorkout(i, controller.dayTemp);////
+                                    controller.deleteWorkout(i, controller.dayTemp);
+                                    controller.onInit();
+                                    Get.back();
                                   }, child: Text("삭제")),
                                 ],
                               );
@@ -166,7 +182,15 @@ class RoutineCalendar extends GetView<CalendarController> {
 
                       TextButton(
                         onPressed: (){
-                          Get.toNamed('/workouts_select_page', arguments: {'date': controller.pick, 'add' : false});
+                          if(controller.routineDay.length==0){
+                            Get.toNamed(Routes.workoutSelect, arguments: {'date' : controller.pick, 'add' : false});
+                            print("post");
+                          }
+                          else{
+                            Get.toNamed(Routes.workoutSelect, arguments: {'date' : controller.pick, 'add' : true});
+                            print("put");
+                          }
+                          //Get.toNamed('/workouts_select_page', arguments: {'date': controller.pick});
                         }, 
                         child: Icon(Icons.add), 
                         style: TextButton.styleFrom(

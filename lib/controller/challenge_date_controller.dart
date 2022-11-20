@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -5,6 +7,7 @@ class ChallengeDateController extends GetxController{
   static ChallengeDateController get to => Get.find();
   var week = ["일", "월", "화", "수", "목", "금", "토"];
   static DateTime now = DateTime.now();
+  var challengeId;
 
   //RxInt year = 0.obs;
   //RxInt month = 0.obs;
@@ -39,7 +42,7 @@ class ChallengeDateController extends GetxController{
 
     if (DateTime(start.year, start.month, start.day).weekday != 7) {
       var tempList = [];
-      for (var i = DateTime(start.year, start.month, start.day).weekday - 1; i >= 0; i--) {
+      for (var i = DateTime(start.year, start.month, start.day).weekday ; i > 0; i--) {
         temp = DateTime(start.year, start.month, start.day-i);
         tempList.add({
           "year": temp.year,
@@ -57,12 +60,21 @@ class ChallengeDateController extends GetxController{
     pickDate(int index){
     if(days[index]["picked"] == true){
       days[index]["picked"].value = false;
-      selectDays.remove(DateTime(days[index]["year"], days[index]["month"], days[index]["day"]));
+      selectDays.remove("${days[index]["year"]}-${days[index]["month"]}-${days[index]["day"]}");
     }
     else{
       days[index]["picked"].value = true;
-      selectDays.add(DateTime(days[index]["year"], days[index]["month"], days[index]["day"]));
+      selectDays.add("${days[index]["year"]}-${days[index]["month"]}-${days[index]["day"]}");
     }
     
+  }
+
+  setId(int id){
+    challengeId = id;
+  }
+
+  challengePush() async{
+    String url = "http://15.164.168.230:8080/members/1/challenges/${challengeId}";
+    await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: jsonEncode(selectDays));
   }
 }
