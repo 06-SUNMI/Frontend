@@ -35,7 +35,8 @@ class ChallengeInfoRoutine extends GetView<ChallengeInfoController>{
         for(int j=0; j<controller.info.length; j++)...[
         DataRow(
             color: MaterialStateColor.resolveWith((states) => Colors.white),
-          cells: <DataCell>[
+
+            cells: <DataCell>[
 
               DataCell(Text(controller.info[j]["date"].toString()),),
               DataCell(Text(controller.info[j]["name"]),),
