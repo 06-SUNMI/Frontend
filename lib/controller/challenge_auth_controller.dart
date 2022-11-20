@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:exif/exif.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sunmi/controller/calendar_controller.dart';
+import 'package:sunmi/controller/challenges_controller.dart';
 import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 import 'package:sunmi/data/model/routine_detail.dart';
 
@@ -22,9 +24,9 @@ class ChallengeAuthController extends GetxController {
   get isImageLoaded => _isImageLoaded.value;
   set isImageLoaded(value) => _isImageLoaded.value = value;
 
-  final Rx<File>? _selectedImage = Rx<File>(File(''));
-  get selectedImage => _selectedImage!.value;
-  set selectedImage(value) => _selectedImage!.value = value;
+  final Rx<File> _selectedImage = Rx<File>(File(''));
+  get selectedImage => _selectedImage.value;
+  set selectedImage(value) => _selectedImage.value = value;
 
   ChallengeAuthController({
     required this.challengeAuthRepository
@@ -32,13 +34,29 @@ class ChallengeAuthController extends GetxController {
 
   authChallenge() async {
     if(isImageLoaded){
-      getImageDate();
+
+      var dateString = await getImageDate();
+      print(dateString);
+      DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString.toString());
+      print(imageDateOriginal);
+      int  difference = DateTime.now().difference(imageDateOriginal).inDays;
+      print(difference);
+      if(difference != 0) {
+        print('photo is not for today');
+        return -4;
+      }
+
       await getTodayRoutineDetail();
       print(todayRoutineDetail!.routineChallengeId);
-      return await challengeAuthRepository.authChallenge(
+      var response = await challengeAuthRepository.authChallenge(
           todayRoutineDetail!.routineChallengeId,
           todayRoutineDetail!.memberRoutineId,
           selectedImage);
+
+      if(response > 0){
+        Get.find<ChallengeController>().getAll();
+      }
+      return response;
     }
   }
 
@@ -67,20 +85,18 @@ class ChallengeAuthController extends GetxController {
     }
   }
 
-  getImageDate(){
-    readExif().then((exif){
-      DateTime;
-      print(exif['EXIF DateTimeOriginal']);
-      String dateString = exif['EXIF DateTimeOriginal'].toString().substring(0,10);
-      print(dateString);
-      DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString);
-
-      print(imageDateOriginal);
-    });
+  getImageDate() async{
+    var exif = await readExif();
+    print(exif['EXIF DateTimeOriginal']);
+    String dateString = exif['EXIF DateTimeOriginal'].toString().substring(0,10);
+    print(dateString);
+    DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString);
+    print(imageDateOriginal);
+    return dateString;
   }
 
   readExif() async {
-    final fileBytes = File(selectedImage!.path).readAsBytesSync();
+    final fileBytes = File(selectedImage.path).readAsBytesSync();
     final data = await readExifFromBytes(fileBytes);
 
     if(data.isEmpty) {

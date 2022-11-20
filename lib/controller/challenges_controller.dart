@@ -21,16 +21,15 @@ class ChallengeController extends GetxController {
   get registeredChallenges => _registeredChallenges.value;
   set registeredChallenges(value) => _registeredChallenges.value = value;
 
-  @override
-
   getAll(){
+    print("challenge controller getAll() started-------------");
     challengeRepository.getAll().then((data){
       this.challenges = data;
     });
-
     registeredChallengeRepository.getAllByMemberId().then((data){
       this.registeredChallenges = data;
     });
+    print("challenge controller getAll() ended---------------");
   }
 
   challengeInfo(int index){

@@ -7,7 +7,7 @@ import 'package:sunmi/ui/widget/challenge/challenge_auth_bottom_sheet.dart';
 import 'package:sunmi/ui/widget/challenge/challenge_auth_photos.dart';
 import 'package:sunmi/ui/widget/challenge/registered_challenge_progress.dart';
 
-class RegisteredChallengeInfoPage extends StatelessWidget{
+class RegisteredChallengeInfoPage extends GetView<RegisteredChallengeInfoController>{
 
   @override
   Widget build(BuildContext context) {
