@@ -19,7 +19,7 @@ class CalendarController extends GetxController {
   RxList routineDay= [].obs;
 
   late DateTime pick;
-  late int pickDateRoutineId;
+  var pickDateRoutineId;
   late int dayTemp;
 
   @override
@@ -96,7 +96,7 @@ class CalendarController extends GetxController {
     };
     days[index]["picked"].value = true;
     pick = DateTime(days[index]["year"],days[index]["month"],days[index]["day"]);
-    //pickDateRoutineId = days[index]["routineId"];
+    pickDateRoutineId = days[index]["routineId"];
     routineDay.clear();
     
     if(days[index]["routineId"]!=0){
