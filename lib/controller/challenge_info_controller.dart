@@ -13,14 +13,13 @@ class ChallengeInfoController extends GetxController{
 
   @override
   void onInit(){
-    getChallengeInfo();
   }
   void setId(var value){
     Id=value.challengeId;
     getChallengeInfo();
   }
   getChallengeInfo() async{
-    var url = 'http://15.164.168.230:8080/challenges/${Id!}';
+    var url = 'http://15.164.168.230:8080/challenges/${Id}';
     final response = await http.get(Uri.parse((url)));
     Info = jsonDecode(response.body);
     for(int i=0; i<Info['challengeRoutineDataList'].length; i++)

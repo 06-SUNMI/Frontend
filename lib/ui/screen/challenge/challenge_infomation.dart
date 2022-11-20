@@ -105,7 +105,7 @@ class ChallengeCheck extends StatelessWidget {
                           onPressed: (){
                             // String enddays = "${_enddays.year}-${_enddays.month}-${_enddays.day}";
                             //
-                            Get.toNamed(Routes.challengeDate, arguments: {/*"challengeId":_id,*/"start_date" : DateTime(_startdays.year, _startdays.month, _startdays.day), "end_date" : DateTime(_enddays.year, _enddays.month, _enddays.day)});
+                            Get.toNamed(Routes.challengeDate, arguments: {"challengeId":_id,"start_date" : DateTime(_startdays.year, _startdays.month, _startdays.day), "end_date" : DateTime(_enddays.year, _enddays.month, _enddays.day)});
                           },
                         ),
             ),
