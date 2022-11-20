@@ -37,6 +37,6 @@ class WorkoutController extends GetxController{
   }
 
   gotoRoutineRegister(Workout workout){
-    Get.toNamed(Routes.routineRegister, arguments: {'workout': workout, 'date': Get.arguments['date']});
+    Get.toNamed(Routes.routineRegister, arguments: {'workout': workout, 'date': Get.arguments['date'], 'add' : Get.arguments['add']});
   }
 }

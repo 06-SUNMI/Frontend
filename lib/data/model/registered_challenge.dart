@@ -7,6 +7,7 @@ class RegisteredChallenge {
   int participationFee;
   int participatedNum;
   int numPerWeek;
+  String challengeParticipantStatus;
 
 
   RegisteredChallenge({
@@ -18,6 +19,7 @@ class RegisteredChallenge {
     required this.participationFee,
     required this.participatedNum,
     required this.numPerWeek,
+    required this.challengeParticipantStatus,
   });
 
   factory RegisteredChallenge.fromJson(Map<String, dynamic> json){
@@ -30,6 +32,7 @@ class RegisteredChallenge {
         participationFee: json['participationFee'],
         participatedNum: json['participationNum'],
         numPerWeek: json['numPerWeek'],
+        challengeParticipantStatus: json['challengeParticipantStatus'],
     );
   }
 

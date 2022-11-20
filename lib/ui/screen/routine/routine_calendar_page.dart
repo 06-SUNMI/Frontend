@@ -166,7 +166,7 @@ class RoutineCalendar extends GetView<CalendarController> {
 
                       TextButton(
                         onPressed: (){
-                          Get.toNamed('/workouts_select_page', arguments: {'date': controller.pick});
+                          Get.toNamed('/workouts_select_page', arguments: {'date': controller.pick, 'add' : false});
                         }, 
                         child: Icon(Icons.add), 
                         style: TextButton.styleFrom(

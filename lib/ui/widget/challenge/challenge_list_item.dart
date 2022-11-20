@@ -48,8 +48,9 @@ Widget registeredChallengeItems(context, index) {
                   '${challengeController.registeredChallenges[index].startDate}'
                       '\nto ${challengeController.registeredChallenges[index].endDate}'),
               Text(
-                  '${challengeController.registeredChallenges[index].progressRate}'
-              ),]
+                  '진행율: ${challengeController.registeredChallenges[index].progressRate} 상태:${challengeController.registeredChallenges[index].challengeParticipantStatus}'
+              ),
+              ]
         )],
     ),
   );
