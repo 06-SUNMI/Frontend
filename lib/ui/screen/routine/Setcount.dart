@@ -10,7 +10,7 @@ import 'dart:convert';
 
 class Setcount extends StatelessWidget {
 
-  Setcount(workoutName, date);
+  Setcount();
 
   @override
   Widget build(BuildContext context) {
