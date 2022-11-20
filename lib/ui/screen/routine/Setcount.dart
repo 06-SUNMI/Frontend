@@ -196,51 +196,90 @@ class _SetPageState extends State<SetPage> {
     );
   }
 }
-void _postRequests(String tea, String teb, var date) async{
-  String url = 'http://15.164.168.230:8080/members/1/routines';
+void _postRequests(String tea, String teb, var date) async {
+  var routineId = Get.arguments["add"];
   Workout selectedWorkout = Get.arguments['workout'];
-  var workoutNames= selectedWorkout.workoutName;
+  var workoutNames = selectedWorkout.workoutName;
   DateTime dates = Get.arguments['date'];
   String date_data = "${dates.year}-${dates.month}-${dates.day}";
-  var data = {
-    "memberRoutineWorkoutContentList": [
-      {
-        "memberRoutineWorkoutName": workoutNames,
-        "memberRoutineWorkoutWeight": null,
-        "memberRoutineWorkoutCount": tea,
-        "memberRoutineWorkoutSet": teb,
-        "memberRoutineWorkoutTime": null
-      }
-    ],
-    "routineRegisterdate": date_data,
-  };
-  var body = jsonEncode(data);
-  http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
 
- // print('post : ${_res.body}');
+  if (routineId == 0) {
+    String url = 'http://15.164.168.230:8080/members/1/routines';
+    var data = {
+      "memberRoutineWorkoutContentList": [
+        {
+          "memberRoutineWorkoutName": workoutNames,
+          "memberRoutineWorkoutWeight": null,
+          "memberRoutineWorkoutCount": tea,
+          "memberRoutineWorkoutSet": teb,
+          "memberRoutineWorkoutTime": null
+        }
+      ],
+      "routineRegisterdate": date_data,
+    };
+    var body = jsonEncode(data);
+    http.Response _res = await http.post(
+        Uri.parse(url), headers: {"content-type": "application/json"},
+        body: body);
+  }
+  else {
+    String url = 'http://15.164.168.230:8080/routines/${routineId}/routine-content';
+
+    var data = {
+
+      "memberRoutineWorkoutName": workoutNames,
+      "memberRoutineWorkoutWeight": null,
+      "memberRoutineWorkoutCount": tea,
+      "memberRoutineWorkoutSet": teb,
+      "memberRoutineWorkoutTime": null
+    };
+    var body = jsonEncode(data);
+    http.Response _res = await http.post(
+        Uri.parse(url), headers: {"content-type": "application/json"},
+        body: body);
+  }
+  //print('post : ${_res.body}');
 }
 
 void _postRequestt(String tec, var date) async{
-  String url = 'http://15.164.168.230:8080/members/1/routines';
+
   Workout selectedWorkout = Get.arguments['workout'];
   var workoutNames= selectedWorkout.workoutName;
   DateTime dates = Get.arguments['date'];
   String date_data = "${dates.year}-${dates.month}-${dates.day}";
-  var data = {
-    "memberRoutineWorkoutContentList": [
-      {
-        "memberRoutineWorkoutName": workoutNames,
-        "memberRoutineWorkoutWeight": null,
-        "memberRoutineWorkoutCount": null,
-        "memberRoutineWorkoutSet": null,
-        "memberRoutineWorkoutTime": tec
-      }
-    ],
-    "routineRegisterdate": date_data,
-    //Get.arguments['date'],
-  };
-  var body = jsonEncode(data);
-  http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
+  var routineId = Get.arguments["add"];
 
-  //print('post : ${_res.body}');
+  if(routineId==0){
+    String url = 'http://15.164.168.230:8080/members/1/routines';
+    var data = {
+      "memberRoutineWorkoutContentList": [
+        {
+          "memberRoutineWorkoutName": workoutNames,
+          "memberRoutineWorkoutWeight": null,
+          "memberRoutineWorkoutCount": null,
+          "memberRoutineWorkoutSet": null,
+          "memberRoutineWorkoutTime": tec
+        }
+      ],
+      "routineRegisterdate": date_data,
+      //Get.arguments['date'],
+    };
+    var body = jsonEncode(data);
+    http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
+  }
+  else {
+    String url = 'http://15.164.168.230:8080/routines/${routineId}/routine-content';
+    var data = {
+
+      "memberRoutineWorkoutName": workoutNames,
+      "memberRoutineWorkoutWeight": null,
+      "memberRoutineWorkoutCount": null,
+      "memberRoutineWorkoutSet": null,
+      "memberRoutineWorkoutTime": tec
+    };
+    var body = jsonEncode(data);
+    http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
+
+  }
+//print('post : ${_res.body}');
 }
