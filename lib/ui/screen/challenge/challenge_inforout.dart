@@ -12,6 +12,8 @@ class ChallengeInfoRoutine extends GetView<ChallengeInfoController>{
     controller.setId(challenges_data);
 
     return Obx(()=>DataTable(
+      headingRowColor:
+      MaterialStateColor.resolveWith((states) => Colors.white),
       columns: const <DataColumn>[
         DataColumn(
           label: Expanded(
