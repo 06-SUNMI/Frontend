@@ -2,12 +2,13 @@ import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:sunmi/ui/screen/challenge/challenge_inforout.dart';
 
 
 class ChallengeInfoController extends GetxController{
   static ChallengeInfoController get to => Get.find();
   var Info;
-  late int _id;
+  late int Id;
   RxList info =[].obs;
 
   @override
@@ -15,11 +16,11 @@ class ChallengeInfoController extends GetxController{
     getChallengeInfo();
   }
   void setId(var value){
-    _id=value.challengeId;
+    Id=value.challengeId;
+    getChallengeInfo();
   }
   getChallengeInfo() async{
-
-    var url = 'http://15.164.168.230:8080/challenges/${_id}';
+    var url = 'http://15.164.168.230:8080/challenges/${Id!}';
     final response = await http.get(Uri.parse((url)));
     Info = jsonDecode(response.body);
     for(int i=0; i<Info['challengeRoutineDataList'].length; i++)
@@ -27,8 +28,6 @@ class ChallengeInfoController extends GetxController{
         info.add({
           "name" : Info['challengeRoutineDataList'][i]['challengeRoutineContentDataList'][j]['challengeRoutineWorkoutName'],
           "date" : (i+1),
-        }
-        );
-
+        });
   }
 }
