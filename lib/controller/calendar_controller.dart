@@ -19,7 +19,7 @@ class CalendarController extends GetxController {
   RxList routineDay= [].obs;
 
   late DateTime pick;
-  late int pickDateRoutineId;
+  var pickDateRoutineId;
   late int dayTemp;
 
   @override
@@ -47,6 +47,7 @@ class CalendarController extends GetxController {
         "inMonth": true,
         "picked": false.obs,
         "routineId" : 0.obs,
+        "allChecked" : false.obs,
       });
     }
 
@@ -61,6 +62,7 @@ class CalendarController extends GetxController {
           "inMonth": false,
           "picked": false.obs,
           "routineId": 0.obs,
+          "allChecked" : false.obs,
         });
       }
       days = [...temp, ...days].obs;
@@ -75,6 +77,7 @@ class CalendarController extends GetxController {
         "inMonth": false,
         "picked": false.obs,
         "routineId": 0.obs,
+        "allChecked" : false.obs,
       });
     }
 
@@ -96,15 +99,15 @@ class CalendarController extends GetxController {
     pickDateRoutineId = days[index]["routineId"];
     routineDay.clear();
     
-    if(pickDateRoutineId!=0){
-      for(int i=0;i<routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"].length;i++){
+    if(days[index]["routineId"]!=0){
+      for(int i=0;i<routineInfo[days[index]["routineId"]]["memberRoutineData"]["memberRoutineContentList"].length;i++){
         routineDay.add({
-          "workoutId" : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineContentId"],
-          "workoutName": routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutName"],
-          "workoutCount " : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutCount"],
-          "workoutSet" : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutSet"],
-          "workoutTime" : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutTime"],
-          "isChecked" : routineInfo[pickDateRoutineId]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineIsChecked"] ==true ? true.obs : false.obs,
+          "workoutId" : routineInfo[days[index]["routineId"]]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineContentId"],
+          "workoutName": routineInfo[days[index]["routineId"]]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutName"],
+          "workoutCount " : routineInfo[days[index]["routineId"]]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutCount"],
+          "workoutSet" : routineInfo[days[index]["routineId"]]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutSet"],
+          "workoutTime" : routineInfo[days[index]["routineId"]]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutTime"],
+          "isChecked" : routineInfo[days[index]["routineId"]]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineIsChecked"] ==true ? true.obs : false.obs,
         }
         );
       }
@@ -113,8 +116,7 @@ class CalendarController extends GetxController {
   }
 
   getRoutines() async{
-
-    String url = 'http://15.164.168.230:8080/members/4/routines';
+    String url = 'http://15.164.168.230:8080/members/1/routines';
     var response = await http.get(Uri.parse(url));
     var responseBody = response.body;
     routinelist = jsonDecode(responseBody);
@@ -124,7 +126,10 @@ class CalendarController extends GetxController {
     }
 
     for(int i=0;i<days.length;i++){
-      days[i]["routineId"] = hasRoutine(days[i]["year"], days[i]["month"], days[i]["day"]);
+      days[i]["routineId"].value = hasRoutine(days[i]["year"], days[i]["month"], days[i]["day"]);
+    }
+    for(int i=0;i<days.length;i++){
+      //days[i]["allChecked"] = checkRate(days[i]["year"], days[i]["month"], days[i]["day"]);
     }
   }
 
@@ -153,9 +158,17 @@ class CalendarController extends GetxController {
     routineInfo[id] = routineInfoList;
   }
 
-  deleteWorkout(int index, int dayIndex){
-    int deleteWorkoutId = routineDay[index]["memberRoutineContentId"];
-    int deleteRoutineId = days[dayIndex]["routineId"];
+  deleteWorkout(int index, int dayIndex) async{
+    int deleteWorkoutId = routineDay[index]["workoutId"];
+
+    if(routineDay.length==1){
+      String url = 'http://15.164.168.230:8080/routines/${days[dayIndex]["routineId"]}';
+      await http.delete(Uri.parse(url));
+    }
+    else{
+      String url = 'http://15.164.168.230:8080/routines/${days[dayIndex]["routineId"]}/routine-content/${deleteWorkoutId}';
+      await http.delete(Uri.parse(url));
+    }    
   }
 
   pickWorkout(int index) async{
@@ -165,6 +178,7 @@ class CalendarController extends GetxController {
     else{
       routineDay[index]["isChecked"].value = true;
     }
+    
     String url = 'http://15.164.168.230:8080/routines/routine-contents/${routineDay[index]["workoutId"]}/check';
     await http.put(Uri.parse(url));
   }

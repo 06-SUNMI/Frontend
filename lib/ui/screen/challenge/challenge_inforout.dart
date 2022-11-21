@@ -12,6 +12,8 @@ class ChallengeInfoRoutine extends GetView<ChallengeInfoController>{
     controller.setId(challenges_data);
 
     return Obx(()=>DataTable(
+      headingRowColor:
+      MaterialStateColor.resolveWith((states) => Colors.purpleAccent),
       columns: const <DataColumn>[
         DataColumn(
           label: Expanded(
@@ -28,11 +30,14 @@ class ChallengeInfoRoutine extends GetView<ChallengeInfoController>{
 
 
       rows:
-      <DataRow>[
 
+      <DataRow>[
         for(int j=0; j<controller.info.length; j++)...[
         DataRow(
-          cells: <DataCell>[
+            color: MaterialStateColor.resolveWith((states) => Colors.white),
+
+            cells: <DataCell>[
+
               DataCell(Text(controller.info[j]["date"].toString()),),
               DataCell(Text(controller.info[j]["name"]),),
             ]
