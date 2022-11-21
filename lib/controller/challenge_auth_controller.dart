@@ -72,7 +72,7 @@ class ChallengeAuthController extends GetxController {
     int todayRoutineId = -1;
     for(var day in days){
       if(calendarController.isToday(day['year'], day['month'], day['day'])){
-        todayRoutineId = day['routineId'];
+        todayRoutineId = day['routineId'].value;
       }
     }
     print(todayRoutineId);

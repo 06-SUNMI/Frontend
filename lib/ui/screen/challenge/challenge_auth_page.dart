@@ -17,12 +17,11 @@ class ChallengeAuthPage extends StatelessWidget{
         title: Text("Every Health"),
       ),
       body: GetX<ChallengeAuthController>(
-        init: Get.put(ChallengeAuthController(challengeAuthRepository: ChallengeAuthRepository(challengeAuthProvider: ChallengeAuthProvider()))),
         builder: (authPageController){
           return Center(
             child: Column(
               children: [
-                Text("챌린지 인증 사진 정보 페이지입니다",
+                Text("챌린지 인증 페이지입니다",
                   style: TextStyle(
                       fontSize: 20
                   ),),
