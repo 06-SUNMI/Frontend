@@ -34,11 +34,79 @@ class ChallengeAuthPage extends StatelessWidget{
                   child: Text('뒤로가기'),
                   onPressed: () => Get.back(),
                 ),
+                authPageController.isImageLoaded?
+                Image.file(authPageController.selectedImage) : Text("이미지를 불러와주세요"),
                 ElevatedButton(
                   child: Text('보내기'),
                   onPressed: () async {
                     var value = await authPageController.authChallenge();
-                    if(value < 0){
+                    if(value == -4 ){
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                              content: Text('업로드할 이미지의 날짜가 다릅니다'),
+                              actions: [
+                                FloatingActionButton(
+                                  onPressed: (){
+                                    Get.back();
+                                  },
+                                  child: Text('확인'),)
+                              ],
+                            );
+                          });
+                    } else if (value == -3){
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                              content: Text('오늘 루틴을 다 완료하지 못 했습니다'),
+                              actions: [
+                                FloatingActionButton(
+                                  onPressed: (){
+                                    Get.back();
+                                  },
+                                  child: Text('확인'),)
+                              ],
+                            );
+                          });
+                    }
+                    else if (value == -2){
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                              content: Text('이미 오늘 인증을 완료했습니다'),
+                              actions: [
+                                FloatingActionButton(
+                                  onPressed: (){
+                                    Get.back();
+                                  },
+                                  child: Text('확인'),)
+                              ],
+                            );
+                          });
+                    }
+                    else if(value == -1){
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                              content: Text('오늘은 루틴이 없습니다'),
+                              actions: [
+                                FloatingActionButton(
+                                  onPressed: (){
+                                    Get.back();
+                                  },
+                                  child: Text('확인'),)
+                              ],
+                            );
+                          });
+                    } else if (value < 0){
                       showDialog(
                           barrierDismissible: false,
                           context: context,
@@ -54,7 +122,7 @@ class ChallengeAuthPage extends StatelessWidget{
                               ],
                             );
                           });
-                    } else {
+                    }else {
                       print('in challenge auth page after get back--------');
                       showDialog(
                           barrierDismissible: false,
@@ -72,12 +140,11 @@ class ChallengeAuthPage extends StatelessWidget{
                                 child: Text('확인'),
                               )
                             ],
-                          ));
+                          )
+                      );
                     }
                   },
                 ),
-                authPageController.isImageLoaded?
-                Image.file(authPageController.selectedImage) : Text("이미지를 불러와주세요")
               ],
             ),
           );
