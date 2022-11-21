@@ -35,112 +35,104 @@ class ChallengeAuthPage extends StatelessWidget{
                   onPressed: () => Get.back(),
                 ),
                 authPageController.isImageLoaded?
-                Image.file(authPageController.selectedImage) : Text("이미지를 불러와주세요"),
+                Expanded(
+                    child: Image.file(
+                        authPageController.selectedImage,
+                        fit: BoxFit.contain,
+                    )
+                )
+                // Image.file(
+                //            authPageController.selectedImage)
+                    : Text("이미지를 불러와주세요"),
                 ElevatedButton(
                   child: Text('보내기'),
                   onPressed: () async {
                     var value = await authPageController.authChallenge();
                     if(value == -4 ){
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context){
-                            return AlertDialog(
-                              content: Text('업로드할 이미지의 날짜가 다릅니다'),
-                              actions: [
-                                FloatingActionButton(
-                                  onPressed: (){
-                                    Get.back();
-                                  },
-                                  child: Text('확인'),)
-                              ],
-                            );
-                          });
-                    } else if (value == -3){
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context){
-                            return AlertDialog(
-                              content: Text('오늘 루틴을 다 완료하지 못 했습니다'),
-                              actions: [
-                                FloatingActionButton(
-                                  onPressed: (){
-                                    Get.back();
-                                  },
-                                  child: Text('확인'),)
-                              ],
-                            );
-                          });
-                    }
-                    else if (value == -2){
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context){
-                            return AlertDialog(
-                              content: Text('이미 오늘 인증을 완료했습니다'),
-                              actions: [
-                                FloatingActionButton(
-                                  onPressed: (){
-                                    Get.back();
-                                  },
-                                  child: Text('확인'),)
-                              ],
-                            );
-                          });
-                    }
-                    else if(value == -1){
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context){
-                            return AlertDialog(
-                              content: Text('오늘은 루틴이 없습니다'),
-                              actions: [
-                                FloatingActionButton(
-                                  onPressed: (){
-                                    Get.back();
-                                  },
-                                  child: Text('확인'),)
-                              ],
-                            );
-                          });
-                    } else if (value < 0){
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context){
-                            return AlertDialog(
-                              content: Text('실패'),
-                              actions: [
-                                FloatingActionButton(
-                                  onPressed: (){
-                                    Get.back();
-                                  },
-                                  child: Text('확인'),)
-                              ],
-                            );
-                          });
-                    }else {
-                      print('in challenge auth page after get back--------');
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            content: Text('성공'),
+                      Get.dialog(
+                          AlertDialog(
+                            content: Text('업로드할 이미지의 날짜가 다릅니다'),
                             actions: [
                               FloatingActionButton(
-                                  onPressed: (){
-                                    Get.find<AuthPhotoController>().updateCurrentPhotos();
-                                    Get.find<RegisteredChallengeInfoController>().updateCurrentChallenge();
-                                    Get.back();
-                                    Get.back();
-                                  },
-                                child: Text('확인'),
-                              )
+                                onPressed: (){
+                                  Get.back();
+                                },
+                                child: Text('확인'),)
                             ],
-                          )
+                          ),
+                          barrierDismissible: false,
+                      );
+                    } else if (value == -3){
+                      Get.dialog(
+                        AlertDialog(
+                          content: Text('오늘 루틴을 모두 완료하지 못했니다'),
+                          actions: [
+                            FloatingActionButton(
+                              onPressed: (){
+                                Get.back();
+                              },
+                              child: Text('확인'),)
+                          ],
+                        ),
+                        barrierDismissible: false,
+                      );
+                    }
+                    else if (value == -2){
+                      Get.dialog(
+                        AlertDialog(
+                          content: Text('이미 인증을 하였습니다'),
+                          actions: [
+                            FloatingActionButton(
+                              onPressed: (){
+                                Get.back();
+                              },
+                              child: Text('확인'),)
+                          ],
+                        ),
+                        barrierDismissible: false,
+                      );
+                    }
+                    else if(value == -1){
+                      Get.dialog(
+                        AlertDialog(
+                          content: Text('오늘은 인증할 루틴이 없습니다'),
+                          actions: [
+                            FloatingActionButton(
+                              onPressed: (){
+                                Get.back();
+                              },
+                              child: Text('확인'),)
+                          ],
+                        ),
+                        barrierDismissible: false,
+                      );
+                    } else if (value < 0){
+                      Get.dialog(
+                        AlertDialog(
+                          content: Text('실패'),
+                          actions: [
+                            FloatingActionButton(
+                              onPressed: (){
+                                Get.back();
+                              },
+                              child: Text('확인'),)
+                          ],
+                        ),
+                        barrierDismissible: false,
+                      );
+                    }else {
+                      Get.dialog(
+                        AlertDialog(
+                          content: Text('성공'),
+                          actions: [
+                            FloatingActionButton(
+                              onPressed: (){
+                                Get.back();
+                              },
+                              child: Text('확인'),)
+                          ],
+                        ),
+                        barrierDismissible: false,
                       );
                     }
                   },

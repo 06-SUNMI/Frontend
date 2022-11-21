@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sunmi/binding/challenge_auth_binding.dart';
 
 import 'package:sunmi/binding/workout_binding.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_auth_page.dart';
@@ -26,7 +27,7 @@ class AppPages {
     GetPage(name: Routes.routineRegister, page: ()=>Setcount()),
     GetPage(name: Routes.challengeInfo, page: ()=> ChallengeCheck()),
     GetPage(name: Routes.registeredChallengeInfo, page: ()=> RegisteredChallengeInfoPage(),binding: RegisteredChallengeBinding()),
-    GetPage(name: Routes.challengeAuth, page: ()=>ChallengeAuthPage()),
+    GetPage(name: Routes.challengeAuth, page: ()=>ChallengeAuthPage(), binding: ChallengeAuthBinding()),
     GetPage(name: Routes.challengeAuthPhotos, page: ()=>ChallengeAuthPhotosPage()),
     GetPage(name: Routes.challengeAuthPhotoInfo, page: ()=>ChallengeAuthPhotoInfoPage()),
      GetPage(name: Routes.challengeDate, page: ()=>ChallengeDatePage(), binding: ChallengeDateBinding()),
