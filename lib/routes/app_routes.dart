@@ -11,5 +11,7 @@ abstract class Routes{
    static const challengeAuthPhotoInfo = '/challenge-auth-photo-info';
    static const challengeDate = '/challenge_date';
    static const challengeRoutInfo = '/challenge_inforout';
+   static const login = '/login';
+   static const addInfo = '/addInfo';
    //static const calendar = '/calendar';
 }
