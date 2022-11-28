@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
+import 'package:get/get.dart';
+import 'package:sunmi/routes/app_pages.dart';
 
+import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
 
 class NavigatorScreen extends StatefulWidget {
   const NavigatorScreen({Key? key}) : super(key: key);
@@ -64,7 +66,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
                   iconSize: 25,
                 ),
                 IconButton(
-                  onPressed: (){},
+                  onPressed: ()=>Get.toNamed(Routes.snsPost),
                   icon: Icon(Icons.add_box_outlined),
                   color: Colors.white,
                   iconSize: 25,

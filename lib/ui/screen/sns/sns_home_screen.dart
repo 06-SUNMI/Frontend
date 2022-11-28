@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:sunmi/ui/widget/sns/sns_postitems.dart';
 import 'package:sunmi/ui/screen/sns/sns_navigator.dart';
-
 import 'package:sunmi/ui/widget/sns/sns_storybanner.dart';
 
 class HomeScreen extends StatelessWidget {

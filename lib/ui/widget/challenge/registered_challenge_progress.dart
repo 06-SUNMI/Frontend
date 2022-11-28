@@ -10,12 +10,12 @@ challengeProgress(){
       Text('진행상황'),
       Center(
         child: LinearPercentIndicator(
-          width: 300.0,
+          alignment: MainAxisAlignment.center,
+          width: Get.mediaQuery.size.width-30,
           lineHeight: 20.0,
           backgroundColor: Colors.grey,
           progressColor: Colors.blueAccent,
-          // percent: Get.find<RegisteredChallengeInfoController>().registeredChallenge.progressRate/100.0,
-          percent: 0.5,
+          percent: Get.find<RegisteredChallengeInfoController>().registeredChallenge.progressRate/100.0,
           center: Text(registeredChallengeController.registeredChallenge.progressRate.toString()+'%'),
           barRadius: Radius.circular(10.0),
         ),

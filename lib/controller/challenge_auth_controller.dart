@@ -1,15 +1,13 @@
 import 'dart:io';
 
 import 'package:exif/exif.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import 'package:sunmi/controller/calendar_controller.dart';
 import 'package:sunmi/controller/challenges_controller.dart';
-import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 import 'package:sunmi/data/model/routine_detail.dart';
-
 import 'package:sunmi/data/repository/challenge_auth_repository.dart';
 import 'package:sunmi/data/repository/routine_detail_repository.dart';
 

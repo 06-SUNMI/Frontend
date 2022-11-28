@@ -7,7 +7,7 @@ class ChallengeAuthProvider extends GetConnect {
       post('$baseURL/challenges/auth/challenge-routines/$challengeRoutineId/member-routines/$memberRoutineId', data, contentType: 'multipart/form-data');
   
   authChallenge(int challengeRoutineId,int memberRoutineId, File image) async{
-    final challengeAuthPhoto = MultipartFile(image.path, filename: 'image.jpg');
+    final challengeAuthPhoto = MultipartFile(image.path, filename: 'auth_photo_${challengeRoutineId}_${memberRoutineId}.jpg');
     print(challengeAuthPhoto.length);
     final formData = FormData({
       'challengeAuthPostPhoto': challengeAuthPhoto,
