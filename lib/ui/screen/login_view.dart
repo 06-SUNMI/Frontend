@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:get/get.dart';
-import 'package:kakao_flutter_sdk_auth/kakao_flutter_sdk_auth.dart';
-import 'package:sunmi/main.dart';
 import 'package:sunmi/routes/app_pages.dart';
-import 'package:sunmi/ui/screen/add_person_info.dart';
 import 'package:sunmi/controller/user_info_controller.dart';
 
 
@@ -27,12 +24,7 @@ class LoginPage extends StatelessWidget {
                   builder: (controller) {
                     return TextButton(onPressed: () async{
                       await mainLogin.login();
-                      //print(mainLogin.user);
-                      print(mainLogin.user!.kakaoAccount!.profile!.nickname);
-                      print(controller.isNew(mainLogin.user!.id));
                       if(await controller.isNew(mainLogin.user!.id)==true){
-                        //New account
-                          //Navigator.push(context, MaterialPageRoute(builder: (context)=>AddInfo()));
                         Get.toNamed(Routes.addInfo);
                       }
                       else{
