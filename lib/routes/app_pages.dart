@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sunmi/binding/challenge_auth_binding.dart';
+import 'package:sunmi/binding/sns_post_binding.dart';
 
 import 'package:sunmi/binding/workout_binding.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_auth_page.dart';
@@ -10,6 +11,7 @@ import 'package:sunmi/ui/screen/challenge/registered_challenge_info_page.dart';
 import 'package:sunmi/ui/screen/routine/Setcount.dart';
 import 'package:sunmi/ui/screen/routine/workout_select_page.dart';
 import 'package:sunmi/binding/home_binding.dart';
+import 'package:sunmi/ui/screen/sns/sns_post_page.dart';
 import '../binding/challenge_info_binding.dart';
 import '../data/model/workout.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_infomation.dart';
@@ -32,6 +34,7 @@ class AppPages {
     GetPage(name: Routes.challengeAuthPhotoInfo, page: ()=>ChallengeAuthPhotoInfoPage()),
      GetPage(name: Routes.challengeDate, page: ()=>ChallengeDatePage(), binding: ChallengeDateBinding()),
     GetPage(name: Routes.challengeRoutInfo, page: ()=>ChallengeInfoRoutine(), binding: ChallengeInfoBinding()),
+    GetPage(name: Routes.snsPost, page: ()=> SNSPostPage(), binding: SNSPostBinding()),
   ];
 }
 

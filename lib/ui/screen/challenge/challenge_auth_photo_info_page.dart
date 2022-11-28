@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sunmi/controller/auth_photo_controller.dart';
+import 'package:sunmi/data/model/auth_photo.dart';
 
 
-class ChallengeAuthPhotoInfoPage extends StatelessWidget{
+class ChallengeAuthPhotoInfoPage extends GetView{
+  final AuthPhotoController authPhotoController = Get.find<AuthPhotoController>();
+  late AuthPhoto selectedAuthPhoto;
+
   @override
   Widget build(BuildContext context) {
-
+    selectedAuthPhoto = Get.arguments['selectedAuthPhoto'];
     return Scaffold(
       appBar: AppBar(
         title: Text("Every Health"),
@@ -18,9 +23,11 @@ class ChallengeAuthPhotoInfoPage extends StatelessWidget{
               fontSize: 20
             ),),
             ElevatedButton(
-              child: Text('뒤로가기'),
-              onPressed: () => Get.back(),
-            ),
+                onPressed: (){},
+                child: Text('신고하기')),
+            Expanded(
+              child: Image.network(selectedAuthPhoto.photoPath),
+            )
           ],
         ),
       ),
