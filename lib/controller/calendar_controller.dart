@@ -170,6 +170,12 @@ class CalendarController extends GetxController {
       await http.delete(Uri.parse(url));
     }    
   }
+  editWorkout(int index, int dayIndex) async{
+    int editWorkoutId = routineDay[index]["workoutId"];
+
+    String url = 'http://15.164.168.230:8080/routines/${days[dayIndex]["routineId"]}/routine-content/${editWorkoutId}';
+
+  }
 
   pickWorkout(int index) async{
     if(routineDay[index]["isChecked"] == true){

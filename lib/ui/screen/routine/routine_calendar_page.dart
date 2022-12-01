@@ -163,6 +163,8 @@ class RoutineCalendar extends GetView<CalendarController> {
                                         actions: [
                                           TextButton(onPressed: (){
                                             print("수정");
+                                            controller.editWorkout(i, controller.dayTemp);
+                                            Get.back();
                                           }, child: Text("확인")),
                                         ],
                                       );
