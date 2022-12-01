@@ -48,7 +48,7 @@ class SearchScreen extends GetView<SearchController> {
                     color: Colors.white),
                 child: TextField(
                   controller: tea,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                       hintText: '검색',
                       hintStyle: TextStyle(
