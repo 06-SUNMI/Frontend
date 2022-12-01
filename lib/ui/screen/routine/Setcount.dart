@@ -204,7 +204,7 @@ void _postRequests(String tea, String teb, var date) async {
   String date_data = "${dates.year}-${dates.month}-${dates.day}";
   //print(routineId);
   if (routineId == 0) {
-    String url = 'http://15.164.168.230:8080/members/1/routines';
+    String url = 'http://15.164.168.230:8080/members/5/routines';
     var data = {
       "memberRoutineWorkoutContentList": [
         {

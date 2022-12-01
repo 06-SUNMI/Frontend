@@ -34,13 +34,18 @@ class SNSPostController extends GetxController {
   get isVideo => _isVideo.value;
   set isVideo(value) => _isVideo.value = value;
 
-  final RxString _content = ''.obs;
-  get content => _content.value;
-  set content(value) => _content.value = value;
+  final RxBool _isPlaying = false.obs;
+  get isPlaying => _isPlaying.value;
+  set isPlaying(value) => _isPlaying.value = value;
 
   SNSPostController({
     required this.snsPostRepository,
   });
+
+  @override
+  void onInit(){
+    super.onInit();
+  }
 
   @override
   void onClose(){
@@ -67,13 +72,24 @@ class SNSPostController extends GetxController {
   postNewSNSPost() async {
     var response;
     if(!isFileLoaded) return -10;
-    print("incontroller: content");
     if(isImage){
-      response = await snsPostRepository.postNewSNSPost(1, selectedImage, 'jpg', content);
+      response = await snsPostRepository.postNewSNSPost(1, selectedImage, 'jpg', inputTextController.text);
     } else if (isVideo){
-      response = await snsPostRepository.postNewSNSPost(1, selectedVideo, 'mp4', content);
+      response = await snsPostRepository.postNewSNSPost(1, selectedVideo, 'mp4', inputTextController.text);
     }
-    return response;
+
+    if(response is int){
+      print('response: $response');
+      return response;
+    } else {
+      try{
+        print(response);
+        print('error message: ${response['message']}');
+      } catch(err){
+        print(err);
+      }
+      return -9;
+    }
   }
 
   pickImage() async {
@@ -97,7 +113,7 @@ class SNSPostController extends GetxController {
       videoController = VideoPlayerController.file(File(selectedVideo.path));
       await videoController!.initialize();
       await videoController!.setLooping(true);
-      await videoController!.play();
+      await videoController!.pause();
       selectedImage = File('');
       isFileLoaded = true;
       isImage = false;
@@ -116,7 +132,7 @@ class SNSPostController extends GetxController {
       videoController = VideoPlayerController.file(File(selectedVideo.path));
       await videoController!.initialize();
       await videoController!.setLooping(true);
-      await videoController!.play();
+      await videoController!.pause();
       selectedImage = File('');
       isFileLoaded = true;
       isImage = false;

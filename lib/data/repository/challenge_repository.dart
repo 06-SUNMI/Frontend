@@ -11,4 +11,27 @@ class ChallengeRepository {
   getAll() {
     return challengeProvider.getAll();
   }
+
+  getChallengesInProgress() async {
+    List challenges = await challengeProvider.getAll();
+    List<Challenge> challengeInProgress = [];
+    print(challenges);
+
+    for(Challenge challenge in challenges){
+      if(isInProgress(challenge)) {
+        challengeInProgress.add(challenge);
+      }
+    }
+
+    return challengeInProgress;
+  }
+
+  isInProgress(Challenge challenge){
+    DateTime today = DateTime.now();
+    if(challenge.endDate.difference(today).inDays >= 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

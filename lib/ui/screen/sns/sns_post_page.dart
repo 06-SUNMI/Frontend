@@ -1,73 +1,87 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/sns_post_controller.dart';
-import 'package:video_player/video_player.dart';
+import 'package:sunmi/ui/widget/sns/sns_post_file.dart';
 
 class SNSPostPage extends GetView<SNSPostController>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Every Health'),),
-      body: GetX<SNSPostController>(
-        builder: (snsPostController){
-          return Center(
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child:GetX<SNSPostController>(
+          builder: (snsPostController){
+            return Center(
               child: Column(
                 children: [
                   Text('SNS 게시글 작성 페이지',style: TextStyle(fontSize: 30),),
-                  Row(
-                    children: [
-                      Expanded(child: ElevatedButton(onPressed: snsPostController.pickImage, child: Text('이미지 불러오기'))),
-                      Expanded(child: ElevatedButton(onPressed: snsPostController.pickVideo, child: Text('동영상 불러오기'))),
-                    ],
-                  ),
-                  if(snsPostController.isImage)
-                    Expanded(
-                        child: Image.file(
-                          snsPostController.selectedImage,
-                          fit: BoxFit.contain,
-                    )),
-                  if(snsPostController.isVideo)
-                    Expanded(child: AspectRatio(
-                      aspectRatio: snsPostController.videoController!.value.aspectRatio,
-                      child: VideoPlayer(snsPostController.videoController!),
-                    ))
-                    ,
+                  buttonPick(snsPostController),
+                  if(snsPostController.isFileLoaded) snsPostFile(snsPostController),
                   TextField(
-                    controller: snsPostController.inputTextController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Content',
-                    )
+                      controller: snsPostController.inputTextController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Content',
+                      )
                   ),
                   ElevatedButton(onPressed: () async {
                     FocusScope.of(context).unfocus();
                     var response = await snsPostController.postNewSNSPost();
                     print(response);
                     if(response > 0){
-                      Get.dialog(
-                        AlertDialog(
-                          content: Text('성공'),
-                          actions: [
-                            FloatingActionButton(
-                              onPressed: (){
-                                Get.back();
-                                Get.back();
-                              },
-                              child: Text('확인'),)
-                          ],
-                        ),
-                        barrierDismissible: false,
-                      );
+                      dialogSuccess();
+                    } else {
+                      dialogFail();
                     }
                   }, child: Text('완료')),
                 ],
               ),
-            ),
-          );
-        },
+            );},
+        ),
+      )
+    );
+  }
+
+  Row buttonPick(SNSPostController snsPostController) {
+    return Row(
+      children: [
+        Expanded(child: ElevatedButton(onPressed: snsPostController.pickImage, child: Text('이미지 불러오기'))),
+        Expanded(child: ElevatedButton(onPressed: snsPostController.pickVideo, child: Text('동영상 불러오기'))),
+      ],
+    );
+  }
+
+  void dialogFail() {
+    Get.dialog(
+      AlertDialog(
+        content: Text('실패'),
+        actions: [
+          FloatingActionButton(
+            onPressed: (){
+              Get.back();
+            },
+            child: Text('확인'),),
+        ],
       ),
+      barrierDismissible: false,
+    );
+  }
+
+  void dialogSuccess() {
+    Get.dialog(
+      AlertDialog(
+        content: Text('성공'),
+        actions: [
+          FloatingActionButton(
+            onPressed: (){
+              Get.back();
+              Get.back();
+            },
+            child: Text('확인'),)
+        ],
+      ),
+      barrierDismissible: false,
     );
   }
 }
