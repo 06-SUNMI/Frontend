@@ -27,7 +27,6 @@ class SearchController extends GetxController{
     final response = await http.get(url);
     //Info = jsonDecode(response.body);
     Info = jsonDecode(utf8.decode(response.bodyBytes));
-    print(Info);
 
     for(int i=0; i<Info.length; i++) {
       list.add({
@@ -37,12 +36,6 @@ class SearchController extends GetxController{
         "gymName" : Info[i]['gymName'],
         "customProfileImageUrl" : Info[i]['customProfileImageUrl'],
       });
-    }
-    for(int i=0; i<list.length; i++) {
-      print((list[i]["id"]));
-      print((list[i]["name"]));
-      print((list[i]["gymName"]));
-      print((list[i]["customProfileImageUrl"]));
     }
 
   }
@@ -55,7 +48,6 @@ class SearchController extends GetxController{
     final response = await http.get(url);
     //Info = jsonDecode(response.body);
     Info = jsonDecode(utf8.decode(response.bodyBytes));
-    print(Info);
 
     for(int i=0; i<Info.length; i++) {
       String gym = Info[i]['gymName'];
@@ -68,12 +60,6 @@ class SearchController extends GetxController{
           "customProfileImageUrl": Info[i]['customProfileImageUrl'],
         });
       }
-    }
-    for(int i=0; i<list.length; i++) {
-      print((list[i]["id"]));
-      print((list[i]["name"]));
-      print((list[i]["gymName"]));
-      print((list[i]["customProfileImageUrl"]));
     }
 
   }

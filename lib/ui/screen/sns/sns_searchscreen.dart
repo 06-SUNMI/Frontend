@@ -48,7 +48,7 @@ class SearchScreen extends GetView<SearchController> {
                     color: Colors.white),
                 child: TextField(
                   controller: tea,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                       hintText: '검색',
                       hintStyle: TextStyle(
@@ -77,7 +77,7 @@ class SearchScreen extends GetView<SearchController> {
 
             children:[
               TextButton(
-                onPressed: () { ck=_ckone(ck);print(ck); },
+                onPressed: () { ck=_ckone(ck); },
                 child: Text("같은 헬스장 검색"),
                 style: TextButton.styleFrom( primary: Colors.blue, ),
               ),
@@ -122,27 +122,7 @@ class SearchScreen extends GetView<SearchController> {
                                 ),
                             ),
                           ]
-                      /*  ]
-                        else if(ck==1)...[
-                          for (int i = 0; i < controller.list.length; i++) ...[
-                            if(controller.list[i]["gymName"] == '나이스짐')...[
-                            //  Obx(() =>
-                                  ListTile(
-                                    leading: Icon(Icons.people_alt_outlined),
-                                    title: Text(controller.list[i]["name"].toString()),
-                                    tileColor: Colors.purple[50],
-                                    onTap: () {
-                                      Get.toNamed(Routes.userfollowpage, arguments: {'name': controller.list[i]["name"].toString(), 'id':  controller.list[i]["name"],
-                                        'gymName' :  controller.list[i]["gymName"], 'customProfileImageUrl' :  controller.list[i]["customProfileImageUrl"]} );
-                                    },
-                                  ),
-                            //  ),
-                            ]
-                            else...[]
-                          ],
-                          ck=_ckset(ck),
-                        ],
-*/
+
                       ]
 
                   )
