@@ -17,8 +17,6 @@ abstract class Routes{
    static const userfollowpage = '/sns_followuserpage';
    static const searchInfo = '/sns_searchscreen';
    static const pay = '/pay';
-   static const snsPost = '/sns/post';
-   static const userfollowpage = '/sns_followuserpage';
-   static const searchInfo = '/sns_searchscreen';
+
    //static const calendar = '/calendar';
 }
