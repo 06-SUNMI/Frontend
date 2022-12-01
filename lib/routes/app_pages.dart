@@ -25,6 +25,7 @@ import 'homepage.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
 import 'package:sunmi/binding/challenge_date_binding.dart';
 
+
 part 'app_routes.dart';
 
 class AppPages {
@@ -45,6 +46,9 @@ class AppPages {
     GetPage(name: Routes.searchInfo, page: ()=>SearchScreen(), binding: ChallengeInfoBinding()),
     GetPage(name: Routes.userfollowpage, page: ()=>SNSFollowUser(), binding: WorkoutBinding()),
     GetPage(name: Routes.pay, page: ()=>Payment()),
+    GetPage(name: Routes.snsPost, page: ()=> SNSPostPage(), binding: SNSPostBinding()),
+    GetPage(name: Routes.searchInfo, page: ()=>SearchScreen(), binding: ChallengeInfoBinding()),
+    GetPage(name: Routes.userfollowpage, page: ()=>SNSFollowUser(), binding: WorkoutBinding()),
   ];
 }
 
