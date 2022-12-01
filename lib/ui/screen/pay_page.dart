@@ -50,6 +50,7 @@ class Payment extends StatelessWidget {
         appScheme: 'example',                                        // 앱 URL scheme
         displayCardQuota : [2,3]                                     //결제창 UI 내 할부개월수 제한
       ),
+      
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) {
         Get.toNamed(Routes.initial);

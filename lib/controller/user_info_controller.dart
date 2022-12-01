@@ -36,7 +36,6 @@ class UserInfoController extends GetxController{
     }
     return true;//없는 유저
   }
-
   getUserData() async{
     String url = "http://15.164.168.230:8080/members/${userId}";
     var response = await http.get(Uri.parse(url));

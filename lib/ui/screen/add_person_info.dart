@@ -11,7 +11,6 @@ class AddInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(UserInfoController());
-
     TextEditingController heightController = TextEditingController();
     TextEditingController weightController = TextEditingController();
     TextEditingController gymController = TextEditingController();

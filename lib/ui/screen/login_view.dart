@@ -90,9 +90,6 @@ class MainLogin{
   final SocialLogin _socialLogin;
   bool isLogined = false;
   User? user;
-
-
-
   MainLogin(this._socialLogin);
 
   Future login() async{
@@ -107,7 +104,6 @@ class MainLogin{
     isLogined = false;
     user = null;
   }
-
 
 }
 

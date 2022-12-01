@@ -25,7 +25,6 @@ import 'homepage.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
 import 'package:sunmi/binding/challenge_date_binding.dart';
 
-
 part 'app_routes.dart';
 
 class AppPages {
