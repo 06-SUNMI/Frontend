@@ -16,9 +16,12 @@ import '../binding/challenge_info_binding.dart';
 import '../data/model/workout.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_infomation.dart';
 import 'package:sunmi/binding/registered_challenge_binding.dart';
+import '../ui/screen/sns/sns_followuserpage.dart';
+import '../ui/screen/sns/sns_searchscreen.dart';
 import 'homepage.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_date.dart';
 import 'package:sunmi/binding/challenge_date_binding.dart';
+
 
 part 'app_routes.dart';
 
@@ -35,6 +38,8 @@ class AppPages {
      GetPage(name: Routes.challengeDate, page: ()=>ChallengeDatePage(), binding: ChallengeDateBinding()),
     GetPage(name: Routes.challengeRoutInfo, page: ()=>ChallengeInfoRoutine(), binding: ChallengeInfoBinding()),
     GetPage(name: Routes.snsPost, page: ()=> SNSPostPage(), binding: SNSPostBinding()),
+    GetPage(name: Routes.searchInfo, page: ()=>SearchScreen(), binding: ChallengeInfoBinding()),
+    GetPage(name: Routes.userfollowpage, page: ()=>SNSFollowUser(), binding: WorkoutBinding()),
   ];
 }
 
