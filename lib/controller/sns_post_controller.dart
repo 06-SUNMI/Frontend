@@ -73,9 +73,9 @@ class SNSPostController extends GetxController {
     var response;
     if(!isFileLoaded) return -10;
     if(isImage){
-      response = await snsPostRepository.postNewSNSPost(5, selectedImage, 'jpg', inputTextController.text);
+      response = await snsPostRepository.postNewSNSPost(1, selectedImage, 'jpg', inputTextController.text);
     } else if (isVideo){
-      response = await snsPostRepository.postNewSNSPost(5, selectedVideo, 'mp4', inputTextController.text);
+      response = await snsPostRepository.postNewSNSPost(1, selectedVideo, 'mp4', inputTextController.text);
     }
 
     if(response is int){

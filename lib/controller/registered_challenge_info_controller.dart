@@ -53,5 +53,4 @@ class RegisteredChallengeInfoController extends GetxController{
   toChallengeAuthPhotoInfo(selectedAuthPhoto){
     Get.toNamed(Routes.challengeAuthPhotoInfo, arguments: {'selectedAuthPhoto': selectedAuthPhoto});
   }
-
 }

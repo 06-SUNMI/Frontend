@@ -12,6 +12,7 @@ class AuthPhotoRepository{
   }
 
   reportAuthPhoto(authPhotoId, memberId, content){
+    // return authPhotoProvider.reportAuthPhoto(authPhotoId, memberId, content);
     return 0;
   }
 }

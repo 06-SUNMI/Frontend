@@ -251,7 +251,7 @@ void _postRequestt(String tec, var date) async{
   var routineId = Get.arguments["add"];
 
   if(routineId==0){
-    String url = 'http://15.164.168.230:8080/members/5/routines';
+    String url = 'http://15.164.168.230:8080/members/1/routines';
     var data = {
       "memberRoutineWorkoutContentList": [
         {
