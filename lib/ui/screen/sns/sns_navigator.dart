@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sunmi/routes/app_pages.dart';
+
 import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
 
+import '../../../routes/app_pages.dart';
+
+import 'package:get/get_core/src/get_main.dart';
+import 'package:sunmi/ui/screen/routine/Setcount.dart';
+import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
+import 'package:sunmi/ui/screen/sns/sns_searchscreen.dart';
 
 class NavigatorScreen extends StatefulWidget {
   const NavigatorScreen({Key? key}) : super(key: key);
@@ -52,10 +61,11 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
 
               children: [
                 IconButton(
-                    onPressed: (){},
-                    icon: Icon(Icons.search_rounded),
-                    color: Colors.white,
-                    iconSize: 23,
+                  onPressed: () => Get.toNamed(Routes.searchInfo),
+                  icon: Icon(Icons.search_rounded),
+                  color: Colors.white,
+                  iconSize: 23,
+
                 ),
                 IconButton(
                   onPressed: (){},
@@ -64,7 +74,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
                   iconSize: 25,
                 ),
                 IconButton(
-                  onPressed: (){},
+                  onPressed: ()=>Get.toNamed(Routes.snsPost),
                   icon: Icon(Icons.add_box_outlined),
                   color: Colors.white,
                   iconSize: 25,

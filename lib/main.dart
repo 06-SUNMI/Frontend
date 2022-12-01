@@ -11,7 +11,7 @@ void main(){
   KakaoSdk.init(nativeAppKey: 'a6035518e6beb44e880a7138599a7e30');
   runApp(
     GetMaterialApp(
-      initialRoute: Routes.initial,
+      initialRoute: Routes.login,
       getPages: AppPages.pages,
     )
   );

@@ -7,7 +7,7 @@ class RegisteredChallengeProvider extends GetConnect{
   Future<Response> getRegisteredChallenges(int memberId) => get('${url.baseURL}/challenges/members/$memberId');
 
   getAllByMemberId(int memberId) async {
-    var registeredChallengesResponse = await getRegisteredChallenges(1);
+    var registeredChallengesResponse = await getRegisteredChallenges(memberId);
     final registeredChallengesJson = registeredChallengesResponse.body as List;
     final List<RegisteredChallenge> registeredChallenges = registeredChallengesJson.map(
             (challenge) => RegisteredChallenge.fromJson(challenge)).toList();

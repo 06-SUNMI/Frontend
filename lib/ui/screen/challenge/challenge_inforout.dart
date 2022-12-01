@@ -45,6 +45,7 @@ class ChallengeInfoRoutine extends GetView<ChallengeInfoController>{
         ),],
         ],
 
-    ), );
+    ),
+    );
   }
 }

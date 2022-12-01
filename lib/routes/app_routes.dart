@@ -13,5 +13,9 @@ abstract class Routes{
    static const challengeRoutInfo = '/challenge_inforout';
    static const login = '/login';
    static const addInfo = '/addInfo';
+   static const snsPost = '/sns/post';
+   static const userfollowpage = '/sns_followuserpage';
+   static const searchInfo = '/sns_searchscreen';
+   static const pay = '/pay';
    //static const calendar = '/calendar';
 }

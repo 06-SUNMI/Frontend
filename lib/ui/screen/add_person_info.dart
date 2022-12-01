@@ -58,7 +58,6 @@ class AddInfo extends StatelessWidget {
                   keyboardType: TextInputType.number,
                 ),
                 Padding(padding: EdgeInsets.only(top: 20.0),),
-
                 TextField(
                   controller: gymController,
                   decoration: InputDecoration(
@@ -75,13 +74,28 @@ class AddInfo extends StatelessWidget {
                   keyboardType: TextInputType.text,
                 ),
                 Padding(padding: EdgeInsets.only(top: 20.0),),
+
                 GetBuilder<UserInfoController>( 
                   builder: (controller) {
                     return TextButton(
                       child: Text('확인'),
                       onPressed: () {
-                        controller.setUser(heightController.text, weightController.text, gymController.text);
-                        Get.toNamed(Routes.initial);
+                        if(heightController.text!=null&& weightController.text!=null&& gymController.text!=null){
+                          controller.setUserData(heightController.text, weightController.text, gymController.text);
+                          Get.toNamed(Routes.initial);
+                        }
+                        else{
+                          showDialog(context: context, builder: (BuildContext context){
+                              return AlertDialog(         
+                                content: Text("모두 입력하세요"),  
+                                actions: [
+                                  TextButton(onPressed: (){
+                                    Get.back(); 
+                                  }, child: Text("확인")),
+                                ],
+                              );
+                            });
+                        }
                       },
                    );
                   },

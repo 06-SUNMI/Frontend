@@ -77,7 +77,7 @@ class ChallengeDatePage extends GetView<ChallengeDateController>{
         ElevatedButton(
             onPressed: (){
               controller.challengePush();
-              Get.toNamed(Routes.initial);
+              Get.toNamed(Routes.pay);
             }, child: Text("Confirm"),
           ),
       ]),

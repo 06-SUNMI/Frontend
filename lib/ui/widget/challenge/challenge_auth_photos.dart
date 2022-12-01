@@ -25,7 +25,7 @@ challengeAuthPhotos(){
           itemCount: authPhotoController.authPhotos.length,
           itemBuilder: (context,index){
             return InkWell(
-              onTap: () => Get.find<RegisteredChallengeInfoController>().toChallengeAuthPhotoInfo(),
+              onTap: () => Get.find<RegisteredChallengeInfoController>().toChallengeAuthPhotoInfo(authPhotoController.authPhotos[index]),
               child: Image.network(authPhotoController.authPhotos[index].photoPath,),
             );
           },

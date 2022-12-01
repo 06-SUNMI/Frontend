@@ -20,22 +20,22 @@ class LoginPage extends StatelessWidget {
               Center(
                 child: Image(image: AssetImage("assets/images/eh.png")),
               ),
-               GetBuilder<UserInfoController>( // 단순 상태 관리
+               GetBuilder<UserInfoController>(
                   builder: (controller) {
                     return TextButton(onPressed: () async{
-                      await mainLogin.login();
-                      if(await controller.isNew(mainLogin.user!.id)==true){
-                        Get.toNamed(Routes.addInfo);
-                      }
-                      else{
-                        //이미 가입된 계정
-                        Get.toNamed(Routes.initial);
-                      }
-                      
-                      
+                        await mainLogin.login();
+                        print(mainLogin.user!.id);
+                        if(await controller.isNew(mainLogin.user!.id)==true){
+                          controller.setName(mainLogin.user!.properties!["nickname"]);
+                          controller.setMail(mainLogin.user!.kakaoAccount!.email);
+                          Get.toNamed(Routes.addInfo);
+                        }
+                        else{
+                          controller.getUserData();
+                          Get.toNamed(Routes.initial);
+                        }
                       }, 
-                      child: Image(
-                        image: AssetImage("assets/images/kakao_login_medium_narrow.png"),
+                        child: Image(image: AssetImage("assets/images/kakao_login_medium_narrow.png"),
                       ),
                     );
                   }
