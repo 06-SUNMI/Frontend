@@ -18,7 +18,6 @@ class RegisteredChallengeRepository {
 
     for (RegisteredChallenge challenge in challengeController.registeredChallenges) {
       if(challenge.challengeId == challengeId) {
-
         return challenge;
       }
     }

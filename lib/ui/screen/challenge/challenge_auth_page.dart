@@ -47,7 +47,7 @@ class ChallengeAuthPage extends StatelessWidget{
                     }
                     else if(value == -1){
                       dialogFail('오늘은 인증할 루틴이 없습니다');
-                    } else if (value < 0){
+                    } else if (value <= 0){
                       dialogFail('실패');
                     }else {
                       dialogSuccess();

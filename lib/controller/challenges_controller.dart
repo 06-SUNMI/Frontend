@@ -14,20 +14,21 @@ class ChallengeController extends GetxController {
   required this.registeredChallengeRepository});
 
   final _challenges = <Challenge>[].obs;
-  get challenges => _challenges.value;
-  set challenges(value) => _challenges.value = value;
+  get challenges => _challenges;
+  set challenges(value) => _challenges.assignAll(value);
 
   final _registeredChallenges = <RegisteredChallenge>[].obs;
-  get registeredChallenges => _registeredChallenges.value;
-  set registeredChallenges(value) => _registeredChallenges.value = value;
+  get registeredChallenges => _registeredChallenges;
+  set registeredChallenges(value) => _registeredChallenges.assignAll(value);
 
   getAll(){
     print("challenge controller getAll() started-------------");
-    challengeRepository.getAll().then((data){
-      this.challenges = data;
+    challengeRepository.getChallengesInProgress().then((data){
+      challenges = data;
+
     });
     registeredChallengeRepository.getAllByMemberId().then((data){
-      this.registeredChallenges = data;
+      registeredChallenges = data;
     });
     print("challenge controller getAll() ended---------------");
   }

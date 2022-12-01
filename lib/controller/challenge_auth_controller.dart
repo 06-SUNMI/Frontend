@@ -32,7 +32,6 @@ class ChallengeAuthController extends GetxController {
 
   authChallenge() async {
     if(isImageLoaded){
-
       var dateString = await getImageDate();
       print(dateString);
       DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString.toString());
@@ -44,10 +43,9 @@ class ChallengeAuthController extends GetxController {
         return -4;
       }
 
-      await getTodayRoutineDetail();
-      // for (var routine in todayRoutineDetail!.routines){
-      //   if(routine.workoutChecked == false) return -5;
-      // }
+      if(await getTodayRoutineDetail() == 0){
+        return -1;
+      }
       var response = await challengeAuthRepository.authChallenge(
           todayRoutineDetail!.routineChallengeId,
           todayRoutineDetail!.memberRoutineId,
@@ -55,8 +53,8 @@ class ChallengeAuthController extends GetxController {
       try {
         if(response['status'] > 399 ) return -10;
       } catch(err){
-
-    }
+        print(err);
+      }
       if(response > 0){
         Get.find<ChallengeController>().getAll();
       }
@@ -74,8 +72,11 @@ class ChallengeAuthController extends GetxController {
       }
     }
     print(todayRoutineId);
+    if(todayRoutineId == 0){
+      return todayRoutineId;
+    }
     this.todayRoutineDetail = await routineDetailRepository.getById(todayRoutineId);
-    return;
+    return todayRoutineId;
   }
 
   pickImage() async {
@@ -83,7 +84,6 @@ class ChallengeAuthController extends GetxController {
     var image = await picker.pickImage(source: ImageSource.gallery);
 
     if(image != null){
-      print('image found');
       selectedImage = File(image.path);
       isImageLoaded = true;
     }
