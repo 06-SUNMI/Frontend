@@ -12,5 +12,7 @@ abstract class Routes{
    static const challengeDate = '/challenge_date';
    static const challengeRoutInfo = '/challenge_inforout';
    static const snsPost = '/sns/post';
+   static const userfollowpage = '/sns_followuserpage';
+   static const searchInfo = '/sns_searchscreen';
    //static const calendar = '/calendar';
 }
