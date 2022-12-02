@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class Workout {
   String workoutName;
   String workoutTarget;
+  String workoutTitle;
   String? imagePath;
 
   Workout({
     required this.workoutName,
     required this.workoutTarget,
+    required this.workoutTitle,
     this.imagePath
   });
 
@@ -15,6 +17,7 @@ class Workout {
     return Workout(
         workoutName: json['workoutName'],
         workoutTarget: json['workoutTarget'],
+        workoutTitle: json['workoutTitle'],
         imagePath: json['imagePath']
     );
   }
@@ -23,6 +26,7 @@ class Workout {
     final Map<String, dynamic> workoutJson = Map<String, dynamic>();
     workoutJson['workoutName'] = this.workoutName;
     workoutJson['workoutTarget'] = this.workoutTarget;
+    workoutJson['workoutTitle'] = this.workoutTitle;
     return workoutJson;
   }
 
