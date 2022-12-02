@@ -73,6 +73,9 @@ class SNSPostController extends GetxController {
   postNewSNSPost() async {
     var response;
     if(!isFileLoaded) return -10;
+    if(inputTextController.text.isEmpty){
+      inputTextController.text = ' ';
+    }
     if(isImage){
       response = await snsPostRepository.postNewSNSPost(
           Get.find<UserInfoController>().userId!,
@@ -94,6 +97,7 @@ class SNSPostController extends GetxController {
       try{
         print(response);
         print('error message: ${response['message']}');
+        return response['message'];
       } catch(err){
         print(err);
       }
@@ -113,7 +117,7 @@ class SNSPostController extends GetxController {
     }
   }
 
-  pickVideo() async {
+  pickVideoByGallery() async {
     final picker = ImagePicker();
     var video = await picker.pickVideo(source: ImageSource.gallery);
 
@@ -132,7 +136,7 @@ class SNSPostController extends GetxController {
     }
   }
 
-  pickVideoByCamera() async {
+  pickVideo() async {
     final picker = ImagePicker();
     var video = await picker.pickVideo(source: ImageSource.camera);
 

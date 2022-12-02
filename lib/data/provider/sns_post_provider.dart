@@ -5,8 +5,8 @@ import 'url.dart';
 
 class SNSPostProvider extends GetConnect {
   Future<Response> postSNSPost(int memberId, FormData data) =>
-      // post('$baseURL/sns/posts/users/$memberId',data, headers: {'Content-Type': 'multipart/form-data'});
-      post('$baseURL/sns/posts/users/$memberId',data, contentType: 'multipart/form-data');
+      // post('$baseURL/sns/posts/members/$memberId',data, headers: {'Content-Type': 'multipart/form-data'});
+      post('$baseURL/sns/posts/members/$memberId',data, contentType: 'multipart/form-data');
 
 
   postNewSNSPost(int memberId, File fileToPost, String fileType, String content) async {
