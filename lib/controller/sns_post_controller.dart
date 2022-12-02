@@ -97,6 +97,7 @@ class SNSPostController extends GetxController {
       try{
         print(response);
         print('error message: ${response['message']}');
+        return response['message'];
       } catch(err){
         print(err);
       }
@@ -116,7 +117,7 @@ class SNSPostController extends GetxController {
     }
   }
 
-  pickVideo() async {
+  pickVideoByGallery() async {
     final picker = ImagePicker();
     var video = await picker.pickVideo(source: ImageSource.gallery);
 
@@ -135,7 +136,7 @@ class SNSPostController extends GetxController {
     }
   }
 
-  pickVideoByCamera() async {
+  pickVideo() async {
     final picker = ImagePicker();
     var video = await picker.pickVideo(source: ImageSource.camera);
 
