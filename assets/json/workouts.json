@@ -2,136 +2,163 @@
   {
     "workoutName": "BENCH_PRESS_DUMBBELL",
     "workoutTarget": "chest",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Dumbbell-Bench-Press-resized-768x512.png",
+    "workoutTitle": "덤벨 벤치프레스"
   },
   {
     "workoutName": "CHEST_PRESS_MACHINE",
     "workoutTarget": "chest",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/machine-chest-press-resized-768x512.png",
+    "workoutTitle": "체스트프레스 머신"
   },
   {
     "workoutName": "PUSH_UP",
     "workoutTarget": "chest",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/push-up-tall-resized-768x512.png",
+    "workoutTitle": "푸쉬업"
   },
   {
     "workoutName": "LAT_PULL_DOWN",
     "workoutTarget": "back",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/wide-grip-lat-pull-down-resized-768x512.png",
+    "workoutTitle": "랫풀다운"
   },
   {
     "workoutName": "ONE_ARM_DUMBBELL_ROW",
     "workoutTarget": "back",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/bent-over-one-arm-dumbbell-row-resized-768x512.png",
+    "workoutTitle": "덤벨 로우"
   },
   {
     "workoutName": "SEATED_ROW_CABLE",
     "workoutTarget": "back",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Seated-cable-row-new-resized-768x512.png",
+    "workoutTitle": "시티드로우"
   },
   {
     "workoutName": "SQUAT",
     "workoutTarget": "lowerBody",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/barbell-squat-resized-FIXED-2-768x512.png",
+    "workoutTitle": "스쿼트"
   },
   {
     "workoutName": "WIDE_SQUAT",
     "workoutTarget": "lowerBody",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/barbell-sumo-squat-resized-new-768x512.png",
+    "workoutTitle": "와이드 스쿼트"
   },
   {
     "workoutName": "LEG_EXTENSION",
     "workoutTarget": "lowerBody",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/lever-leg-extension-resized-768x512.png",
+    "workoutTitle": "레그익스텐션"
   },
   {
     "workoutName": "SHOULDER_PRESS_DUMBBELL",
     "workoutTarget": "shoulder",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Dumbbell-Shoulder-Press-resized-768x512.png",
+    "workoutTitle": "덤벨 숄더프레스"
   },
   {
     "workoutName": "LATERAL_RAISE_DUMBBELL",
     "workoutTarget": "shoulder",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/dumbbell-lateral-raise-resized-768x512.png",
+    "workoutTitle": "덤벨 래터럴레이즈"
   },
   {
     "workoutName": "SHOULDER_PRESS_MACHINE",
     "workoutTarget": "shoulder",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/machine-chest-press-resized-768x512.png",
+    "workoutTitle": "숄더프레스 머신"
   },
   {
     "workoutName": "BENCH_DIPS",
     "workoutTarget": "triceps",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/bench-dip-resized-768x512.png",
+    "workoutTitle": "벤치 딥스"
   },
   {
     "workoutName": "TRICEP_PUSH_DOWN_CABLE",
     "workoutTarget": "triceps",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Triceps-Rope-Pushdown-resized-768x512.png",
+    "workoutTitle": "케이블 푸쉬다운"
   },
   {
     "workoutName": "ONE_ARM_TRICEP_EXTENSION_DUMBBELL",
     "workoutTarget": "triceps",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Standing-one-arm-overhead-dumbbell-triceps-extension-768x512.png",
+    "workoutTitle": "덤벨 익스텐션"
   },
   {
     "workoutName": "BICEP_CURL_DUMBBELL",
     "workoutTarget": "biceps",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Dumbbell-Alternate-Biceps-Curl-resized-768x512.png",
+    "workoutTitle": "덤벨컬"
   },
   {
     "workoutName": "HAMMER_CURL_DUMBBELL",
     "workoutTarget": "biceps",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Dumbbell-Hammer-Curl-resized-768x512.png",
+    "workoutTitle": "덤벨 해머컬"
   },
   {
     "workoutName": "BICEP_CURL_CABLE",
     "workoutTarget": "biceps",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Cable-curl-resized-768x512.png",
+    "workoutTitle": "케이블컬"
   },
   {
     "workoutName": "CRUNCH",
     "workoutTarget": "core",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Crunch-resized-768x512.png",
+    "workoutTitle": "크런치"
   },
   {
     "workoutName": "PLANK",
     "workoutTarget": "core",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Front-Plank-resized-768x512.png",
+    "workoutTitle": "플랭크"
   },
   {
     "workoutName": "LEG_RAISE",
     "workoutTarget": "core",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Hanging-leg-hip-raise-resized-768x512.png",
+    "workoutTitle": "레그레이즈"
   },
   {
     "workoutName": "WRIST_CURL_DUMBBELL",
     "workoutTarget": "forearm",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/seated-dumbbell-wrist-curl-resized-768x512.png",
+    "workoutTitle": "덤벨 리스트컬"
   },
   {
     "workoutName": "REVERSE_WRIST_CURL_DUMBBELL",
     "workoutTarget": "forearm",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Dumbbell-one-arm-reverse-wrist-curl-resized-768x512.png",
+    "workoutTitle": "덤벨 리버스리스트컬"
   },
   {
     "workoutName": "WRIST_CURL_BARBELL",
     "workoutTarget": "forearm",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/Seated-barbell-wrist-curl-resized-768x512.png",
+    "workoutTitle": "바벨컬"
   },
   {
     "workoutName": "TREADMILL_RUNNING",
     "workoutTarget": "aerobic",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/treadmill.png",
+    "workoutTitle": "러닝머신"
   },
   {
     "workoutName": "SLOW_BURPEE",
     "workoutTarget": "aerobic",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/burpee.png",
+    "workoutTitle": "버피테스트"
   },
   {
     "workoutName": "CRISS_CROSS_JUMP",
     "workoutTarget": "aerobic",
-    "imagePath" : "assets/images/checkimage.png"
+    "imagePath" : "assets/images/burpee.png",
+    "workoutTitle": "크로스점프"
   }
 ]

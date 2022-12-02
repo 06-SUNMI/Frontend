@@ -15,13 +15,13 @@ createWorkoutListItem(Workout workout) {
               workout.imagePath!,
               width: 75,
               height: 75,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
             Expanded(
               child: Container(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
-                  workout.workoutName,
+                  workout.workoutTitle,
                   textAlign: TextAlign.start,
                 ),
               ),

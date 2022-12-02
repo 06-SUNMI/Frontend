@@ -9,7 +9,7 @@ Widget challengeListItems(context, index) {
     child: Row(
       children: [
         Image.asset(
-          'assets/images/checkimage.png',
+          challengeController.challenges[index].imagePath,
           height: 100,
           width: 100,
           fit: BoxFit.cover,),
@@ -35,10 +35,10 @@ Widget registeredChallengeItems(context, index) {
       mainAxisSize: MainAxisSize.max,
       children: [
         Image.asset(
-          'assets/images/checkimage.png',
+          challengeController.registeredChallenges[index].imagePath,
           height: 100,
           width: 100,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
         Column(
             children: [

@@ -12,8 +12,9 @@ challengeAuthBottomSheet() {
   }
   else if(DateTime.now().difference(registeredChallengeController.registeredChallenge.endDate).inDays > 0){
     return Text('챌린지 기간이 끝났습니다');
-  }
-  else return Container(
+  } else if(registeredChallengeController.registeredChallenge.challengeParticipantStatus == 'FAIL'){
+    return Text('챌린지에 실패했습니다');
+  } else return Container(
       alignment: AlignmentDirectional.bottomCenter,
       child: ElevatedButton(
           child: Text('인증하기'),

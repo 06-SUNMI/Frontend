@@ -38,12 +38,12 @@ class ChallengeAuthPhotoInfoPage extends GetView{
                       ),
                       actions: [
                         FloatingActionButton(
-                          onPressed: (){
-                            var text = authPhotoController.reportChallengeAuthPhoto();
+                          onPressed: () async {
+                            var response = await authPhotoController.reportChallengeAuthPhoto();
                             Get.back();
                             Get.dialog(
                               AlertDialog(
-                                content: Text(text),
+                                content: response is int ?Text('신고가 완료되었습니다'): Text(response),
                                 actions: [
                                   FloatingActionButton(
                                     onPressed: (){

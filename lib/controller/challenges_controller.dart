@@ -6,6 +6,8 @@ import 'package:sunmi/data/repository/registered_challenge_repository.dart';
 import 'package:sunmi/data/model/challenge.dart';
 import 'package:sunmi/routes/app_pages.dart';
 
+import 'user_info_controller.dart';
+
 class ChallengeController extends GetxController {
   final ChallengeRepository challengeRepository;
   final RegisteredChallengeRepository registeredChallengeRepository;
@@ -27,7 +29,7 @@ class ChallengeController extends GetxController {
       challenges = data;
 
     });
-    registeredChallengeRepository.getAllByMemberId().then((data){
+    registeredChallengeRepository.getAllByMemberId(Get.find<UserInfoController>().userId!).then((data){
       registeredChallenges = data;
     });
     print("challenge controller getAll() ended---------------");
