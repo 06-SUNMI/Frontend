@@ -50,14 +50,13 @@ class AuthPhotoController extends GetxController{
 
   reportChallengeAuthPhoto() async {
     var reportContent = inputTextController.text;
-    var response = await authPhotoRepository.reportAuthPhoto(selectedAuthPhoto.authPostId, Get.find<UserInfoController>().userId, inputTextController.text);
+    var response = await authPhotoRepository.reportAuthPhoto(selectedAuthPhoto.authPostId, Get.find<UserInfoController>().userId, reportContent);
+    inputTextController.clear();
     if(response is int){
       if(response<0) return '실패';
       return response;
     } else {
       return response['message'];
     }
-    inputTextController.clear();
-    return reportContent;
   }
 }
