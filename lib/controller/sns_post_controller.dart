@@ -73,6 +73,9 @@ class SNSPostController extends GetxController {
   postNewSNSPost() async {
     var response;
     if(!isFileLoaded) return -10;
+    if(inputTextController.text.isEmpty){
+      inputTextController.text = ' ';
+    }
     if(isImage){
       response = await snsPostRepository.postNewSNSPost(
           Get.find<UserInfoController>().userId!,
