@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
 import 'dart:convert';
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 class UserInfoController extends GetxController{
   int? height;
@@ -22,7 +21,6 @@ class UserInfoController extends GetxController{
     var response = await http.get(Uri.parse(url));
     var responseBody = response.body;
     var userList = jsonDecode(responseBody);//userList = 소셜 아이디, 소셜 종류
-    print("kakao:  ${kakaoId}");
 
     for(int i=0;i<userList.length;i++){
       print(userList[i]["socialId"]);

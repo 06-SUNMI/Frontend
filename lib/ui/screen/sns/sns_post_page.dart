@@ -25,16 +25,19 @@ class SNSPostPage extends GetView<SNSPostController>{
                         labelText: 'Content',
                       )
                   ),
-                  ElevatedButton(onPressed: () async {
-                    FocusScope.of(context).unfocus();
-                    var response = await snsPostController.postNewSNSPost();
-                    print(response);
-                    if(response > 0){
-                      dialogSuccess();
-                    } else {
-                      dialogFail();
-                    }
-                  }, child: Text('완료')),
+                  ElevatedButton(
+                      onPressed: () async {
+                        FocusScope.of(context).unfocus();
+                        var response = await snsPostController.postNewSNSPost();
+                        if(response is int){
+                          response > 0
+                              ?dialogSuccess()
+                              :dialogFail();
+                        } else {
+
+                          dialogFailMessage(response);
+                        }},
+                      child: Text('완료')),
                 ],
               ),
             );},
@@ -56,6 +59,22 @@ class SNSPostPage extends GetView<SNSPostController>{
     Get.dialog(
       AlertDialog(
         content: Text('실패'),
+        actions: [
+          FloatingActionButton(
+            onPressed: (){
+              Get.back();
+            },
+            child: Text('확인'),),
+        ],
+      ),
+      barrierDismissible: false,
+    );
+  }
+
+  void dialogFailMessage(message) {
+    Get.dialog(
+      AlertDialog(
+        content: Text(message),
         actions: [
           FloatingActionButton(
             onPressed: (){

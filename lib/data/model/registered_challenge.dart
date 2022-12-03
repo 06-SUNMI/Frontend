@@ -8,6 +8,7 @@ class RegisteredChallenge {
   int participatedNum;
   int numPerWeek;
   String challengeParticipantStatus;
+  String imagePath;
 
 
   RegisteredChallenge({
@@ -20,19 +21,21 @@ class RegisteredChallenge {
     required this.participatedNum,
     required this.numPerWeek,
     required this.challengeParticipantStatus,
+    required this.imagePath,
   });
 
   factory RegisteredChallenge.fromJson(Map<String, dynamic> json){
     return RegisteredChallenge(
-        challengeId: json['challengeId'],
-        challengeName: json['name'],
-        startDate: DateTime.parse(json['startDate']),
-        endDate: DateTime.parse(json['endDate']),
-        progressRate: json['progressRate'],
-        participationFee: json['participationFee'],
-        participatedNum: json['participationNum'],
-        numPerWeek: json['numPerWeek'],
-        challengeParticipantStatus: json['challengeParticipantStatus'],
+      challengeId: json['challengeId'],
+      challengeName: json['name'],
+      startDate: DateTime.parse(json['startDate']),
+      endDate: DateTime.parse(json['endDate']),
+      progressRate: json['progressRate'],
+      participationFee: json['participationFee'],
+      participatedNum: json['participationNum'],
+      numPerWeek: json['numPerWeek'],
+      challengeParticipantStatus: json['challengeParticipantStatus'],
+      imagePath: 'assets/images/burpee.png',
     );
   }
 

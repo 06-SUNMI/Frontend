@@ -5,8 +5,8 @@ import 'url.dart';
 
 class AuthPhotoProvider extends GetConnect{
   Future<Response> getAuthPhoto(int challengeId) => get('$baseURL/challenges/$challengeId/auth');
-  Future<Response> postAuthPhotoReport(reportedAuthPostId, reportingMemberId, data) =>
-      post('$baseURL/challenges/auth/$reportedAuthPostId/report/members/$reportingMemberId', data);
+  Future<Response> postAuthPhotoReport(reportedAuthPostId, reportingMemberId, content) =>
+      post('$baseURL/challenges/auth/$reportedAuthPostId/report/members/$reportingMemberId?reportReason=$content', null);
 
   getAllByChallengeId(int challengeId) async {
     var authPhotoResponse = await getAuthPhoto(challengeId);
@@ -16,10 +16,14 @@ class AuthPhotoProvider extends GetConnect{
   }
 
   reportAuthPhoto(int reportedAuthPostId, int reportingMemberId, String content) async {
-    var data = {
-      'ReportReason': content,
-    };
-    var reportResponse = await postAuthPhotoReport(reportedAuthPostId, reportingMemberId, data);
-    return 0;
+    var reportResponse = await postAuthPhotoReport(reportedAuthPostId, reportingMemberId, content);
+    print(reportResponse.headers);
+    print(reportResponse.body);
+    try {
+      return reportResponse.body;
+    } catch (err){
+      print(err);
+      return -1;
+    }
   }
 }

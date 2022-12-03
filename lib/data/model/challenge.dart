@@ -6,6 +6,7 @@ class Challenge{
   int participationFee;
   int participatedNum;
   int numPerWeek;
+  String imagePath;
 
   Challenge({
     required this.challengeId,
@@ -14,7 +15,8 @@ class Challenge{
     required this.endDate,
     required this.participationFee,
     required this.participatedNum,
-    required this.numPerWeek
+    required this.numPerWeek,
+    required this.imagePath,
   });
 
   factory Challenge.fromJson(Map<String, dynamic> json){
@@ -25,7 +27,8 @@ class Challenge{
       endDate: DateTime.parse(json['endDate']),
       participationFee: json['participationFee'],
       participatedNum: json['participationNum'],
-      numPerWeek: json['numPerWeek']
+      numPerWeek: json['numPerWeek'],
+      imagePath: 'assets/images/checkimage.png',
     );
   }
 

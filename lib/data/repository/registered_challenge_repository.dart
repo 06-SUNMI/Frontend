@@ -9,8 +9,8 @@ class RegisteredChallengeRepository {
 
   RegisteredChallengeRepository({required this.registeredChallengeProvider});
 
-  getAllByMemberId(){
-    return registeredChallengeProvider.getAllByMemberId(1);
+  getAllByMemberId(memberId){
+    return registeredChallengeProvider.getAllByMemberId(memberId);
   }
 
   getById(int challengeId){

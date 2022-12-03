@@ -17,6 +17,7 @@ class CalendarController extends GetxController {
   Map routineInfo = {};
   var routineInfoList;
   RxList routineDay= [].obs;
+  int? userId;
 
   late DateTime pick;
   var pickDateRoutineId;
@@ -116,11 +117,14 @@ class CalendarController extends GetxController {
   }
 
   getRoutines() async{
-    String url = 'http://15.164.168.230:8080/members/1/routines';
+    String url = 'http://15.164.168.230:8080/members/${userId}/routines';
     var response = await http.get(Uri.parse(url));
     var responseBody = response.body;
     routinelist = jsonDecode(responseBody);
-    routineCount = routinelist["memberRoutineDataList"].length; 
+    if(routinelist["memberRoutineDataList"]==null){
+      routineCount=0;}
+    else{
+    routineCount = routinelist["memberRoutineDataList"].length; }
     for(var i=0;i<routineCount;i++){
       getRoutineInfo(routinelist["memberRoutineDataList"][i]["routineId"], routinelist["memberRoutineDataList"][i]["routineRegisterData"]);
     }
@@ -187,5 +191,8 @@ class CalendarController extends GetxController {
     
     String url = 'http://15.164.168.230:8080/routines/routine-contents/${routineDay[index]["workoutId"]}/check';
     await http.put(Uri.parse(url));
+  }
+  setId(int? id){
+    userId = id;
   }
 }

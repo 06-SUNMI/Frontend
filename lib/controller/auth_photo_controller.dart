@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:sunmi/controller/user_info_controller.dart';
 import 'package:sunmi/data/model/auth_photo.dart';
 import 'package:sunmi/data/repository/auth_photo_repository.dart';
 
@@ -47,9 +48,15 @@ class AuthPhotoController extends GetxController{
     });
   }
 
-  reportChallengeAuthPhoto(){
+  reportChallengeAuthPhoto() async {
     var reportContent = inputTextController.text;
+    var response = await authPhotoRepository.reportAuthPhoto(selectedAuthPhoto.authPostId, Get.find<UserInfoController>().userId, reportContent);
     inputTextController.clear();
-    return reportContent;
+    if(response is int){
+      if(response<0) return '실패';
+      return response;
+    } else {
+      return response['message'];
+    }
   }
 }

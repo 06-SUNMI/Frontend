@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sunmi/controller/user_info_controller.dart';
 import 'package:video_player/video_player.dart';
 
 import 'package:sunmi/data/repository/sns_post_repository.dart';
@@ -72,10 +73,21 @@ class SNSPostController extends GetxController {
   postNewSNSPost() async {
     var response;
     if(!isFileLoaded) return -10;
+    if(inputTextController.text.isEmpty){
+      inputTextController.text = ' ';
+    }
     if(isImage){
-      response = await snsPostRepository.postNewSNSPost(1, selectedImage, 'jpg', inputTextController.text);
+      response = await snsPostRepository.postNewSNSPost(
+          Get.find<UserInfoController>().userId!,
+          selectedImage,
+          'jpg',
+          inputTextController.text);
     } else if (isVideo){
-      response = await snsPostRepository.postNewSNSPost(1, selectedVideo, 'mp4', inputTextController.text);
+      response = await snsPostRepository.postNewSNSPost(
+          Get.find<UserInfoController>().userId!,
+          selectedVideo,
+          'mp4',
+          inputTextController.text);
     }
 
     if(response is int){
@@ -85,6 +97,7 @@ class SNSPostController extends GetxController {
       try{
         print(response);
         print('error message: ${response['message']}');
+        return response['message'];
       } catch(err){
         print(err);
       }
@@ -104,7 +117,7 @@ class SNSPostController extends GetxController {
     }
   }
 
-  pickVideo() async {
+  pickVideoByGallery() async {
     final picker = ImagePicker();
     var video = await picker.pickVideo(source: ImageSource.gallery);
 
@@ -123,7 +136,7 @@ class SNSPostController extends GetxController {
     }
   }
 
-  pickVideoByCamera() async {
+  pickVideo() async {
     final picker = ImagePicker();
     var video = await picker.pickVideo(source: ImageSource.camera);
 
