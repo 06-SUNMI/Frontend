@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/calendar_controller.dart';
+import 'package:sunmi/controller/user_info_controller.dart';
 import 'package:sunmi/routes/app_pages.dart';
 
 class RoutineCalendar extends GetView<CalendarController> {
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    Get.put(UserInfoController());
+    return GetBuilder<UserInfoController>( 
+                  builder: (userController) {
+                    controller.setId(userController.userId);
+                    return Scaffold(
         appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -210,5 +215,6 @@ class RoutineCalendar extends GetView<CalendarController> {
         ],
       ),),
     );
+                  },);
   }
 }
