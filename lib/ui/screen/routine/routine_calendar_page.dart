@@ -13,10 +13,17 @@ class RoutineCalendar extends GetView<CalendarController> {
                     controller.setId(userController.userId);
                     return Scaffold(
         appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
+        title: Obx(()=>Text(
+                controller.year.toString() + "." + controller.month.toString(),
+                style: TextStyle(fontSize: 20),
+              ),),
+            
+            
+            
+            
+
+        actions: [
+          IconButton(
               onPressed: () {
                  if (controller.month.value == 1) {
                   controller.month(12);
@@ -32,14 +39,7 @@ class RoutineCalendar extends GetView<CalendarController> {
                 color: Colors.black,
               ),
             ),
-            Obx(()=>Container(
-              margin: EdgeInsets.symmetric(horizontal: 30),
-              child: Text(
-                controller.year.toString() + "." + controller.month.toString(),
-                style: TextStyle(fontSize: 20),
-              ),
-            ),),
-            IconButton(
+          IconButton(
               onPressed: () {
                 if (controller.month.value == 12) {
                   controller.month(1);
@@ -55,7 +55,7 @@ class RoutineCalendar extends GetView<CalendarController> {
                 color: Colors.black,
               ),
             ),
-            IconButton(
+          IconButton(
               onPressed: () {
                controller.onInit();
               },
@@ -65,8 +65,7 @@ class RoutineCalendar extends GetView<CalendarController> {
                 color: Colors.blue,
               ),
             ),
-          ],
-        ),
+        ],
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
@@ -107,7 +106,9 @@ class RoutineCalendar extends GetView<CalendarController> {
                   ],
                 ),
               ),
+              Obx(()=>
               SizedBox(
+
                 width: 350,
                 child: Wrap(
                   children: [
@@ -141,7 +142,7 @@ class RoutineCalendar extends GetView<CalendarController> {
                     ),),
                   ],
                 ),
-              ),
+              ),),
               
                 SizedBox(
                   child: Obx(()=>Column(
