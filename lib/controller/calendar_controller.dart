@@ -15,6 +15,9 @@ class CalendarController extends GetxController {
   var routinelist;
   int routineCount = 0;
   Map routineInfo = {};
+  Map routineMap = {};
+  var pickString;
+  
   var routineInfoList;
   RxList routineDay= [].obs;
   int? userId;
@@ -24,9 +27,9 @@ class CalendarController extends GetxController {
   late int dayTemp;
 
   @override
-  void onInit () {
+  void onInit (){
     super.onInit();
-    getRoutines();
+     getRoutines();
     setFirst(now.year, now.month);
   }
 
@@ -100,6 +103,7 @@ class CalendarController extends GetxController {
     pickDateRoutineId = days[index]["routineId"];
     routineDay.clear();
     
+    
     if(days[index]["routineId"]!=0){
       for(int i=0;i<routineInfo[days[index]["routineId"]]["memberRoutineData"]["memberRoutineContentList"].length;i++){
         routineDay.add({
@@ -122,9 +126,10 @@ class CalendarController extends GetxController {
     var responseBody = response.body;
     routinelist = jsonDecode(responseBody);
     if(routinelist["memberRoutineDataList"]==null){
-      routineCount=0;}
-    else{
-    routineCount = routinelist["memberRoutineDataList"].length; }
+      routineCount=0;
+    }else{
+      routineCount = routinelist["memberRoutineDataList"].length; 
+    }
     for(var i=0;i<routineCount;i++){
       getRoutineInfo(routinelist["memberRoutineDataList"][i]["routineId"], routinelist["memberRoutineDataList"][i]["routineRegisterData"]);
     }
@@ -160,6 +165,11 @@ class CalendarController extends GetxController {
     var responseBody = response.body;
     routineInfoList = jsonDecode(responseBody);
     routineInfo[id] = routineInfoList;
+    if(routineInfoList["memberRoutineData"]!=null){
+      for(int i=0;i<routineInfoList["memberRoutineData"]["memberRoutineContentList"].length;i++){
+        routineMap[infodate] = routineInfoList["memberRoutineData"]["memberRoutineContentList"][i];
+      }
+    }
   }
 
   deleteWorkout(int index, int dayIndex) async{

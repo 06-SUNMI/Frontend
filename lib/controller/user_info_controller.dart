@@ -71,5 +71,20 @@ class UserInfoController extends GetxController{
     };
     var body = jsonEncode(data);
     http.Response _res = await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
+    setUserId();
+  }
+  setUserId() async{
+     String url = "http://15.164.168.230:8080/members";
+    var response = await http.get(Uri.parse(url));
+    var responseBody = response.body;
+    var userList = jsonDecode(responseBody);//userList = 소셜 아이디, 소셜 종류
+
+    for(int i=0;i<userList.length;i++){
+      if(userList[i]["socialId"]!=null){
+      if(int.parse(userList[i]["socialId"]) == socialId){//이미 있는 유저
+        userId = userList[i]["memberId"];
+      }
+      }
+    }
   }
 }
