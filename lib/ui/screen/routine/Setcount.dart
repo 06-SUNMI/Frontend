@@ -7,8 +7,11 @@ import 'package:sunmi/controller/workout_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:sunmi/routes/app_pages.dart';
 import 'dart:convert';
+import 'package:get/get.dart';
+import 'package:sunmi/controller/user_info_controller.dart';
 
-class Setcount extends StatelessWidget {
+
+class Setcount extends StatelessWidget {  
 
   Setcount();
 
@@ -45,6 +48,10 @@ class _SetPageState extends State<SetPage> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(UserInfoController());
+    return GetBuilder<UserInfoController>( 
+                  builder: (userController) {
+                    
     return Scaffold(
       appBar: AppBar(title: Text('운동 세트/시간 선택'),),
       body: Container(
@@ -141,7 +148,7 @@ class _SetPageState extends State<SetPage> {
               child: const Text("확인"),
               onPressed: () {
                 if (_c == Counter.sets) {
-                  _postRequests(tea.text,teb.text,date);
+                  _postRequests(tea.text,teb.text,date, userController.userId);
                   showDialog(
                     context: context,
                     barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
@@ -163,7 +170,7 @@ class _SetPageState extends State<SetPage> {
                     },
                   );
                 } else {
-                  _postRequestt(tec.text,date);
+                  _postRequestt(tec.text,date, userController.userId);
                   showDialog(
                     context: context,
                     barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
@@ -193,10 +200,10 @@ class _SetPageState extends State<SetPage> {
           ],
         ),
       ),
-    );
+    );});
   }
 }
-void _postRequests(String tea, String teb, var date) async {
+void _postRequests(String tea, String teb, var date, var id) async {
   var routineId = Get.arguments["add"];
   Workout selectedWorkout = Get.arguments['workout'];
   var workoutNames = selectedWorkout.workoutName;
@@ -204,7 +211,7 @@ void _postRequests(String tea, String teb, var date) async {
   String date_data = "${dates.year}-${dates.month}-${dates.day}";
   //print(routineId);
   if (routineId == 0) {
-    String url = 'http://15.164.168.230:8080/members/5/routines';
+    String url = 'http://15.164.168.230:8080/members/${id}/routines';
     var data = {
       "memberRoutineWorkoutContentList": [
         {
@@ -242,7 +249,7 @@ void _postRequests(String tea, String teb, var date) async {
 
 }
 
-void _postRequestt(String tec, var date) async{
+void _postRequestt(String tec, var date, var id) async{
 
   Workout selectedWorkout = Get.arguments['workout'];
   var workoutNames= selectedWorkout.workoutName;
@@ -251,7 +258,7 @@ void _postRequestt(String tec, var date) async{
   var routineId = Get.arguments["add"];
 
   if(routineId==0){
-    String url = 'http://15.164.168.230:8080/members/1/routines';
+    String url = 'http://15.164.168.230:8080/members/${id}/routines';
     var data = {
       "memberRoutineWorkoutContentList": [
         {
