@@ -77,7 +77,8 @@ class SearchScreen extends GetView<SearchController> {
 
             children:[
               TextButton(
-                onPressed: () { ck=_ckone(ck); },
+                onPressed: () { ck=_ckone(ck); controller.gymgetSearch(tea.text);
+                ck = 0;},
                 child: Text("같은 헬스장 검색"),
                 style: TextButton.styleFrom( primary: Colors.blue, ),
               ),
@@ -98,6 +99,7 @@ class SearchScreen extends GetView<SearchController> {
                       }
                       else{
                         controller.gymgetSearch(tea.text);
+                        ck = 0;
                       }
                     }, label: Text("Search"),
               ),
@@ -147,4 +149,3 @@ class SearchScreen extends GetView<SearchController> {
     return 1;
   }
 }
-

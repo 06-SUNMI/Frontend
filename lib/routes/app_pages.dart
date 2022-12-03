@@ -46,9 +46,6 @@ class AppPages {
     GetPage(name: Routes.searchInfo, page: ()=>SearchScreen(), binding: ChallengeInfoBinding()),
     GetPage(name: Routes.userfollowpage, page: ()=>SNSFollowUser(), binding: WorkoutBinding()),
     GetPage(name: Routes.pay, page: ()=>Payment()),
-    GetPage(name: Routes.snsPost, page: ()=> SNSPostPage(), binding: SNSPostBinding()),
-    GetPage(name: Routes.searchInfo, page: ()=>SearchScreen(), binding: ChallengeInfoBinding()),
-    GetPage(name: Routes.userfollowpage, page: ()=>SNSFollowUser(), binding: WorkoutBinding()),
   ];
 }
 
