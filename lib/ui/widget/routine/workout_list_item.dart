@@ -21,7 +21,7 @@ createWorkoutListItem(Workout workout) {
               child: Container(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
-                  workout.workoutTitle,
+                  workout.workoutTitle!,
                   textAlign: TextAlign.start,
                 ),
               ),
