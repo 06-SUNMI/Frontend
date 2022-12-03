@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
                   builder: (controller) {
                     return TextButton(onPressed: () async{
                         await mainLogin.login();
-                        print(mainLogin.user!.id);
+                        print(mainLogin.user);
                         if(await controller.isNew(mainLogin.user!.id)==true){
                           controller.setName(mainLogin.user!.properties!["nickname"]);
                           controller.setMail(mainLogin.user!.kakaoAccount!.email);

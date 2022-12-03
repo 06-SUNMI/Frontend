@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:core';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,8 +17,17 @@ class SNSFollowUser extends GetView<CalendarController> {
 
   var userName=Get.arguments["name"];
   var gymName=Get.arguments["gymName"];
+  var userimg=Get.arguments["customProfileImageUrl"];
+
   @override
   Widget build(BuildContext context) {
+    int? userid=controller.userId;
+    Future<bool> checkinuser = getfollow(userid!);
+
+    if(userimg=='null'){
+      userimg='images/eh.png';//임시 이미지
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -71,6 +82,7 @@ class SNSFollowUser extends GetView<CalendarController> {
           fontWeight: FontWeight.bold,
         ),
         toolbarHeight: 50,
+
       ),
 
 
@@ -81,71 +93,100 @@ class SNSFollowUser extends GetView<CalendarController> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 20.0,width: 200.0,),
-            /*Row(
-              children: List.generate(1/*storys.length*/, (index) {
-                return StoryItem(
-                  storyimg: storys[1]['image'],
-                  storyname: storys[1]['name'],
-                );
-              }),
-
-            ),*/
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.only(top: 20),
+                 // padding: EdgeInsets.only(top: 10),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 100.0),
+                    padding: const EdgeInsets.only(left: 20.0),
+
                       child:CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage('images/eh.png'),//임시 이미지
+                        backgroundImage: AssetImage('$userimg'),//임시 이미지
                     ),
                   ),
                 ),
                 Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.only(top: 15, left: 20),
-                      child: Text(
-                        userName,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.black),
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(top: 10,left: 20),
+                          child: Text(
+                            userName,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(top: 15, left: 10),
+                          child: Text(
+                            gymName,
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 15,
+                                color: Colors.black),
+                          ),
+                        ),
+                      ],
+
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(top: 5, left: 20),
-                      child: Text(
-                        gymName,
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 15,
-                            color: Colors.black),
-                      ),
+
+                    Row(
+                     children: [
+                        TextButton(
+                         // padding: const EdgeInsets.only(bottom: 5, left: 20),
+                          onPressed: () {  },
+                          child: Text(
+                            "팔로워",
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12,
+                                color: Colors.black),
+                          ),
+                        ),
+                       TextButton(
+                         // padding: const EdgeInsets.only(bottom: 5, left: 20),
+                         onPressed: () {  },
+                         child: Text(
+                           "팔로잉",
+                           style: TextStyle(
+                               fontWeight: FontWeight.normal,
+                               fontSize: 12,
+                               color: Colors.black),
+                         ),
+                       ),
+                      ]
                     ),
+
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.only(top: 5, left: 50),
-                  child: ElevatedButton(
+                if(Get.arguments['id']!=userid || checkinuser==false)...[
+                  Container(
+                    padding: const EdgeInsets.only(left: 50, bottom: 5),
+                    child: ElevatedButton(
 
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple[100],
-                      minimumSize: const Size(60, 20),
-                      //  alignment: const Alignment(150,0),
-                      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2.0),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple[100],
+                          minimumSize: const Size(60, 20),
+                          //  alignment: const Alignment(150,0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15.0, horizontal: 10),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(3.0),
 
-                      ),
+                          ),
+                        ),
+                        child: const Text('팔로우'),
+                        onPressed: () =>
+                        {
+                          _postRequests(Get.arguments['id'], userid!),
+                        }
                     ),
-                    child: const Text('팔로우'),
-                    onPressed: () => {
-                      _postRequests(Get.arguments['id']),
-                    }
                   ),
-                ),
+                ]
               ],
             ),
 
@@ -234,12 +275,24 @@ class SNSFollowUser extends GetView<CalendarController> {
         ),),
     );
   }
-}
 
-void _postRequests(var id) async {
-    String url = 'http://15.164.168.230:8080/members/$id/1'; //임시
+}
+Future<bool> getfollow(int userid) async {
+  var Info;
+  var url = 'http://15.164.168.230:8080/sns/members/$userid/follow-members';
+  final response = await http.get(Uri.parse((url)));
+  Info = jsonDecode(response.body);
+  for(int i=0; i<Info.length; i++){
+    if(Info[i] == userid){
+      print("안받아짐");
+      return false;
+    }
+  }
+  return true;
+}
+void _postRequests(var id, int userid) async {
+    String url = 'http://15.164.168.230:8080/sns/follow/$id/$userid';
     http.Response _res = await http.post(
         Uri.parse(url), headers: {"content-type": "application/json"},
     );
-    print(_res.request);
 }

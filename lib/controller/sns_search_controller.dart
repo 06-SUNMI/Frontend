@@ -22,7 +22,7 @@ class SearchController extends GetxController{
   getSearch(String tea) async{
     list.clear();
     var url = Uri.parse(
-      'http://15.164.168.230:8080/sns/users/$tea',
+      'http://15.164.168.230:8080/sns/members/$tea',
     );
     final response = await http.get(url);
     //Info = jsonDecode(response.body);
@@ -44,7 +44,7 @@ class SearchController extends GetxController{
   gymgetSearch(String tea) async{
     list.clear();
     var url = Uri.parse(
-      'http://15.164.168.230:8080/sns/users/$tea',
+      'http://15.164.168.230:8080/sns/members/$tea',
     );
     final response = await http.get(url);
     //Info = jsonDecode(response.body);
