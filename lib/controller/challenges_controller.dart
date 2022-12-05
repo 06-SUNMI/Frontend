@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sunmi/controller/home_controller.dart';
 import 'package:sunmi/data/model/registered_challenge.dart';
 
 import 'package:sunmi/data/repository/challenge_repository.dart';
@@ -23,15 +24,26 @@ class ChallengeController extends GetxController {
   get registeredChallenges => _registeredChallenges;
   set registeredChallenges(value) => _registeredChallenges.assignAll(value);
 
-  getAll(){
-    print("challenge controller getAll() started-------------");
-    challengeRepository.getChallengesInProgress().then((data){
-      challenges = data;
+  HomeController _homeController = Get.find<HomeController>();
 
+  @override
+  void onInit(){
+    getAll();
+    super.onInit();
+
+    ever(_homeController.curPage, (callback){
+      if(_homeController.curPage == 1){
+        getAll();
+      }
     });
-    registeredChallengeRepository.getAllByMemberId(Get.find<UserInfoController>().userId!).then((data){
-      registeredChallenges = data;
-    });
+  }
+
+  getAll() async {
+    print("challenge controller getAll() started-------------");
+    challenges = await challengeRepository.getChallengesInProgress();
+    registeredChallenges = await registeredChallengeRepository.getAllByMemberId(Get.find<UserInfoController>().userId);
+    _challenges.refresh();
+    _registeredChallenges.refresh();
     print("challenge controller getAll() ended---------------");
   }
 

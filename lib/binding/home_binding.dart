@@ -9,11 +9,11 @@ import 'package:sunmi/controller/calendar_controller.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<ChallengeController>(ChallengeController(
-        challengeRepository: ChallengeRepository(
-            challengeProvider: ChallengeProvider()),
-        registeredChallengeRepository: RegisteredChallengeRepository(
-            registeredChallengeProvider: RegisteredChallengeProvider()),
+    Get.lazyPut(()=>ChallengeController(
+      challengeRepository: ChallengeRepository(
+          challengeProvider: ChallengeProvider()),
+      registeredChallengeRepository: RegisteredChallengeRepository(
+          registeredChallengeProvider: RegisteredChallengeProvider()),
     ));
     Get.lazyPut(() => CalendarController());
   }
