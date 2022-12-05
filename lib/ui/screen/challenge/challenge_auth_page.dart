@@ -37,20 +37,16 @@ class ChallengeAuthPage extends StatelessWidget{
                   child: Text('보내기'),
                   onPressed: () async {
                     var value = await authPageController.authChallenge();
-                    if(value == -4 ){
-                      dialogFail('업로드할 이미지의 날짜가 다릅니다');
-                    } else if (value == -3){
-                      dialogFail('오늘 루틴을 모두 완료하지 못했니다');
-                    }
-                    else if (value == -2){
-                      dialogFail('이미 인증을 하였습니다');
-                    }
-                    else if(value == -1){
-                      dialogFail('오늘은 인증할 루틴이 없습니다');
-                    } else if (value <= 0){
-                      dialogFail('실패');
-                    }else {
-                      dialogSuccess();
+                    if(value is int){
+                      if(value == -4 ){
+                        dialogFail('업로드할 이미지의 날짜가 다릅니다');
+                      } else if (value <= 0){
+                        dialogFail('실패');
+                      }else {
+                        dialogSuccess();
+                      }
+                    } else {
+                      dialogFail(value['message']);
                     }
                   },
                 ),
