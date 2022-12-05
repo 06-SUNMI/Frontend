@@ -21,15 +21,15 @@ class SNSFollowUser extends GetView<CalendarController> {
 
   @override
   Widget build(BuildContext context) {
-    int? userid=controller.userId;
+    /*int? userid=controller.userId;
     Future<bool> checkinuser = getfollow(userid!);
 
     if(userimg=='null'){
-      userimg='images/eh.png';//임시 이미지
+      userimg='assets/images/eh.png';//임시 이미지
     }
-
+*/
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -272,7 +272,7 @@ class SNSFollowUser extends GetView<CalendarController> {
               ),),
             ),
           ],
-        ),),
+        ),),*/
     );
   }
 

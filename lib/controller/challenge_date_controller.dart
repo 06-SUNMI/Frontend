@@ -74,7 +74,7 @@ class ChallengeDateController extends GetxController{
   }
 
   challengePush() async{
-    String url = "http://15.164.168.230:8080/members/1/challenges/${challengeId}";
+    String url = "http://15.164.168.230:8080/members/102/challenges/${challengeId}";
     await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: jsonEncode(selectDays));
   }
 }
