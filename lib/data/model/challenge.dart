@@ -28,7 +28,7 @@ class Challenge{
       participationFee: json['participationFee'],
       participatedNum: json['participationNum'],
       numPerWeek: json['numPerWeek'],
-      imagePath: 'assets/images/checkimage.png',
+      imagePath: 'assets/images/challenge_routine.jpg',
     );
   }
 
