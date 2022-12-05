@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sunmi/binding/challenge_auth_binding.dart';
 import 'package:sunmi/binding/sns_post_binding.dart';
+import 'package:sunmi/binding/sns_user_routine_binding.dart';
 
 import 'package:sunmi/binding/workout_binding.dart';
 import 'package:sunmi/ui/screen/add_person_info.dart';
@@ -44,7 +45,7 @@ class AppPages {
     GetPage(name: Routes.addInfo, page: ()=>AddInfo()),
     GetPage(name: Routes.snsPost, page: ()=> SNSPostPage(), binding: SNSPostBinding()),
     GetPage(name: Routes.searchInfo, page: ()=>SearchScreen(), binding: ChallengeInfoBinding()),
-    GetPage(name: Routes.userfollowpage, page: ()=>SNSFollowUser(), binding: WorkoutBinding()),
+    GetPage(name: Routes.userfollowpage, page: ()=>SNSFollowUser(), binding: SNSRoutineBinding(),),
     GetPage(name: Routes.pay, page: ()=>Payment()),
   ];
 }

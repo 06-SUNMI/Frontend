@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sunmi/controller/challenge_date_controller.dart';
 import 'package:sunmi/routes/app_pages.dart';
 import 'package:sunmi/controller/user_info_controller.dart';
 
@@ -53,6 +54,7 @@ class Payment extends StatelessWidget {
       
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) {
+        Get.find<ChallengeDateController>().challengePush();
         Get.toNamed(Routes.initial);
       },
     );
