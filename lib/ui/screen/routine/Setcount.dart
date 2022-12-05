@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sunmi/controller/calendar_controller.dart';
 import 'exercise_setcount.dart';
 import '/data/model/workout.dart';
 import 'package:get/get.dart';
@@ -7,12 +8,10 @@ import 'package:sunmi/controller/workout_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:sunmi/routes/app_pages.dart';
 import 'dart:convert';
-import 'package:get/get.dart';
 import 'package:sunmi/controller/user_info_controller.dart';
 
 
 class Setcount extends StatelessWidget {  
-
   Setcount();
 
   @override
@@ -69,7 +68,6 @@ class _SetPageState extends State<SetPage> {
                     _c = value!;
                   });
                 },
-
               ),
             ),
 
@@ -162,6 +160,7 @@ class _SetPageState extends State<SetPage> {
                             child: const Text('확인'),
                             onPressed: () {
                               Navigator.of(context).pop();
+                              Get.find<CalendarController>().onInit();
                               Get.toNamed(Routes.initial);
                             },
                           ),
@@ -184,6 +183,7 @@ class _SetPageState extends State<SetPage> {
                             child: const Text('확인'),
                             onPressed: () {
                               Navigator.of(context).pop();
+                              Get.find<CalendarController>().onInit();
                               Get.toNamed(Routes.initial);//Routes.initial)
                             },
                           ),
@@ -194,9 +194,7 @@ class _SetPageState extends State<SetPage> {
 
                 }
               },
-
             ),
-
           ],
         ),
       ),
