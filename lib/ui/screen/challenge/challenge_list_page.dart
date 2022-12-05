@@ -12,7 +12,7 @@ class ChallengeListPage extends GetView<ChallengeController> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text('챌린지 리스트 페이지'),
+        title: const Text('Every Health'),
       ),
       body: GetX<ChallengeController>(
         init: Get.find<ChallengeController>().getAll(),
