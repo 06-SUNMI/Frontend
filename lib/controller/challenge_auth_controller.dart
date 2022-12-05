@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 
 import 'package:sunmi/controller/calendar_controller.dart';
 import 'package:sunmi/controller/challenges_controller.dart';
+import 'package:sunmi/controller/user_info_controller.dart';
 import 'package:sunmi/data/model/routine_detail.dart';
 import 'package:sunmi/data/repository/challenge_auth_repository.dart';
 import 'package:sunmi/data/repository/routine_detail_repository.dart';
@@ -16,7 +17,8 @@ class ChallengeAuthController extends GetxController {
   final ChallengeAuthRepository challengeAuthRepository;
   final RoutineDetailRepository routineDetailRepository = RoutineDetailRepository();
 
-  RoutineDetail? todayRoutineDetail;
+  int? routineChallengeId;
+  int? memberRoutineId;
 
   final RxBool _isImageLoaded = false.obs;
   get isImageLoaded => _isImageLoaded.value;
@@ -33,25 +35,23 @@ class ChallengeAuthController extends GetxController {
   authChallenge() async {
     if(isImageLoaded){
       var dateString = await getImageDate();
-      print(dateString);
       DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString.toString());
-      print(imageDateOriginal);
       int  difference = DateTime.now().difference(imageDateOriginal).inDays;
-      print(difference);
       if(difference != 0) {
         print('photo is not for today');
         return -4;
       }
 
-      if(await getTodayRoutineDetail() == 0){
+      if(getTodayRoutineDetail() == false){
         return -1;
       }
       var response = await challengeAuthRepository.authChallenge(
-          todayRoutineDetail!.routineChallengeId,
-          todayRoutineDetail!.memberRoutineId,
+          routineChallengeId!,
+          memberRoutineId!,
           selectedImage);
       try {
-        if(response['status'] > 399 ) return -10;
+        print(response['message']);
+        return response;
       } catch(err){
         print(err);
       }
@@ -62,21 +62,17 @@ class ChallengeAuthController extends GetxController {
     }
   }
 
-  getTodayRoutineDetail() async {
+  getTodayRoutineDetail() {
     CalendarController calendarController = Get.find<CalendarController>();
-    List days = calendarController.days;
-    int todayRoutineId = -1;
-    for(var day in days){
-      if(calendarController.isToday(day['year'], day['month'], day['day'])){
-        todayRoutineId = day['routineId'].value;
-      }
+    var today = DateFormat('yyyy-M-d').format(DateTime.now());
+    print('today is $today');
+    routineChallengeId = calendarController.challengeRoutineList[today]['challengeRoutineId'];
+    memberRoutineId = calendarController.challengeRoutineList[today]['memberRoutineId'];
+    print(Get.find<UserInfoController>().userId);
+    if(routineChallengeId == null){
+      return false;
     }
-    print(todayRoutineId);
-    if(todayRoutineId == 0){
-      return todayRoutineId;
-    }
-    this.todayRoutineDetail = await routineDetailRepository.getById(todayRoutineId);
-    return todayRoutineId;
+    return true;
   }
 
   pickImage() async {
@@ -91,11 +87,8 @@ class ChallengeAuthController extends GetxController {
 
   getImageDate() async{
     var exif = await readExif();
-    print(exif['EXIF DateTimeOriginal']);
     String dateString = exif['EXIF DateTimeOriginal'].toString().substring(0,10);
-    print(dateString);
     DateTime imageDateOriginal = DateFormat('yyyy:MM:dd').parse(dateString);
-    print(imageDateOriginal);
     return dateString;
   }
 

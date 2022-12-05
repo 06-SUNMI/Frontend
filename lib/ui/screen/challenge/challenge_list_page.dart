@@ -15,7 +15,7 @@ class ChallengeListPage extends GetView<ChallengeController> {
         title: const Text('Every Health'),
       ),
       body: GetX<ChallengeController>(
-        init: Get.find<ChallengeController>().getAll(),
+        init: Get.find<ChallengeController>(),
         builder: (challengeController) {
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
