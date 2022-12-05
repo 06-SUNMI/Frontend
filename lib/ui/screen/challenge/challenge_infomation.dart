@@ -65,7 +65,7 @@ class ChallengeCheck extends StatelessWidget {
               color: Colors.white,
               height: 30, // 높이 설정
               padding: EdgeInsets.fromLTRB(0,0,25,0),
-              child: Text("기간 : $startdays  부터 시작, "+"4 주 동안 진행 ", style: TextStyle(fontSize: 12,fontFamily: 'Signatra',
+              child: Text("기간 : $startdays  부터 시작 ", style: TextStyle(fontSize: 12,fontFamily: 'Signatra',
                   fontWeight: FontWeight.bold),textAlign: TextAlign.end,),
             ),
             Container(
@@ -80,7 +80,7 @@ class ChallengeCheck extends StatelessWidget {
                   child:Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children : <Widget>[
-                      Image.asset('assets/images/challenge.png',fit: BoxFit.scaleDown),
+                      Image.asset('assets/images/challenge.jpg',fit: BoxFit.scaleDown),
                     ],
                   )
               ),

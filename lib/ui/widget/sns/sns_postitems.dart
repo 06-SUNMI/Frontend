@@ -1,37 +1,43 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:http/http.dart' as http;
 import 'package:sunmi/data/post.dart';
 
+import '../../../controller/sns_controller.dart';
 
 
-class PostItems extends StatefulWidget {
+class PostItems extends GetView<SnsController> {
+  const PostItems({super.key});
 
-  const PostItems({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<PostItems> createState() => _PostItemsState();
-}
-
-class _PostItemsState extends State<PostItems> {
-  bool temp =false;
   @override
   Widget build(BuildContext context) {
-
+    Get.lazyPut(() => SnsController());
+    //in= controller.counts() as int;
     int favindex = 0;
     int index = 0;
-
     List favicon = [
       favindex == index ? (Icon(Icons.favorite, color: Colors.black26))
           : Icon(Icons.favorite,color: Colors.red,)
     ];
 
-    return Column(
+    controller.onIniit();
+
+
+    //print(controller.info[0]);
+    //print(controller.info[1]);
+    for(int i =0; i<controller.info.length; i++){
+      if(controller.info[i]["memberProfilePhotoUrl"].toString()=='null'){
+        controller.info[i]["memberProfilePhotoUrl"]=controller.info[i]["snsImageOrVideoLinkList"].toString();//임시 이미지
+      }
+    }
+    return Obx(() =>Column(
+
         children: List.generate(
 
-          posts.length,
-              (index) {
+          controller.info.length, (index) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Column(
@@ -52,16 +58,16 @@ class _PostItemsState extends State<PostItems> {
                               width: 35,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
+
                                   image: DecorationImage(
-                                      image:
-                                      NetworkImage(posts[index]['profileImg']),
+                                      image:NetworkImage(controller.info[index]["memberProfilePhotoUrl"][0]),
                                       fit: BoxFit.cover)),
                             ),
                             SizedBox(
                               width: 10,
                             ),
                             Text(
-                              posts[index]['name'],
+                              controller.info[index]["memberName"],
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -85,7 +91,7 @@ class _PostItemsState extends State<PostItems> {
                     height: 400.0,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage(posts[index]['postImg']),
+                            image: NetworkImage(controller.info[index]["snsImageOrVideoLinkList"]),
                             fit: BoxFit.cover)),
                   ),
                   SizedBox(
@@ -102,13 +108,14 @@ class _PostItemsState extends State<PostItems> {
                             IconButton(
                               //icon: Icon(favicon[favindex]),
                              icon: Icon(Icons.favorite),
-                              color:  posts[index]['isLoved']==false? Colors.black26: Colors.redAccent,
+                              color: Colors.black26,
                               iconSize: 25,
                               onPressed: (){
-                                posts[index]['isLoved'] =!posts[index]['isLoved'];
-                                print("as");
+                                //color: controller.info[index]["favcheck"] ? 0 : Colors.black26: Colors.redAccent,
+                                favcheck( controller.info[index]["snsPostId"],  controller.info[index]["memberId"]);
+                                controller.increase(index);
                                 //favindex = 1;
-                                setState((){});
+
                               },
 
                             ),
@@ -143,36 +150,10 @@ class _PostItemsState extends State<PostItems> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: posts[index]['likedBy'] == null
-                                    ? ''
-                                    : posts[index]['likedBy'],
+                                text: '좋아요  ${controller.info[index]["snsLikesNum"]} 개',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 14),
-                              ),
-                              TextSpan(
-                                text:
-                                posts[index]['likedBy'] == null ? '' : '님 외 ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.black,
-                                    fontSize: 14),
-                              ),
-                              TextSpan(
-                                text: posts[index]['Likescount'],
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14),
-                              ),
-                              TextSpan(
-                                text: posts[index]['likedBy'] == null
-                                    ? ''
-                                    : '명이 좋아합니다',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.black,
                                     fontSize: 14),
                               ),
                             ],
@@ -185,14 +166,14 @@ class _PostItemsState extends State<PostItems> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: '${posts[index]['name']}',
+                                text: '${controller.info[index]["memberName"]}',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15),
                               ),
                               TextSpan(
-                                text: '${posts[index]['caption']}',
+                                text: '    ${controller.info[index]["snsContent"]}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.black,
@@ -201,33 +182,23 @@ class _PostItemsState extends State<PostItems> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "댓글 ${posts[index]['commentCount']}개 모두 보기",
-                          style: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15),
-                        ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Text(
-                          posts[index]['timeAgo'],
-                          style: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12),
-                        ),
                       ],
                     ),
                   )
                 ],
               ),
-            );
+              );
+
           },
-        ));
+        )
+    ),
+    );
   }
+}
+
+void favcheck(var snsPostId, var memberId) async {
+  String url = 'http://15.164.168.230:8080/sns/posts/2/likes/$snsPostId/$memberId';
+  http.Response _res = await http.post(
+    Uri.parse(url), headers: {"content-type": "application/json"},
+  );
 }

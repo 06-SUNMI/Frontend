@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/sns_post_controller.dart';
+import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
 import 'package:sunmi/ui/widget/sns/sns_post_file.dart';
+
+import '../../../controller/sns_controller.dart';
+import '../../../routes/app_pages.dart';
 
 class SNSPostPage extends GetView<SNSPostController>{
   @override
@@ -96,6 +100,7 @@ class SNSPostPage extends GetView<SNSPostController>{
             onPressed: (){
               Get.back();
               Get.back();
+              Get.find<SnsController>().onInit;
             },
             child: Text('확인'),)
         ],

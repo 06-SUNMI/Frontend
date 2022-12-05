@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/challenge_info_controller.dart';
 
+import 'package:sunmi/data/model/workout.dart';
+
 class ChallengeInfoRoutine extends GetView<ChallengeInfoController> {
   var challenges_data = Get.arguments["challenge"];
 
@@ -45,7 +47,7 @@ class ChallengeInfoRoutine extends GetView<ChallengeInfoController> {
                       Colors.white),
                       cells: <DataCell>[
                         DataCell(Text(controller.info[j]["date"].toString(),)),
-                        DataCell(Text(controller.info[j]["name"],))
+                        DataCell(Text(workoutNameTranslated[controller.info[j]["name"]].toString(),))
                       ]
                   ),
                 ],

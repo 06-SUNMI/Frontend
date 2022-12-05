@@ -39,15 +39,6 @@ class ChallengeInfoController extends GetxController{
     for(int i=0; i<Info['challengeRoutineDataList'].length; i++) {
       for (int j = 0; j < Info['challengeRoutineDataList'][i]['challengeRoutineContentDataList'].length; j++) {
         if (j == 0) {
-        /*  for(int k=0; k<workouts.length; k++){
-            print(workouts[k]);
-            if(workouts[k] == Info['challengeRoutineDataList'][i]['challengeRoutineContentDataList'][j]['challengeRoutineWorkoutName']) {
-              info.add({
-                "name": workoutTargets,
-                "date": (i + 1),
-              });
-              break;
-            }*/
             info.add({
               "name": Info['challengeRoutineDataList'][i]['challengeRoutineContentDataList'][j]['challengeRoutineWorkoutName'],
               "date": (i + 1),

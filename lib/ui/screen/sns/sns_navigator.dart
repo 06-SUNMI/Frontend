@@ -5,7 +5,7 @@ import 'package:sunmi/routes/app_pages.dart';
 import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
 
 import '../../../routes/app_pages.dart';
-
+import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:sunmi/ui/screen/routine/Setcount.dart';
 import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
@@ -84,72 +84,6 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
           ],
         ),
       );
-    } else if (pageindex == 1) {
-      return null;
-    } else if (pageindex == 2) {
-      return null;
-    } else if (pageindex == 3) {
-     /* return AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        title: const Text(
-          "likes",
-          style: TextStyle(color: Colors.white, fontSize: 25),
-        ),
-      );*/
-    } else if (pageindex == 4) {
-      return AppBar(
-        backgroundColor: Colors.black,
-        title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.lock,
-                  size: 18,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "bouziani.off",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Icon(Icons.keyboard_arrow_down),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-              /*  SvgPicture.asset(
-                  'assets/images/upload_icon.svg',
-                  height: 23,
-                ),*/
-
-                SizedBox(
-                  width: 20,
-                ),
-                /*SvgPicture.asset(
-                  'assets/images/drawer_icon.svg',
-                  height: 20,
-                  color: Colors.white,
-                ),*/
-                SizedBox(
-                  width: 5,
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-
-
     }
     AppBar(
       backgroundColor: Colors.purple[300],
