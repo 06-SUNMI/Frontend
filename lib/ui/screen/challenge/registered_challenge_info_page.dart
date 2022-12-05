@@ -14,7 +14,7 @@ class RegisteredChallengeInfoPage extends GetView<RegisteredChallengeInfoControl
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('등록한 챌린지 상세 조회 페이지'),
+        title: Text('Every Health'),
       ),
       body: GetX<RegisteredChallengeInfoController>(
         builder: (registeredChallengeInfoController){
