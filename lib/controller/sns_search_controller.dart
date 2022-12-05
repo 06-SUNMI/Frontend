@@ -12,6 +12,7 @@ class SearchController extends GetxController{
   RxList list = [].obs;
   RxInt counter = 0.obs;
   bool _isChecked = false;
+  late int userId;
   @override
   increase(var value) {
       return _isChecked = false;
@@ -39,6 +40,9 @@ class SearchController extends GetxController{
       });
     }
 
+  }
+  setId(int i){
+    userId = i;
   }
 
   gymgetSearch(String tea) async{

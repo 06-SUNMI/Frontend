@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/calendar_controller.dart';
 import 'package:sunmi/routes/app_pages.dart';
+import 'package:sunmi/data/model/workout.dart';
 
 
 class RoutineCalendar extends GetView<CalendarController>{
   Widget build(BuildContext context){ 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("루틴 페이지"),
       ),
       body: Obx(()=>SingleChildScrollView(
@@ -93,7 +95,7 @@ class RoutineCalendar extends GetView<CalendarController>{
                             //Get.toNamed(Routes.initial);
                         },
                         leading: controller.userRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineIsChecked"]==true ? Icon(Icons.check_box) :  Icon(Icons.check_box_outline_blank),
-                        title: Text(controller.userRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutName"]),
+                        title: Text(workoutNameTranslated[controller.userRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutName"]].toString()),
                         onLongPress: () {
                             showDialog(context: context, builder: (BuildContext context){
                               return AlertDialog(
@@ -141,7 +143,7 @@ class RoutineCalendar extends GetView<CalendarController>{
                     for(int i=0;i<controller.getChallengeRoutineCount();i++)
                       ListTile(
                         leading: controller.challengeRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineIsChecked"]==true ? Icon(Icons.check_box) :  Icon(Icons.check_box_outline_blank),
-                        title: Text(controller.challengeRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutName"]),
+                        title: Text(workoutNameTranslated[controller.challengeRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutName"]].toString()),
                         onTap: () {
                           controller.pickChallengeWorkout(i);
                           //Get.toNamed(Routes.addInfo);

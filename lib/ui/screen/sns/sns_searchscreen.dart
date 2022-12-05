@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
+import 'package:sunmi/controller/sns_user_routine_info_controller.dart';
 
 
 import '../../../controller/sns_search_controller.dart';
@@ -118,6 +119,7 @@ class SearchScreen extends GetView<SearchController> {
                                   title: Text(controller.list[i]["name"].toString()),
                                   tileColor: Colors.purple[50],
                                   onTap: () {
+                                    controller.setId(controller.list[i]["id"]);
                                     Get.toNamed(Routes.userfollowpage, arguments: {'name': controller.list[i]["name"].toString(), 'id':  controller.list[i]["id"],
                                       'gymName' :  controller.list[i]["gymName"], 'customProfileImageUrl' :  controller.list[i]["customProfileImageUrl"]} );
                                   },
