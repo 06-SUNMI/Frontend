@@ -1,3 +1,4 @@
+
 List posts = [
   {
     "id": 1,
@@ -40,7 +41,7 @@ List posts = [
     "commentCount": "60",
     "likedBy": "sonitakhoun",
     "timeAgo": "3일 전",
-    "Likescount": "15,7k"
+    "Likescount": "좋아요 7,754개 "
   },
   {
     "id": 4,
@@ -84,7 +85,7 @@ List posts = [
     "commentCount": "10",
     "likedBy": "sonitakhoun",
     "timeAgo": "1일 전",
-    "Likescount": "157,754"
+    "Likescount": "좋아요 754개 "
   },
   {
     "id": 7,

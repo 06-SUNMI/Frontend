@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 
 class StoryItem extends StatelessWidget {
@@ -9,12 +12,14 @@ class StoryItem extends StatelessWidget {
   }) : super(key: key);
   final String storyname; //storys[index]['image']
   final String storyimg; //storys[index]['name'],
-
+  //getpost();
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 10.0),
+
+        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 10.0),
       child: Column(
+
         children: [
           Container(
             height: 67,
