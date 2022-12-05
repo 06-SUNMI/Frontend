@@ -35,7 +35,7 @@ class RegisteredChallenge {
       participatedNum: json['participationNum'],
       numPerWeek: json['numPerWeek'],
       challengeParticipantStatus: json['challengeParticipantStatus'],
-      imagePath: 'assets/images/burpee.png',
+      imagePath: 'assets/images/challenge_routine.jpg',
     );
   }
 

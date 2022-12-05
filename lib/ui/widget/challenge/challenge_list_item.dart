@@ -33,11 +33,8 @@ Widget challengeListItems(context, index) {
 
 Widget registeredChallengeItems(context, index) {
   final challengeController = Get.find<ChallengeController>();
-
   return InkWell(
-    onTap: ()=>challengeController.registeredChallengeInfo(index),
     child: Row(
-      mainAxisSize: MainAxisSize.max,
       children: [
         Image.asset(
           challengeController.registeredChallenges[index].imagePath,
@@ -56,5 +53,6 @@ Widget registeredChallengeItems(context, index) {
           ),
         )],
     ),
+    onTap: ()=>challengeController.registeredChallengeInfo(index),
   );
 }
