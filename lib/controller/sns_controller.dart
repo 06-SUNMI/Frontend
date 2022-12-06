@@ -35,7 +35,7 @@ class SnsController extends GetxController {
         "snsContent": Info[i]['snsContent'],
         "snsLikesNum": Info[i]['snsLikesNum'],
         "memberProfilePhotoUrl" : 'assets/images/eh.png',
-        "favcheck" : "0",
+        "favcheck" : false.obs,
         "snsImageOrVideoLinkList": Info[i]['snsImageOrVideoLinkList'][0],
       });
       print(info[i]);
@@ -50,7 +50,11 @@ class SnsController extends GetxController {
    // return info.length;
  // }
   void increase(int index) {
-    info[index]["snsLikesNum"]=1;
-    update();
+    if(info[index]["favcheck"]==true){
+      info[index]["favcheck"].value = false;
+    }
+    else {
+      info[index]["favcheck"].value = true;
+    }
   }
 }

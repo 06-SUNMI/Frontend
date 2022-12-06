@@ -108,10 +108,10 @@ class PostItems extends GetView<SnsController> {
                             IconButton(
                               //icon: Icon(favicon[favindex]),
                              icon: Icon(Icons.favorite),
-                              color: Colors.black26,
+                              color: controller.info[index]["favcheck"]==true? Colors.red: Colors.black26,
                               iconSize: 25,
                               onPressed: (){
-                                //color: controller.info[index]["favcheck"] ? 0 : Colors.black26: Colors.redAccent,
+                               // color: controller.info[index]["favcheck"] ? 0 : Colors.black26: Colors.redAccent,
                                 favcheck( controller.info[index]["snsPostId"],  controller.info[index]["memberId"]);
                                 controller.increase(index);
                                 //favindex = 1;
@@ -149,13 +149,13 @@ class PostItems extends GetView<SnsController> {
                         RichText(
                           text: TextSpan(
                             children: [
-                              TextSpan(
+                             /* TextSpan(
                                 text: '좋아요  ${controller.info[index]["snsLikesNum"]} 개',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 14),
-                              ),
+                              ),*/
                             ],
                           ),
                         ),
