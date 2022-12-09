@@ -8,9 +8,9 @@ class UserInfoController extends GetxController{
   int? weight;
   String? gymName;
   int? userId;
-  String? name;
+  late String name;
   String? email;
-  Image? image;  
+  late String image;  
   int? socialId;
   String? loginAt;
   String? emailAccount;
@@ -19,8 +19,8 @@ class UserInfoController extends GetxController{
     socialId = kakaoId;
     String url = "http://15.164.168.230:8080/members";
     var response = await http.get(Uri.parse(url));
-    var responseBody = response.body;
-    var userList = jsonDecode(responseBody);//userList = 소셜 아이디, 소셜 종류
+    var responseBody = response.bodyBytes;
+    var userList = jsonDecode(utf8.decode(responseBody));//userList = 소셜 아이디, 소셜 종류
 
     for(int i=0;i<userList.length;i++){
       print(userList[i]["socialId"]);
@@ -37,8 +37,8 @@ class UserInfoController extends GetxController{
   getUserData() async{
     String url = "http://15.164.168.230:8080/members/${userId}";
     var response = await http.get(Uri.parse(url));
-    var responseBody = response.body;
-    var userData = jsonDecode(responseBody);
+    var responseBody = response.bodyBytes;
+    var userData = jsonDecode(utf8.decode(responseBody));
 
     height = userData["memberHeight"];
     weight = userData["memberWeight"];
@@ -52,6 +52,9 @@ class UserInfoController extends GetxController{
   }
   setMail(var mail){
     emailAccount = mail;
+  }
+  setImage(var i){
+    image = i;
   }
 
   setUserData(var heightInput, var weightInput, var gymInput) async{

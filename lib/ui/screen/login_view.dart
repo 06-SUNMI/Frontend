@@ -28,10 +28,12 @@ class LoginPage extends StatelessWidget {
                         if(await controller.isNew(mainLogin.user!.id)==true){
                           controller.setName(mainLogin.user!.properties!["nickname"]);
                           controller.setMail(mainLogin.user!.kakaoAccount!.email);
+                          controller.setImage(mainLogin.user!.properties!["profile_image"]);
                           Get.toNamed(Routes.addInfo);
                         }
                         else{
                           controller.getUserData();
+                          controller.setImage(mainLogin.user!.properties!["profile_image"]);
                           Get.toNamed(Routes.initial);
                         }
                       }, 

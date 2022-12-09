@@ -10,8 +10,35 @@ class RoutineCalendar extends GetView<CalendarController>{
   Widget build(BuildContext context){ 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
         title: Text("루틴 페이지"),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text("Username"), 
+              accountEmail: Text("Email"),
+              currentAccountPicture: CircleAvatar(backgroundColor: Colors.white, backgroundImage: AssetImage('assets/images/eh.png'),
+              ),  
+            ),
+            ListTile(
+              leading: Icon(Icons.people),
+              title: Text("개인정보 수정"),
+              onTap: () {
+                Get.toNamed(Routes.userEdit);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text("로그아웃"),
+              onTap: () {
+                
+              },
+            )
+          ],
+        ),
       ),
       body: Obx(()=>SingleChildScrollView(
         child: Column(
@@ -97,6 +124,9 @@ class RoutineCalendar extends GetView<CalendarController>{
                         leading: controller.userRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineIsChecked"]==true ? Icon(Icons.check_box) :  Icon(Icons.check_box_outline_blank),
                         title: Text(workoutNameTranslated[controller.userRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutName"]].toString()),
                         onLongPress: () {
+                          TextEditingController setController = TextEditingController();
+                          TextEditingController countController = TextEditingController();
+                          TextEditingController timeController = TextEditingController();
                             showDialog(context: context, builder: (BuildContext context){
                               return AlertDialog(
                                 actions: [
@@ -105,11 +135,65 @@ class RoutineCalendar extends GetView<CalendarController>{
                                     showDialog(context: context, builder: (BuildContext context){
                                       return AlertDialog(
                                         title: Text("EDIT WORKOUT"),
+                                        content: controller.userRoutineList[controller.pickString]["memberRoutineData"]["memberRoutineContentList"][i]["memberRoutineWorkoutTime"]!=null?
+                                          Column(
+                                            children: [
+                                              TextField(
+                                              controller: setController,
+                                              decoration: InputDecoration(
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                  borderSide: BorderSide(width: 1, color: Colors.grey),
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                  borderSide: BorderSide(width: 1, color: Colors.purple),
+                                                ),
+                                                hintText: '세트',
+                                              ),
+                                              keyboardType: TextInputType.number,
+                                            ),
+                                            TextField(
+                                              controller: countController,
+                                              decoration: InputDecoration(
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                  borderSide: BorderSide(width: 1, color: Colors.grey),
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                  borderSide: BorderSide(width: 1, color: Colors.purple),
+                                                ),
+                                                hintText: '횟수',
+                                              ),
+                                              keyboardType: TextInputType.number,
+                                            ),
+                                            ],
+                                          ):
+                                          Column(
+                                            children: [
+                                              TextField(
+                                              controller: timeController,
+                                              decoration: InputDecoration(
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                  borderSide: BorderSide(width: 1, color: Colors.grey),
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                  borderSide: BorderSide(width: 1, color: Colors.purple),
+                                                ),
+                                                hintText: '시간',
+                                              ),
+                                              keyboardType: TextInputType.number,
+                                            ),
+                                            ],
+                                          ),
                                         
                                         actions: [
                                           TextButton(onPressed: (){
                                             print("수정");
-                                            //controller.editWorkout(i, controller.dayTemp);
+                                            //controller.editWorkout(i);
                                             Get.back();
                                           }, child: Text("확인")),
                                         ],
