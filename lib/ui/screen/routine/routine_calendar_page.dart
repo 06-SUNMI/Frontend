@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/controller/calendar_controller.dart';
+import 'package:sunmi/controller/user_info_controller.dart';
 import 'package:sunmi/routes/app_pages.dart';
 import 'package:sunmi/data/model/workout.dart';
 import 'package:sunmi/ui/screen/login_view.dart';
@@ -9,20 +10,26 @@ import 'package:sunmi/ui/screen/login_view.dart';
 
 class RoutineCalendar extends GetView<CalendarController>{
   Widget build(BuildContext context){ 
+    Get.put(UserInfoController());
+
     final mainLogin = MainLogin(Kakao());
+    
     return Scaffold(
       appBar: AppBar(
         //automaticallyImplyLeading: false,
         title: Text("루틴 페이지"),
       ),
-      drawer: Drawer(
+      drawer: 
+       GetBuilder<UserInfoController>(
+                  builder: (userController) {
+                    return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text("Username"), 
-              accountEmail: Text("Email"),
-              currentAccountPicture: CircleAvatar(backgroundColor: Colors.white, backgroundImage: AssetImage('assets/images/eh.png'),
+              accountName: Text(userController.name), 
+              accountEmail: Text(userController.point.toString()+" Point"),
+              currentAccountPicture: CircleAvatar(backgroundColor: Colors.white, backgroundImage: NetworkImage(userController.image),
               ),  
             ),
             ListTile(
@@ -42,7 +49,7 @@ class RoutineCalendar extends GetView<CalendarController>{
             )
           ],
         ),
-      ),
+      );},),
       body: Obx(()=>SingleChildScrollView(
         child: Column(
           children: [

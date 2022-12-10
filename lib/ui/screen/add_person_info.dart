@@ -72,13 +72,56 @@ class AddInfo extends GetView<UserInfoController> {
                   ),
                   keyboardType: TextInputType.text,
                 ),
+                TextButton(onPressed: (){
+                          if(gymController.text==""){
+                            showDialog(context: context, builder: (BuildContext context){
+                                  return AlertDialog(         
+                                    content: Text("검색할 장소를 입력하세요"),  
+                                    actions: [
+                                      TextButton(onPressed: (){
+                                        Get.back(); 
+                                      }, child: Text("확인")),
+                                    ],
+                                  );
+                                });
+                          }else{
+                            controller.searchGym(gymController.text);
+                          }
+                        }, child: Text("검색"),),
                 Padding(padding: EdgeInsets.only(top: 20.0),),
+
+                Obx(()=>
+                    SingleChildScrollView(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              for(int i=0;i<controller.gymList.length;i++)
+                                ListTile(
+                                  leading: controller.isGymSelected == 0 ? Icon(Icons.check_box_outline_blank): Icon(Icons.check_box),
+                                  subtitle: Text(controller.gymList[i]["gymAddress"]),
+                                  title: Text(controller.gymList[i]["gymName"]), 
+                                  onTap: () {
+                                    controller.setGym(i);
+                                  },
+                                ),
+                            ],
+                          ),
+                        )
+                          
+                      ),
+                    ),
+                    ), 
 
                 
                  
                 TextButton(onPressed: (){
                   if(heightController.text!=""&& weightController.text!=""&& controller.isGymSelected==1){
-                    //controller.setUserData(heightController.text, weightController.text, gymController.text);
+                    controller.setUserData(heightController.text, weightController.text);
                     Get.toNamed(Routes.initial);
                   }
                   else if(controller.isGymSelected==1){

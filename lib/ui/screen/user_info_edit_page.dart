@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sunmi/controller/user_info_controller.dart';
 
 import '../../routes/app_pages.dart';
@@ -55,6 +58,9 @@ class UserInfoEditPage extends GetView<UserInfoController> {
                   ),
                 ),
               ),
+              TextButton(onPressed: (){
+                controller.pickImage();
+              }, child: Text("사진 변경")),
               
               Container(
                 margin: EdgeInsets.all(20.0),
@@ -169,10 +175,8 @@ class UserInfoEditPage extends GetView<UserInfoController> {
               ),
               TextButton(onPressed: (){
                 if(heightController.text!=""&& weightController.text!=""&& controller.isGymSelected==1){
-                  //controller.setUserData(heightController.text, weightController.text, gymController.text);
-                  print("height: " + heightController.text);
-                  print(weightController.text);
-                  print(gymController.text);
+                  print("putuserData");
+                  //controller.putUserData(heightController.text, weightController.text);
                   Get.toNamed(Routes.initial);
                 }
                 else if(controller.isGymSelected==1){
