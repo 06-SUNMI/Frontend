@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:sunmi/controller/calendar_controller.dart';
 import 'package:sunmi/controller/user_info_controller.dart';
 
 class ChallengeDateController extends GetxController{
@@ -77,5 +78,6 @@ class ChallengeDateController extends GetxController{
   challengePush() async{
     String url = "http://15.164.168.230:8080/members/${Get.find<UserInfoController>().userId}/challenges/${challengeId}";
     await http.post(Uri.parse(url), headers: {"content-type": "application/json"}, body: jsonEncode(selectDays));
+    Get.find<CalendarController>().onInit();
   }
 }

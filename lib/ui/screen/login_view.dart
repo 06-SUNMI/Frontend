@@ -5,7 +5,7 @@ import 'package:sunmi/routes/app_pages.dart';
 import 'package:sunmi/controller/user_info_controller.dart';
 
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<UserInfoController> {
   const LoginPage({super.key});
   
   @override
@@ -20,28 +20,26 @@ class LoginPage extends StatelessWidget {
               Center(
                 child: Image(image: AssetImage("assets/images/eh.png")),
               ),
-               GetBuilder<UserInfoController>(
-                  builder: (controller) {
-                    return TextButton(onPressed: () async{
-                        await mainLogin.login();
-                        print(mainLogin.user);
-                        if(await controller.isNew(mainLogin.user!.id)==true){
-                          controller.setName(mainLogin.user!.properties!["nickname"]);
-                          controller.setMail(mainLogin.user!.kakaoAccount!.email);
-                          controller.setImage(mainLogin.user!.properties!["profile_image"]);
-                          Get.toNamed(Routes.addInfo);
-                        }
-                        else{
-                          controller.getUserData();
-                          controller.setImage(mainLogin.user!.properties!["profile_image"]);
-                          Get.toNamed(Routes.initial);
-                        }
-                      }, 
-                        child: Image(image: AssetImage("assets/images/kakao_login_medium_narrow.png"),
-                      ),
-                    );
+              TextButton(onPressed: () async{
+                  await mainLogin.login();
+                  if(await controller.isNew(mainLogin.user!.id)==true){
+                    controller.setName(mainLogin.user!.properties!["nickname"]);
+                    controller.setMail(mainLogin.user!.kakaoAccount!.email);
+                    controller.setImage(mainLogin.user!.properties!["profile_image"]);
+                    Get.toNamed(Routes.addInfo);
                   }
-               ),
+                  else{
+                    controller.getUserData();
+                    //controller.setImage(mainLogin.user!.properties!["profile_image"]);
+
+                    Get.toNamed(Routes.initial);
+                  }
+                }, 
+                  child: Image(image: AssetImage("assets/images/kakao_login_medium_narrow.png"),
+                ),
+              ),
+                  
+               
             ],
           )
     );
