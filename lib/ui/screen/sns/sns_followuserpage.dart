@@ -13,6 +13,9 @@ import 'package:sunmi/ui/screen/sns/sns_searchscreen.dart';
 import 'package:sunmi/controller/sns_user_routine_info_controller.dart';
 import 'package:sunmi/data/model/workout.dart';
 
+import '../../../controller/sns_search_controller.dart';
+import '../../../controller/user_info_controller.dart';
+
 
 class SNSFollowUser extends GetView<SNSRoutineController> {
   SNSFollowUser({Key? key}) : super(key: key);
@@ -20,16 +23,15 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
   var userName=Get.arguments["name"];
   var gymName=Get.arguments["gymName"];
   var userimg=Get.arguments["customProfileImageUrl"];
+  var Id=Get.arguments["id"];
+  int? userId = Get.find<UserInfoController>().userId;
 
   @override
   Widget build(BuildContext context) {
-    /*int? userid=controller.userId;
-    Future<bool> checkinuser = getfollow(userid!);
-
-    if(userimg=='null'){
-      userimg='assets/images/eh.png';//임시 이미지
-    }
-*/
+    Get.lazyPut(() => UserInfoController());
+    controller.onInit();
+  //0
+    print(userId);
     return Scaffold(
       appBar: AppBar(
         title: Text("유저 조회"),
@@ -107,10 +109,10 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
 
                   ],
                 ),
-                Container(
+                if(controller.getfollow(userId!,Id)==0)...[
+                  Container(
                     padding: const EdgeInsets.only(left: 50, bottom: 5),
                     child: ElevatedButton(
-
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple[100],
                           minimumSize: const Size(60, 20),
@@ -125,11 +127,11 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
                         child: const Text('팔로우'),
                         onPressed: () =>
                         {
-                          
+                          controller.postRequests(userId,Id),
                         }
                     ),
                   ),
-                
+                ],
               ],
             ),
             Container(//요일 표시
@@ -160,7 +162,7 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
                   for (var i = 0; i < controller.days.length; i++)
                   InkWell(
                     onTap: () => controller.pickDate(i),
-                    child : Container(     
+                    child : Container(
                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                       width: 40,
                       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
@@ -232,22 +234,4 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
   }
 
 }
-Future<bool> getfollow(int userid) async {
-  var Info;
-  var url = 'http://15.164.168.230:8080/sns/members/$userid/follow-members';
-  final response = await http.get(Uri.parse((url)));
-  Info = jsonDecode(response.body);
-  for(int i=0; i<Info.length; i++){
-    if(Info[i] == userid){
-      print("안받아짐");
-      return false;
-    }
-  }
-  return true;
-}
-void _postRequests(var id, int userid) async {
-    String url = 'http://15.164.168.230:8080/sns/follow/$id/$userid';
-    http.Response _res = await http.post(
-        Uri.parse(url), headers: {"content-type": "application/json"},
-    );
-}
+

@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 class SearchController extends GetxController{
 
   static SearchController get to => Get.find();
+
   var Info;
   RxList list = [].obs;
   RxInt counter = 0.obs;

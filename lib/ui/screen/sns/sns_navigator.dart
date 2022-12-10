@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sunmi/routes/app_pages.dart';
+import 'package:sunmi/ui/screen/sns/sns_account_screen.dart';
 
 import 'package:sunmi/ui/screen/sns/sns_home_screen.dart';
 
@@ -32,10 +33,6 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
   Widget getbody() {
     List<Widget> Screens = [
       HomeScreen(),
-      /*    SearchScreen(),
-      ReelScreen(),
-      LikesScreen(),
-      AccountScreen(),*/
     ];
     return IndexedStack(
       index: pageindex,
@@ -68,7 +65,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
 
                 ),
                 IconButton(
-                  onPressed: (){},
+                  onPressed: () => Get.toNamed(Routes.accountPage),
                   icon: Icon(Icons.person_outline),
                   color: Colors.white,
                   iconSize: 25,
