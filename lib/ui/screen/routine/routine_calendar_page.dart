@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:sunmi/controller/calendar_controller.dart';
 import 'package:sunmi/routes/app_pages.dart';
 import 'package:sunmi/data/model/workout.dart';
+import 'package:sunmi/ui/screen/login_view.dart';
 
 
 class RoutineCalendar extends GetView<CalendarController>{
   Widget build(BuildContext context){ 
+    final mainLogin = MainLogin(Kakao());
     return Scaffold(
       appBar: AppBar(
         //automaticallyImplyLeading: false,
@@ -33,8 +35,9 @@ class RoutineCalendar extends GetView<CalendarController>{
             ListTile(
               leading: Icon(Icons.logout),
               title: Text("로그아웃"),
-              onTap: () {
-                
+              onTap: () async{
+                await mainLogin.logout();
+                Get.toNamed(Routes.login);
               },
             )
           ],

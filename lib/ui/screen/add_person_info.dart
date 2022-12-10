@@ -5,7 +5,7 @@ import 'package:sunmi/controller/user_info_controller.dart';
 import 'package:sunmi/routes/app_pages.dart';
 
 
-class AddInfo extends StatelessWidget {
+class AddInfo extends GetView<UserInfoController> {
   const AddInfo({super.key});
 
   @override
@@ -74,31 +74,38 @@ class AddInfo extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.only(top: 20.0),),
 
-                GetBuilder<UserInfoController>( 
-                  builder: (controller) {
-                    return TextButton(
-                      child: Text('확인'),
-                      onPressed: () {
-                        if(heightController.text!=null&& weightController.text!=null&& gymController.text!=null){
-                          controller.setUserData(heightController.text, weightController.text, gymController.text);
-                          Get.toNamed(Routes.initial);
-                        }
-                        else{
-                          showDialog(context: context, builder: (BuildContext context){
-                              return AlertDialog(         
-                                content: Text("모두 입력하세요"),  
-                                actions: [
-                                  TextButton(onPressed: (){
-                                    Get.back(); 
-                                  }, child: Text("확인")),
-                                ],
-                              );
-                            });
-                        }
-                      },
-                   );
-                  },
-                ),
+                
+                 
+                TextButton(onPressed: (){
+                  if(heightController.text!=""&& weightController.text!=""&& controller.isGymSelected==1){
+                    //controller.setUserData(heightController.text, weightController.text, gymController.text);
+                    Get.toNamed(Routes.initial);
+                  }
+                  else if(controller.isGymSelected==1){
+                    showDialog(context: context, builder: (BuildContext context){
+                        return AlertDialog(         
+                          content: Text("모두 입력하세요"),  
+                          actions: [
+                            TextButton(onPressed: (){
+                              Get.back(); 
+                            }, child: Text("확인")),
+                          ],
+                        );
+                      });
+                  }
+                  else{
+                    showDialog(context: context, builder: (BuildContext context){
+                        return AlertDialog(         
+                          content: Text("헬스장을 선택하세요"),  
+                          actions: [
+                            TextButton(onPressed: (){
+                              Get.back(); 
+                            }, child: Text("확인")),
+                          ],
+                        );
+                      });
+                  }
+                }, child: Text("확인"),),
               ],
             ),
           ),
