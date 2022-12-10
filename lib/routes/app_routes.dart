@@ -19,5 +19,6 @@ abstract class Routes{
    static const pay = '/pay';
    static const snsPage = '/PostItems';
    static const userEdit = '/user_info_edit';
+   static const accountPage = "/AccountScreen";
    //static const calendar = '/calendar';
 }

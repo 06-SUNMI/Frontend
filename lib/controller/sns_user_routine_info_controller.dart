@@ -190,4 +190,28 @@ class SNSRoutineController extends GetxController {
 
   }
 
+
+
+   getfollow(int userid,id) async {
+    var Info;
+    var url = 'http://15.164.168.230:8080/sns/members/$userid/follow-members';
+    final response = await http.get(Uri.parse((url)));
+    Info = jsonDecode(response.body);
+    int ck=0;
+    print(userid);print(id);
+    for(int i=0; i<Info.length; i++){
+      if(Info[i].toString() == id){
+        ck=1;
+        return ck;
+      }
+    }
+    if(ck==0) return ck;
+  }
+  void postRequests(var id, int userid) async {
+    String url = 'http://15.164.168.230:8080/sns/follow/$id/$userid';
+    http.Response _res = await http.post(
+      Uri.parse(url), headers: {"content-type": "application/json"},
+    );
+  }
+
 }

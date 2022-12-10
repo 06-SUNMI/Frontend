@@ -79,8 +79,8 @@ class UserInfoController extends GetxController{
   setUserId() async{
      String url = "http://15.164.168.230:8080/members";
     var response = await http.get(Uri.parse(url));
-    var responseBody = response.body;
-    var userList = jsonDecode(responseBody);//userList = 소셜 아이디, 소셜 종류
+    var responseBody = response.bodyBytes;
+    var userList = jsonDecode(utf8.decode(responseBody));//userList = 소셜 아이디, 소셜 종류
 
     for(int i=0;i<userList.length;i++){
       if(userList[i]["socialId"]!=null){
