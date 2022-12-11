@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
+import 'package:sunmi/controller/sns_search_controller.dart';
 
 import '../../../controller/sns_samegym_controller.dart';
 import '../../../routes/app_pages.dart';
@@ -25,6 +26,7 @@ class StoryItem extends GetView<SnsgymController> {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => SnsgymController());
+    Get.lazyPut(()=>SearchController());
     return Padding(
 
         padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 10.0),
@@ -56,6 +58,7 @@ class StoryItem extends GetView<SnsgymController> {
                         image: NetworkImage(storyimg), fit: BoxFit.cover)),
                   child: InkWell(
                     onTap: () {
+                        Get.find<SearchController>().userId = controller.info[num]["memberId"];
                         Get.toNamed(Routes.userfollowpage, arguments: {'name': "$storyname", 'id':  controller.info[num]["memberId"],
                         'gymName' :  controller.info[num]["memberRegisteredGymName"], 'customProfileImageUrl' :  controller.info[num]["customProfileImageUrl"]} );
                   },
