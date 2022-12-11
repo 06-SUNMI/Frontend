@@ -46,7 +46,7 @@ class UserInfoEditPage extends GetView<UserInfoController> {
                       Padding(padding: EdgeInsets.only(left: 20.0),),
                       CircleAvatar(
                         radius: 40.0,
-                        child :ClipOval(child: Image.network(controller.image),),
+                        child :ClipOval(child: Image.network(controller.image!),),
                       ),
                       Padding(padding: EdgeInsets.only(left: 30.0),),
                       Column(

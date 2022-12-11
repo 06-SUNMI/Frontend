@@ -119,7 +119,7 @@ class SearchScreen extends GetView<SearchController> {
                                   title: Text(controller.list[i]["name"].toString()),
                                   tileColor: Colors.purple[50],
                                   onTap: () {
-                                    controller.setId(controller.list[i]["id"]);
+                             //       controller.setId(controller.list[i]["id"]);
                                     Get.toNamed(Routes.userfollowpage, arguments: {'name': controller.list[i]["name"].toString(), 'id':  controller.list[i]["id"],
                                       'gymName' :  controller.list[i]["gymName"], 'customProfileImageUrl' :  controller.list[i]["customProfileImageUrl"]} );
                                   },

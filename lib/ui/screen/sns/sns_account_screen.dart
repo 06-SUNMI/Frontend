@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:sunmi/ui/screen/sns/sns_follower.dart';
 
 import '../../../controller/sns_post_controller.dart';
 import '../../../controller/sns_search_controller.dart';
+import '../../../controller/sns_user_routine_info_controller.dart';
 import '../../../controller/user_info_controller.dart';
 import '../../../data/storys.dart';
 import '../../../routes/app_pages.dart';
@@ -45,8 +47,15 @@ class ProfileHeader extends GetView<UserInfoController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(()=>SearchController());
+   // Get.lazyPut(()=>SearchController());
     Get.lazyPut(() => UserInfoController());
+    Get.lazyPut(() => SNSRoutineController());
+    dynamic flowercount = 0;
+
+    flowercount=Get.find<SNSRoutineController>().userpagegetfollow(controller.userId!);
+   // userpagegetfollow();
+    print("flowercount");
+    print(flowercount);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
@@ -92,30 +101,34 @@ class ProfileHeader extends GetView<UserInfoController> {
                     ),
                 Row(
                   children: [
-
-                    Text(
-                      '팔로워',
+                    TextButton( onPressed: () => Get.toNamed(Routes.followerPage),
+                      child: Text( flowercount.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.white,
                           fontSize: 14),
+                      ),
                     ),
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
+                    TextButton( onPressed: () => Get.toNamed(Routes.followerPage),
+                      child: Text(
                       '   131',
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                           fontSize: 18),
+                      ),
                     ),
-                    Text(
+                    TextButton( onPressed: () { },
+                      child: Text(
                       '   팔로잉',
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.white,
                           fontSize: 14),
+                      ),
                     ),
                     SizedBox(
                       width: 5,

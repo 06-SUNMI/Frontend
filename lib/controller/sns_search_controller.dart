@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:sunmi/controller/user_info_controller.dart';
 
 
 
 class SearchController extends GetxController{
 
   static SearchController get to => Get.find();
+  String gymId = Get.find<UserInfoController>().gymId;
 
   var Info;
   RxList list = [].obs;
@@ -34,7 +36,7 @@ class SearchController extends GetxController{
     for(int i=0; i<Info.length; i++) {
       list.add({
         //"id" : Info['id'][i]o,
-        "id": Info[i]['id'],
+        "id": Info[i]['memberId'],
         "name": Info[i]['name'],
         "gymName" : Info[i]['gymName'],
         "customProfileImageUrl" : Info[i]['customProfileImageUrl'],
@@ -54,15 +56,16 @@ class SearchController extends GetxController{
     final response = await http.get(url);
     //Info = jsonDecode(response.body);
     Info = jsonDecode(utf8.decode(response.bodyBytes));
-
+    print(Info);
     for(int i=0; i<Info.length; i++) {
-      String gym = Info[i]['gymName'];
-      if(gym == 'OO 헬스장') {
+      String gym = Info[i]['gymId'];
+      if(gym == gymId) {
         list.add({
           //"id" : Info['id'][i]o,
-          "id": Info[i]['id'],
+          "id": Info[i]['memberId'],
           "name": Info[i]['name'],
           "gymName": Info[i]['gymName'],
+          "gymId" : Info[i]['gymId'],
           "customProfileImageUrl": Info[i]['customProfileImageUrl'],
         });
       }

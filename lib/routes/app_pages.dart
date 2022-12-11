@@ -23,6 +23,7 @@ import '../data/model/workout.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_infomation.dart';
 import 'package:sunmi/binding/registered_challenge_binding.dart';
 import '../ui/screen/sns/sns_account_screen.dart';
+import '../ui/screen/sns/sns_follower.dart';
 import '../ui/screen/sns/sns_followuserpage.dart';
 import '../ui/screen/sns/sns_searchscreen.dart';
 import '../ui/widget/sns/sns_postitems.dart';
@@ -53,7 +54,8 @@ class AppPages {
     GetPage(name: Routes.pay, page: ()=>Payment()),
     GetPage(name: Routes.snsPage, page: ()=>PostItems(), binding: SNSBinding()),
     GetPage(name: Routes.userEdit, page: ()=>UserInfoEditPage()),
-    GetPage(name: Routes.accountPage, page: ()=>AccountScreen())
+    GetPage(name: Routes.accountPage, page: ()=>AccountScreen()),
+    GetPage(name: Routes.followerPage, page: ()=>SNSfollower())
   ];
 }
 

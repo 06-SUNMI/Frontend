@@ -15,7 +15,7 @@ class UserInfoController extends GetxController{
   int? userId;
   late String name;
   String? email;
-  late String image;  
+  late String image;
   int? socialId;
   String? loginAt;
   String? emailAccount;
