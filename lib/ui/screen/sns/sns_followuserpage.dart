@@ -24,14 +24,17 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
   var gymName=Get.arguments["gymName"];
   var userimg=Get.arguments["customProfileImageUrl"];
   var Id=Get.arguments["id"];
-  int? userId = Get.find<UserInfoController>().userId;
+
+//  int userId = ;
 
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => UserInfoController());
+    Get.lazyPut(()=>SearchController());
+    int userId=Get.find<UserInfoController>().userId!;
     controller.onInit();
-  //0
-    print(userId);
+    dynamic ck=controller.getfollow(userId,Id);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("유저 조회"),
@@ -109,7 +112,8 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
 
                   ],
                 ),
-                if(controller.getfollow(userId!,Id)==0)...[
+
+                if(ck==0)...[
                   Container(
                     padding: const EdgeInsets.only(left: 50, bottom: 5),
                     child: ElevatedButton(
@@ -127,7 +131,7 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
                         child: const Text('팔로우'),
                         onPressed: () =>
                         {
-                          controller.postRequests(userId,Id),
+                          controller.postRequests(Id,Get.find<UserInfoController>()!.userId),
                         }
                     ),
                   ),

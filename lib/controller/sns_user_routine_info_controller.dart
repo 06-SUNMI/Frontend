@@ -20,6 +20,7 @@ class SNSRoutineController extends GetxController {
 
   int userRoutineCount = 0;
   int challengeRoutineCount = 0;
+  late int ck=0;
 
   String pickString = "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}";
 
@@ -190,25 +191,29 @@ class SNSRoutineController extends GetxController {
 
   }
 
+  dynamic userpagegetfollow(int userid) async {
+    var Infos;
+    var url = 'http://15.164.168.230:8080/sns/members/$userid/follow-members';
+    final response = await http.get(Uri.parse((url)));
+    Infos = jsonDecode(response.body);
+    return Infos.length;
+  }
 
-
-   getfollow(int userid,id) async {
+  dynamic getfollow(int userid,int id) async {
     var Info;
     var url = 'http://15.164.168.230:8080/sns/members/$userid/follow-members';
     final response = await http.get(Uri.parse((url)));
     Info = jsonDecode(response.body);
     int ck=0;
-    print(userid);print(id);
     for(int i=0; i<Info.length; i++){
-      if(Info[i].toString() == id){
+      if(Info[i] == id){
         ck=1;
         return ck;
       }
     }
-    if(ck==0) return ck;
   }
-  void postRequests(var id, int userid) async {
-    String url = 'http://15.164.168.230:8080/sns/follow/$id/$userid';
+   postRequests(var id, var userid) async {
+    String url = 'http://15.164.168.230:8080/sns/follow/$userid/$id';
     http.Response _res = await http.post(
       Uri.parse(url), headers: {"content-type": "application/json"},
     );

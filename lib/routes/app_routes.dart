@@ -20,5 +20,6 @@ abstract class Routes{
    static const snsPage = '/PostItems';
    static const userEdit = '/user_info_edit';
    static const accountPage = "/AccountScreen";
+   static const followerPage = "/sns_follower";
    //static const calendar = '/calendar';
 }

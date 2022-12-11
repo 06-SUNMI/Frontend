@@ -29,7 +29,7 @@ class RoutineCalendar extends GetView<CalendarController>{
             UserAccountsDrawerHeader(
               accountName: Text(userController.name), 
               accountEmail: Text(userController.point.toString()+" Point"),
-              currentAccountPicture: CircleAvatar(backgroundColor: Colors.white, backgroundImage: NetworkImage(userController.image),
+              currentAccountPicture: CircleAvatar(backgroundColor: Colors.white, backgroundImage: NetworkImage(userController.image!),
               ),  
             ),
             ListTile(
