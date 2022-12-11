@@ -135,7 +135,7 @@ class UserInfoController extends GetxController{
       "memberRegisteredGymId": gymId,
       "memberRegisteredGymName": gymName,
       "memberWeight": weight,
-      "memberProfileImageFile" : imageFile,
+      "memberProfileImageFile" : null,
     };
     var body = jsonEncode(data);
     http.Response _res = await http.put(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
