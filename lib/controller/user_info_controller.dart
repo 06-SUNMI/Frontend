@@ -24,9 +24,6 @@ class UserInfoController extends GetxController{
   RxList gymList = [].obs;
   RxInt isGymSelected = 0.obs;
 
-  late PickedFile f;
-  late File imageFile;
-
   RxInt follower = 0.obs;
   RxList followlist = [].obs;
 
@@ -48,11 +45,6 @@ class UserInfoController extends GetxController{
       });
     }
     follower = len.obs;
-  }
-
-  pickImage() async{
-    f = (await ImagePicker().getImage(source: ImageSource.gallery))!;//갤러리에서 사진을 가져옵니다.
-    imageFile = File(f.path);
   }
 
   isNew(int kakaoId) async{
@@ -145,23 +137,25 @@ class UserInfoController extends GetxController{
     setUserId();
   }
 
-  putUserData(var heightInput, var weightInput) async{
-    print("put");
-    height = int.parse(heightInput);
+putUserData(var heightInput, var weightInput) async{
+
+     height = int.parse(heightInput);
     weight = int.parse(weightInput);
     gymName = gymList[0]["gymName"];
     gymId = gymList[0]["gymId"];
+   print("put");
+
     String url = "http://15.164.168.230:8080/members/${userId}";
-    var data = {
+    final data = {
       "memberHeight": height,
       "memberName": name,
       "memberRegisteredGymId": gymId,
       "memberRegisteredGymName": gymName,
       "memberWeight": weight,
-      "memberProfileImageFile" : null,
     };
     var body = jsonEncode(data);
-    http.Response _res = await http.put(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
+
+    var _res = http.put(Uri.parse(url), headers: {"content-type": "application/json"}, body: body);
     getUserData();
   }
 
