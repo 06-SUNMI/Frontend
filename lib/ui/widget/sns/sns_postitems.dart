@@ -60,7 +60,7 @@ class PostItems extends GetView<SnsController> {
                                   shape: BoxShape.circle,
 
                                   image: DecorationImage(
-                                      image:NetworkImage(controller.info[index]["memberProfilePhotoUrl"][0]),
+                                      image:NetworkImage(controller.info[index]["memberProfilePhotoUrl"]),
                                       fit: BoxFit.cover)),
                             ),
                             SizedBox(
@@ -93,6 +93,7 @@ class PostItems extends GetView<SnsController> {
                         image: DecorationImage(
                             image: NetworkImage(controller.info[index]["snsImageOrVideoLinkList"]),
                             fit: BoxFit.cover)),
+
                   ),
                   SizedBox(
                     height: 5,

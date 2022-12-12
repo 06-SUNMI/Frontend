@@ -18,7 +18,7 @@ class SearchController extends GetxController{
   int? userId;
   @override
   increase(var value) {
-      return _isChecked = false;
+    return _isChecked = false;
   }
   noincrease(var value) {
     return _isChecked = true;
