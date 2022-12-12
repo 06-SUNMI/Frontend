@@ -5,7 +5,7 @@ import 'package:sunmi/controller/registered_challenge_info_controller.dart';
 challengeAuthBottomSheet() {
   var registeredChallengeController = Get.find<RegisteredChallengeInfoController>();
 
-  if(registeredChallengeController.registeredChallenge.progressRate == 100){
+  if(registeredChallengeController.registeredChallenge.challengeParticipantStatus == 'SUCCESS'){
     return Container(
       width: Get.mediaQuery.size.width,
       padding: EdgeInsets.only(left: 10.0,bottom: 20.0,right: 10.0,top: 10.0),
