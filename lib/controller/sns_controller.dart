@@ -34,7 +34,7 @@ class SnsController extends GetxController {
         "memberName" : Info[i]["memberName"],
         "snsContent": Info[i]['snsContent'],
         "snsLikesNum": Info[i]['snsLikesNum'],
-        "memberProfilePhotoUrl" : 'assets/images/eh.png',
+        "memberProfilePhotoUrl" : Info[i]["memberProfilePhotoUrl"],//'assets/images/eh.png',
         "favcheck" : false.obs,
         "snsImageOrVideoLinkList": Info[i]['snsImageOrVideoLinkList'][0],
       });

@@ -20,7 +20,11 @@ class SNSRoutineController extends GetxController {
 
   int userRoutineCount = 0;
   int challengeRoutineCount = 0;
-  late int ck=0;
+
+  RxList followlist = [].obs;
+  RxList userDatalist = [].obs;
+  RxInt ck=0.obs;
+  RxInt followlen = 0.obs;
 
   String pickString = "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}";
 
@@ -32,7 +36,11 @@ class SNSRoutineController extends GetxController {
   void onInit () async{
     super.onInit();
     await getRoutines();
+  //  await userpagegetfollow(Get.find<UserInfoController>().userId!);
     setFirst(pickday.year, pickday.month);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+//setState((){});
+    });
   }
 
   setId(int i){
@@ -41,12 +49,15 @@ class SNSRoutineController extends GetxController {
 
   getRoutines() async{//루틴 전체 조회
     print("GetRoutines start");
+    userpagegetfollow(Get.find<UserInfoController>().userId!);
+
     var routineIdList;
     int routineCount = 0;
     String url = 'http://15.164.168.230:8080/members/${Get.find<SearchController>().userId}/routines';
     var response = await http.get(Uri.parse(url));
     var responseBody = response.body;
     routineIdList = jsonDecode(responseBody);
+
 
     if(routineIdList["memberRoutineDataList"]==null){
       routineCount=0;
@@ -107,10 +118,10 @@ class SNSRoutineController extends GetxController {
     tempRoutine = jsonDecode(responseBody);
     if(tempRoutine["challengeRoutineId"]==null){
       userRoutineList[infodate] = tempRoutine;
-      print("new : ${userRoutineList[infodate]}");
+   //   print("new : ${userRoutineList[infodate]}");
     }else{
       challengeRoutineList[infodate] = tempRoutine;
-      print("new c: ${challengeRoutineList[infodate]}");
+    //  print("new c: ${challengeRoutineList[infodate]}");
     }
   }
 
@@ -131,7 +142,6 @@ class SNSRoutineController extends GetxController {
   insertDays(int year, int month) {
     print("Insertdays start");
     days.clear();
-
     int lastDay = DateTime(year, month + 1, 0).day;
     for (var i = 1; i <= lastDay; i++) {
       days.add({
@@ -191,24 +201,49 @@ class SNSRoutineController extends GetxController {
 
   }
 
-  dynamic userpagegetfollow(int userid) async {
+  dynamic userpagegetfollow(int? userid) async {
+    followlist.clear();
     var Infos;
     var url = 'http://15.164.168.230:8080/sns/members/$userid/follow-members';
     final response = await http.get(Uri.parse((url)));
     Infos = jsonDecode(response.body);
-    return Infos.length;
+    int len=(Infos.length);
+    followlen= len.obs;
+    for (var i = 0; i <Infos.length; i++) {
+      followlist.add({
+        "userid": Infos[i],
+      });
+    }
+    return followlist;
   }
+  dynamic followgetUserData(int user) async{
+    userDatalist.clear();
+    String url = "http://15.164.168.230:8080/members/${user}";
+    var response = await http.get(Uri.parse(url));
+    var responseBody = response.bodyBytes;
+    var userData = jsonDecode(utf8.decode(responseBody));
 
-  dynamic getfollow(int userid,int id) async {
+    for (var i = 0; i <userData.length; i++) {
+      userDatalist.add({
+        "id" : user,
+      "name" : userData["memberName"],
+      "image" : userData["customProfileImageUrl"],
+      "gymId" : userData["memberRegisteredGymId"],
+      "gymName" : userData["memberRegisteredGymName"],
+      });
+    }
+    return userDatalist;
+
+  }
+  getfollow(int userid,int id) async {
     var Info;
     var url = 'http://15.164.168.230:8080/sns/members/$userid/follow-members';
     final response = await http.get(Uri.parse((url)));
     Info = jsonDecode(response.body);
-    int ck=0;
+
     for(int i=0; i<Info.length; i++){
       if(Info[i] == id){
-        ck=1;
-        return ck;
+        ck=1.obs;
       }
     }
   }

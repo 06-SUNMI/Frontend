@@ -50,13 +50,8 @@ class ProfileHeader extends GetView<UserInfoController> {
    // Get.lazyPut(()=>SearchController());
     Get.lazyPut(() => UserInfoController());
     Get.lazyPut(() => SNSRoutineController());
-    dynamic flowercount = 0;
-
-    flowercount=Get.find<SNSRoutineController>().userpagegetfollow(controller.userId!);
-   // userpagegetfollow();
-    print("flowercount");
-    print(flowercount);
-    return Padding(
+    Get.lazyPut(()=> SearchController());
+    return Obx(() => Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,11 +67,15 @@ class ProfileHeader extends GetView<UserInfoController> {
                     image: DecorationImage(
                         image: NetworkImage(controller.image), fit: BoxFit.cover)),
               ),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                   Row(
                   children: [
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text(
                       controller.name.toString(),
                       style: TextStyle(
@@ -96,52 +95,52 @@ class ProfileHeader extends GetView<UserInfoController> {
                           fontSize: 12),
                     ),
                   ],
-                ), SizedBox(
-                      height: 10,
-                    ),
-                Row(
-                  children: [
-                    TextButton( onPressed: () => Get.toNamed(Routes.followerPage),
-                      child: Text( flowercount.toString(),
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                          fontSize: 14),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    TextButton( onPressed: () => Get.toNamed(Routes.followerPage),
-                      child: Text(
-                      '   131',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 18),
-                      ),
-                    ),
-                    TextButton( onPressed: () { },
-                      child: Text(
-                      '   팔로잉',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                          fontSize: 14),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '   39',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 18),
-                    ),
-                  ],
                 ),
+                    Row(
+                        children: [
+                          TextButton( onPressed: () => Get.toNamed(Routes.followerPage, arguments: {"count": controller.follower.obs}),
+                            child: Text(
+                              "팔로워",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                                fontSize: 14),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          TextButton( onPressed: () => Get.toNamed(Routes.followerPage,arguments: {"count": controller.follower.obs}),
+                            child: Text(
+                            controller.follower.toString(),
+
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 18),
+                            ),
+                          ),
+                          TextButton( onPressed: () { },
+                            child: Text(
+                            '   팔로잉',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                                fontSize: 14),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '   39',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 18),
+                          ),
+                        ],
+                      ),
               ],
               ),
               Column(
@@ -245,6 +244,7 @@ class ProfileHeader extends GetView<UserInfoController> {
 
         ],
       ),
+    ),
     );
   }
 }

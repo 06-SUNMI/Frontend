@@ -31,17 +31,20 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
   Widget build(BuildContext context) {
     Get.lazyPut(() => UserInfoController());
     Get.lazyPut(()=>SearchController());
-    int userId=Get.find<UserInfoController>().userId!;
-    controller.onInit();
-    dynamic ck=controller.getfollow(userId,Id);
 
+    int? userId=Get.find<UserInfoController>().userId;
+    controller.onInit();
+    controller.getfollow(userId!,Id);
+    var ck;
     return Scaffold(
       appBar: AppBar(
         title: Text("유저 조회"),
 
       ),
       body: Obx(()=>SingleChildScrollView(
+
         child: Column(
+
           children: [
             SizedBox(height: 20.0,width: 200.0,),
             Row(
@@ -51,7 +54,7 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
                     padding: const EdgeInsets.only(left: 20.0),
                       child:CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage("assets/images/eh.png"),//임시 이미지
+                        backgroundImage: NetworkImage(userimg.toString()),
                     ),
                   ),
                 ),
@@ -113,7 +116,7 @@ class SNSFollowUser extends GetView<SNSRoutineController> {
                   ],
                 ),
 
-                if(ck==0)...[
+                if(controller.ck==0)...[
                   Container(
                     padding: const EdgeInsets.only(left: 50, bottom: 5),
                     child: ElevatedButton(

@@ -18,6 +18,7 @@ import 'package:sunmi/binding/home_binding.dart';
 import 'package:sunmi/ui/screen/sns/sns_post_page.dart';
 import 'package:sunmi/ui/screen/user_info_edit_page.dart';
 import '../binding/challenge_info_binding.dart';
+import '../binding/follower_binding.dart';
 import '../binding/sns_binding.dart';
 import '../data/model/workout.dart';
 import 'package:sunmi/ui/screen/challenge/challenge_infomation.dart';
@@ -55,7 +56,7 @@ class AppPages {
     GetPage(name: Routes.snsPage, page: ()=>PostItems(), binding: SNSBinding()),
     GetPage(name: Routes.userEdit, page: ()=>UserInfoEditPage()),
     GetPage(name: Routes.accountPage, page: ()=>AccountScreen()),
-    GetPage(name: Routes.followerPage, page: ()=>SNSfollower())
+    GetPage(name: Routes.followerPage, page: ()=>SNSfollower(), binding: FollowBinding() )
   ];
 }
 

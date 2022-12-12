@@ -6,6 +6,7 @@ import 'package:http/http.dart'as http;
 import 'dart:convert';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:sunmi/controller/sns_user_routine_info_controller.dart';
 
 class UserInfoController extends GetxController{
   int? height;
@@ -25,7 +26,29 @@ class UserInfoController extends GetxController{
 
   late PickedFile f;
   late File imageFile;
-  
+
+  RxInt follower = 0.obs;
+  RxList followlist = [].obs;
+
+
+  setFollower(int userId) async {
+    followlist.clear();
+    var Infos;
+    var url = 'http://15.164.168.230:8080/sns/members/$userId/follow-members';
+    final response = await http.get(Uri.parse((url)));
+    Infos = jsonDecode(response.body);
+    int len = (Infos.length);
+    print("Info: ");
+    print(Infos);
+    print("len: ");
+    print(len);
+    for (var i = 0; i <len; i++) {
+      followlist.add({
+        "userid": Infos[i],
+      });
+    }
+    follower = len.obs;
+  }
 
   pickImage() async{
     f = (await ImagePicker().getImage(source: ImageSource.gallery))!;//갤러리에서 사진을 가져옵니다.
@@ -55,6 +78,7 @@ class UserInfoController extends GetxController{
     var response = await http.get(Uri.parse(url));
     var responseBody = response.bodyBytes;
     var userData = jsonDecode(utf8.decode(responseBody));
+    setFollower(userId!);
 
     height = userData["memberHeight"];
     weight = userData["memberWeight"];
@@ -88,8 +112,7 @@ class UserInfoController extends GetxController{
     var response = await http.get(Uri.parse(url));
     var responseBody = response.bodyBytes;
     var tempList = jsonDecode(utf8.decode(responseBody));
-    print(url);
-    print(tempList);
+
     for(int i=0;i<tempList["documents"].length;i++){
       gymList.add({
         "gymName" : tempList["documents"][i]["place_name"],

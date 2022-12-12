@@ -3,44 +3,65 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:sunmi/data/storys.dart';
 
 import '../../../controller/sns_search_controller.dart';
 import '../../../controller/sns_user_routine_info_controller.dart';
 import '../../../controller/user_info_controller.dart';
+import '../../../routes/app_pages.dart';
 
 class SNSfollower extends GetView<SNSRoutineController> {
   SNSfollower({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => UserInfoController());
+    Get.lazyPut(()=>SearchController());
+    Get.lazyPut(()=>SNSRoutineController());
 
-    int userId=Get.find<UserInfoController>().userId!;
-  //  Get.lazyPut(() => UserInfoController());
+    RxInt m=Get.arguments["count"].value;
+    int? userids=Get.find<UserInfoController>().userId;
+    //controller.userpagegetfollow(Get.find<UserInfoController>().userId!);
+    int num=controller.followlist.length;
 
-    int l= controller.userpagegetfollow(userId);
-    print(l);
     return Scaffold(
       appBar: AppBar(
         title: Text("팔로워"),
         backgroundColor: Colors.purple[300],
+      ),
+      body:  ListView.builder(
+         // scrollDirection: Axis.vertical,
+          itemCount: m.value,
+          itemBuilder: (context, int index) {
+            controller.followgetUserData(controller.followlist[index]["userid"]);
+           return Obx(() => ListTile(
+
+              leading: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image:NetworkImage(controller.userDatalist[index]["image"]),
+                        fit: BoxFit.cover)),
+              ),
+              tileColor: Colors.purple[index * 100],
+              title: Align(
+                alignment: Alignment(-1, 0),
+                child: new Text(controller.userDatalist[index]["name"]),
+              ),
+              contentPadding:EdgeInsets.all(10),
+              onTap: () {
+                controller.userId = controller.userDatalist[index]["id"];
+                Get.toNamed(Routes.userfollowpage, arguments: {'name': controller.userDatalist[index]["name"].toString(), 'id':  controller.userDatalist[index]["id"],
+                  'gymName' :  controller.userDatalist[index]["gymName"], 'customProfileImageUrl' :  controller.userDatalist[index]["image"]} );
+              },
+
+            ),);
+          },
 
       ),
-      body: ListView.separated(
-          scrollDirection:
-          Axis.vertical, //vertical : 수직으로 나열 / horizontal : 수평으로 나열
-          separatorBuilder: (BuildContext context, int index) => const Divider(
-            color: Colors.black,
-          ), //separatorBuilder : item과 item 사이에 그려질 위젯 (개수는 itemCount -1 이 된다)
-          itemCount: 7, //리스트의 개수
-          itemBuilder: (BuildContext context, int index) {
-            //리스트의 반목문 항목 형성
-            return Container(
-              height: 70,
-              color: Colors.purple[index * 100],
-              alignment: Alignment.center,
-              child: Text('item : $index'),
-            );
-          }),
-    );
+      );
   }
 }
+

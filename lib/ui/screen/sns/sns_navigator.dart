@@ -44,7 +44,7 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
     if (pageindex == 0) {
       return AppBar(
         backgroundColor: Colors.purple[300],
-        title: Row(
+        title:  Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
