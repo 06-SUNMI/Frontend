@@ -94,7 +94,7 @@
 1) assets/font : 사용된 폰트들을 저장해 놓은 폴더 <br> 
 2) assets/images : 사용된 이미지들을 저장해 놓은 폴더 <br> 
 3) assets/json : 사용된 데이터들을 저장해 놓은 폴더 <br> 
-
+</pre>
 * pubspec.ymal : 개발에 필요한 sdk들을 추가해놓은 파일
 
 * lib/
@@ -106,7 +106,7 @@
 4) lib/data : 커뮤니티 기능 관련 데이터들을 모아놓은 폴더
 5) lib/ui : 페이지 위젯들을 구현해놓은 파일들
 6) lib/main.dart : 메인 
-
+</pre>
 
 <br>
 
