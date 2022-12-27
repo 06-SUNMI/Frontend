@@ -42,12 +42,6 @@
 
 * 자신이 수행한 운동의 기록을 확인 가능
 
-|                        front                        |                        inside                        |
-| :-------------------------------------------------: | :--------------------------------------------------: |
-| <img src=images/1.jpg  width="100%"/> | <img src=images/container_inside.png  width="100%"/> |
-|                      **back**                       |                       **top**                        |
-| <img src=images/container_back.png  width="100%"/>  |  <img src=images/container_top.png  width="100%"/>   |
-
 
 
 
@@ -62,13 +56,6 @@
 
 * 챌린지 수행 중 인증과 신고를 통해서 공정한 챌린지 진행 가능
 
-
-|                        front                        |                        inside                        |
-| :-------------------------------------------------: | :--------------------------------------------------: |
-| <img src=images/1.jpg  width="100%"/> | <img src=images/container_inside.png  width="100%"/> |
-|                      **back**                       |                       **top**                        |
-| <img src=images/container_back.png  width="100%"/>  |  <img src=images/container_top.png  width="100%"/>   |
-
   <br>
 
 ### SNS
@@ -78,12 +65,6 @@
 
 * 사용자의 이름 또는 등록한 헬스장이름을 검색해 다른 사용자를 검색 가능 
 * 
-
-|                        front                        |                        inside                        |
-| :-------------------------------------------------: | :--------------------------------------------------: |
-| <img src=images/1.jpg  width="100%"/> | <img src=images/container_inside.png  width="100%"/> |
-|                      **back**                       |                       **top**                        |
-| <img src=images/container_back.png  width="100%"/>  |  <img src=images/container_top.png  width="100%"/>   |
 
   <br>
 
@@ -102,13 +83,29 @@
 * SNS 글의 신고글과 해당 사용자 제제 가능
 
 
-|                        front                        |                        inside                        |
-| :-------------------------------------------------: | :--------------------------------------------------: |
-| <img src=images/1.jpg  width="100%"/> | <img src=images/container_inside.png  width="100%"/> |
-|                      **back**                       |                       **top**                        |
-| <img src=images/container_back.png  width="100%"/>  |  <img src=images/container_top.png  width="100%"/>   |
+
 
   <br>
+### 프로젝트 파일 구조
+
+* assets/
+
+<pre> 
+1) assets/font : 사용된 폰트들을 저장해 놓은 폴더 <br> 
+2) assets/images : 사용된 이미지들을 저장해 놓은 폴더 <br> 
+3) assets/json : 사용된 데이터들을 저장해 놓은 폴더 <br> 
+
+* pubspec.ymal : 개발에 필요한 sdk들을 추가해놓은 파일
+
+* lib/
+
+<pre> 
+1) lib/binding : 컨트롤러와 위젯을 묶어주는 바인딩 파일들을 모아놓은 폴더 <br> 
+2) lib/controller : 상태 관리를 위한 GetX의 컨트롤러들을 모아놓은 폴더 <br> 
+3) lib/routes : GetX의 페이지 이동을 위한 페이지 이름들을 모아놓은 파일들 <br>
+4) lib/data : 커뮤니티 기능 관련 데이터들을 모아놓은 폴더
+5) lib/ui : 페이지 위젯들을 구현해놓은 파일들
+6) lib/main.dart : 메인 
 
 
 <br>
